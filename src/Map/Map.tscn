@@ -1,3 +1,160 @@
-[gd_scene format=2]
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/art/map/background.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/map/sky.png" type="Texture" id=2]
+[ext_resource path="res://src/Map/Counter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Map/DisplayStand.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/art/map/grass.png" type="Texture" id=5]
+[ext_resource path="res://src/UI/PlusButton.tscn" type="PackedScene" id=6]
 
 [node name="Map" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 971.258, 613.642 )
+scale = Vector2( 5.5, 5.5 )
+texture = ExtResource( 2 )
+
+[node name="InStore" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+texture = ExtResource( 1 )
+
+[node name="Counter" parent="InStore" instance=ExtResource( 3 )]
+position = Vector2( 716.422, 374.327 )
+
+[node name="Displays" type="Node2D" parent="InStore"]
+position = Vector2( -48, 7 )
+
+[node name="DisplayStand" parent="InStore/Displays" instance=ExtResource( 4 )]
+position = Vector2( -249.869, 290.922 )
+
+[node name="DisplayStand2" parent="InStore/Displays" instance=ExtResource( 4 )]
+position = Vector2( -498.565, 293.223 )
+
+[node name="DisplayStand3" parent="InStore/Displays" instance=ExtResource( 4 )]
+position = Vector2( -251.301, 24.5366 )
+
+[node name="PlusButton" parent="InStore/Displays" instance=ExtResource( 6 )]
+margin_left = -10.6787
+margin_top = 295.0
+margin_right = 29.3213
+margin_bottom = 335.0
+
+[node name="PlusButton2" parent="InStore/Displays" instance=ExtResource( 6 )]
+margin_left = 196.221
+margin_top = 292.33
+margin_right = 236.221
+margin_bottom = 332.33
+
+[node name="PlusButton3" parent="InStore/Displays" instance=ExtResource( 6 )]
+margin_left = 405.791
+margin_top = 299.004
+margin_right = 445.791
+margin_bottom = 339.004
+
+[node name="PlusButton4" parent="InStore/Displays" instance=ExtResource( 6 )]
+margin_left = -4.00452
+margin_top = 22.6923
+margin_right = 35.9955
+margin_bottom = 62.6923
+
+[node name="PlusButton5" parent="InStore/Displays" instance=ExtResource( 6 )]
+margin_left = 196.221
+margin_top = 25.3619
+margin_right = 236.221
+margin_bottom = 65.3619
+
+[node name="PlusButton6" parent="InStore/Displays" instance=ExtResource( 6 )]
+margin_left = 408.461
+margin_top = 36.0406
+margin_right = 448.461
+margin_bottom = 76.0406
+
+[node name="Structure" type="Node2D" parent="InStore"]
+
+[node name="grass" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -895.349, 475.377 )
+texture = ExtResource( 5 )
+
+[node name="grass2" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -780.505, 475.18 )
+texture = ExtResource( 5 )
+
+[node name="grass3" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -809.927, 475.774 )
+texture = ExtResource( 5 )
+
+[node name="grass4" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -660.701, 476.219 )
+texture = ExtResource( 5 )
+
+[node name="grass5" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -547.557, 476.219 )
+texture = ExtResource( 5 )
+
+[node name="grass6" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -430.639, 475.581 )
+texture = ExtResource( 5 )
+
+[node name="grass7" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -315.553, 475.581 )
+texture = ExtResource( 5 )
+
+[node name="grass8" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -191.979, 474.632 )
+texture = ExtResource( 5 )
+
+[node name="grass9" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -75.0613, 473.994 )
+texture = ExtResource( 5 )
+
+[node name="grass10" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 40.0252, 473.994 )
+texture = ExtResource( 5 )
+
+[node name="grass11" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 147.724, 473.838 )
+texture = ExtResource( 5 )
+
+[node name="grass12" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 264.642, 473.2 )
+texture = ExtResource( 5 )
+
+[node name="grass13" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 379.729, 473.2 )
+texture = ExtResource( 5 )
+
+[node name="grass14" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 481.079, 473.045 )
+texture = ExtResource( 5 )
+
+[node name="grass15" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 597.997, 472.407 )
+texture = ExtResource( 5 )
+
+[node name="grass16" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 713.083, 472.407 )
+texture = ExtResource( 5 )
+
+[node name="grass17" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 665.217, 475.426 )
+texture = ExtResource( 5 )
+
+[node name="grass18" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 782.135, 474.788 )
+texture = ExtResource( 5 )
+
+[node name="grass19" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 897.222, 474.788 )
+texture = ExtResource( 5 )
+
+[node name="grass20" type="Sprite" parent="InStore/Structure"]
+position = Vector2( -7.78271, 474.426 )
+texture = ExtResource( 5 )
+
+[node name="grass21" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 109.135, 473.788 )
+texture = ExtResource( 5 )
+
+[node name="grass22" type="Sprite" parent="InStore/Structure"]
+position = Vector2( 224.222, 473.788 )
+texture = ExtResource( 5 )

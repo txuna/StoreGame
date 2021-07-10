@@ -16,7 +16,23 @@ _global_script_class_icons={
 [application]
 
 config/name="Store Game"
+run/main_scene="res://src/Main.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[layer_names]
+
+2d_physics/layer_1="Wall"
+2d_physics/layer_2="Npc"
+2d_physics/layer_3="Product"
+2d_physics/layer_4="Counter"
+2d_physics/layer_5="Display"
 
 [rendering]
 
