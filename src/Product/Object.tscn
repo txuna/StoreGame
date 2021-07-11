@@ -1,10 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Product/Object.gd" type="Script" id=1]
 
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.5
+
 [node name="Object" type="RigidBody2D"]
+input_pickable = true
+collision_layer = 4
+collision_mask = 29
+physics_material_override = SubResource( 1 )
+gravity_scale = 9.8
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.7, 0.7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

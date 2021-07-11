@@ -1,16 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/art/map/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/map/sky.png" type="Texture" id=2]
 [ext_resource path="res://src/Map/Counter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Map/DisplayStand.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/art/map/grass.png" type="Texture" id=5]
-[ext_resource path="res://src/UI/PlusButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/art/map/clock.png" type="Texture" id=7]
 [ext_resource path="res://src/Map/Map.gd" type="Script" id=8]
 [ext_resource path="res://assets/font/NanumSquareRoundB.ttf" type="DynamicFontData" id=9]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 9 )
 
@@ -33,49 +32,7 @@ position = Vector2( 716.422, 374.327 )
 position = Vector2( -75.2924, 39.8113 )
 
 [node name="DisplayStand" parent="InStore/Displays" instance=ExtResource( 4 )]
-position = Vector2( -249.869, 290.922 )
-
-[node name="DisplayStand2" parent="InStore/Displays" instance=ExtResource( 4 )]
-position = Vector2( -498.565, 293.223 )
-
-[node name="DisplayStand3" parent="InStore/Displays" instance=ExtResource( 4 )]
-position = Vector2( -251.301, 24.5366 )
-
-[node name="PlusButton" parent="InStore/Displays" instance=ExtResource( 6 )]
-margin_left = -10.6787
-margin_top = 295.0
-margin_right = 29.3213
-margin_bottom = 335.0
-
-[node name="PlusButton2" parent="InStore/Displays" instance=ExtResource( 6 )]
-margin_left = 196.221
-margin_top = 292.33
-margin_right = 236.221
-margin_bottom = 332.33
-
-[node name="PlusButton3" parent="InStore/Displays" instance=ExtResource( 6 )]
-margin_left = 405.791
-margin_top = 299.004
-margin_right = 445.791
-margin_bottom = 339.004
-
-[node name="PlusButton4" parent="InStore/Displays" instance=ExtResource( 6 )]
-margin_left = -4.00452
-margin_top = 22.6923
-margin_right = 35.9955
-margin_bottom = 62.6923
-
-[node name="PlusButton5" parent="InStore/Displays" instance=ExtResource( 6 )]
-margin_left = 196.221
-margin_top = 25.3619
-margin_right = 236.221
-margin_bottom = 65.3619
-
-[node name="PlusButton6" parent="InStore/Displays" instance=ExtResource( 6 )]
-margin_left = 408.461
-margin_top = 36.0406
-margin_right = 448.461
-margin_bottom = 76.0406
+position = Vector2( -490.513, 285.882 )
 
 [node name="Structure" type="Node2D" parent="InStore"]
 
@@ -191,6 +148,58 @@ position = Vector2( 130.748, -116.405 )
 scale = Vector2( 0.613205, 1.49213 )
 polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
 
+[node name="StaticBody2D3" type="StaticBody2D" parent="InStore/Walls"]
+position = Vector2( -693.437, -672.08 )
+rotation = -0.57486
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D3"]
+position = Vector2( 130.748, -116.405 )
+scale = Vector2( 0.613205, 1.49213 )
+polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="InStore/Walls"]
+position = Vector2( 243.13, 145.431 )
+rotation = -2.45864
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D4"]
+position = Vector2( 130.748, -116.405 )
+scale = Vector2( 0.613205, 1.49213 )
+polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="InStore/Walls"]
+position = Vector2( 97.0457, 38.99 )
+rotation = -3.13202
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D5"]
+position = Vector2( 130.748, -116.405 )
+scale = Vector2( 0.613205, 1.49213 )
+polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="InStore/Walls"]
+position = Vector2( -190.609, 192.685 )
+rotation = -4.3986
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D6"]
+position = Vector2( 130.748, -116.405 )
+scale = Vector2( 0.613205, 1.49213 )
+polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="InStore/Walls"]
+position = Vector2( 329.065, 359.183 )
+rotation = -1.99379
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D7"]
+position = Vector2( 130.748, -116.405 )
+scale = Vector2( 0.613205, 1.49213 )
+polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
+
+[node name="Storage" type="Node2D" parent="InStore"]
+
 [node name="Clock" type="Sprite" parent="."]
 position = Vector2( 1726.94, 192.092 )
 scale = Vector2( 1.5, 1.5 )
@@ -201,7 +210,7 @@ margin_left = -51.2998
 margin_top = -10.0433
 margin_right = 65.7002
 margin_bottom = 17.9567
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "00:00:00"
 align = 1
