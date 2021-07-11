@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/art/map/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/map/sky.png" type="Texture" id=2]
@@ -6,8 +6,16 @@
 [ext_resource path="res://src/Map/DisplayStand.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/art/map/grass.png" type="Texture" id=5]
 [ext_resource path="res://src/UI/PlusButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/art/map/clock.png" type="Texture" id=7]
+[ext_resource path="res://src/Map/Map.gd" type="Script" id=8]
+[ext_resource path="res://assets/font/NanumSquareRoundB.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 9 )
 
 [node name="Map" type="Node2D"]
+script = ExtResource( 8 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 971.258, 613.642 )
@@ -22,7 +30,7 @@ texture = ExtResource( 1 )
 position = Vector2( 716.422, 374.327 )
 
 [node name="Displays" type="Node2D" parent="InStore"]
-position = Vector2( -48, 7 )
+position = Vector2( -75.2924, 39.8113 )
 
 [node name="DisplayStand" parent="InStore/Displays" instance=ExtResource( 4 )]
 position = Vector2( -249.869, 290.922 )
@@ -158,3 +166,45 @@ texture = ExtResource( 5 )
 [node name="grass22" type="Sprite" parent="InStore/Structure"]
 position = Vector2( 224.222, 473.788 )
 texture = ExtResource( 5 )
+
+[node name="Npcs" type="Node2D" parent="InStore"]
+
+[node name="Delivery" type="Position2D" parent="InStore"]
+position = Vector2( 111.362, -452.577 )
+
+[node name="Walls" type="Node2D" parent="InStore"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="InStore/Walls"]
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D"]
+position = Vector2( 100, -107.996 )
+scale = Vector2( 1, 1.49213 )
+polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="InStore/Walls"]
+position = Vector2( 1.84497, -648.269 )
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D2"]
+position = Vector2( 130.748, -116.405 )
+scale = Vector2( 0.613205, 1.49213 )
+polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
+
+[node name="Clock" type="Sprite" parent="."]
+position = Vector2( 1726.94, 192.092 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="Clock"]
+margin_left = -51.2998
+margin_top = -10.0433
+margin_right = 65.7002
+margin_bottom = 17.9567
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "00:00:00"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
