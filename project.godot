@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Products",
+"language": "GDScript",
+"path": "res://src/SingleTon/ProductList.gd"
+}, {
+"base": "Node",
+"class": "UIkit",
+"language": "GDScript",
+"path": "res://src/SingleTon/Uikit.gd"
+} ]
 _global_script_class_icons={
-
+"Products": "",
+"UIkit": ""
 }
 
 [application]

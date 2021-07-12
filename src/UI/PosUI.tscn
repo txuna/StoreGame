@@ -158,7 +158,7 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "SandWich"
 
-[node name="SalesContainer" type="ScrollContainer" parent="PosContainer/PosBack/Stock"]
+[node name="BuyContainer" type="ScrollContainer" parent="PosContainer/PosBack/Stock"]
 margin_left = 287.0
 margin_top = 41.0
 margin_right = 700.0
@@ -168,25 +168,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="vbox" type="VBoxContainer" parent="PosContainer/PosBack/Stock/SalesContainer"]
+[node name="vbox" type="VBoxContainer" parent="PosContainer/PosBack/Stock/BuyContainer"]
 margin_right = 312.0
 margin_bottom = 132.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="hbox" type="HBoxContainer" parent="PosContainer/PosBack/Stock/SalesContainer/vbox"]
+[node name="hbox" type="HBoxContainer" parent="PosContainer/PosBack/Stock/BuyContainer/vbox"]
 margin_right = 312.0
 margin_bottom = 64.0
 
-[node name="UpBtn" type="TextureButton" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox"]
+[node name="UpBtn" type="TextureButton" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox"]
 margin_right = 64.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 15 )
 texture_pressed = ExtResource( 14 )
 texture_hover = ExtResource( 14 )
 
-[node name="Count" type="Label" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox"]
+[node name="Count" type="Label" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox"]
 margin_left = 68.0
 margin_top = 9.0
 margin_right = 103.0
@@ -195,7 +195,7 @@ custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "36"
 
-[node name="DownBtn" type="TextureButton" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox"]
+[node name="DownBtn" type="TextureButton" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox"]
 margin_left = 107.0
 margin_right = 171.0
 margin_bottom = 64.0
@@ -206,7 +206,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Price" type="Label" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox"]
+[node name="Price" type="Label" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox"]
 margin_left = 175.0
 margin_top = 9.0
 margin_right = 244.0
@@ -215,7 +215,7 @@ custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "700$"
 
-[node name="TextureButton" type="TextureButton" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox"]
+[node name="TextureButton" type="TextureButton" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox"]
 margin_left = 248.0
 margin_right = 312.0
 margin_bottom = 64.0
@@ -223,19 +223,19 @@ texture_normal = ExtResource( 17 )
 texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 16 )
 
-[node name="hbox2" type="HBoxContainer" parent="PosContainer/PosBack/Stock/SalesContainer/vbox"]
+[node name="hbox2" type="HBoxContainer" parent="PosContainer/PosBack/Stock/BuyContainer/vbox"]
 margin_top = 68.0
 margin_right = 312.0
 margin_bottom = 132.0
 
-[node name="UpBtn" type="TextureButton" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox2"]
+[node name="UpBtn" type="TextureButton" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox2"]
 margin_right = 64.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 15 )
 texture_pressed = ExtResource( 14 )
 texture_hover = ExtResource( 14 )
 
-[node name="Count" type="Label" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox2"]
+[node name="Count" type="Label" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox2"]
 margin_left = 68.0
 margin_top = 9.0
 margin_right = 103.0
@@ -244,7 +244,7 @@ custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "36"
 
-[node name="DownBtn" type="TextureButton" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox2"]
+[node name="DownBtn" type="TextureButton" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox2"]
 margin_left = 107.0
 margin_right = 171.0
 margin_bottom = 64.0
@@ -255,7 +255,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Price" type="Label" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox2"]
+[node name="Price" type="Label" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox2"]
 margin_left = 175.0
 margin_top = 9.0
 margin_right = 244.0
@@ -264,7 +264,7 @@ custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "700$"
 
-[node name="TextureButton" type="TextureButton" parent="PosContainer/PosBack/Stock/SalesContainer/vbox/hbox2"]
+[node name="TextureButton" type="TextureButton" parent="PosContainer/PosBack/Stock/BuyContainer/vbox/hbox2"]
 margin_left = 248.0
 margin_right = 312.0
 margin_bottom = 64.0
@@ -273,10 +273,10 @@ texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 16 )
 
 [node name="StockContainer" type="ScrollContainer" parent="PosContainer/PosBack/Stock"]
-margin_left = 512.323
-margin_top = 42.0782
-margin_right = 661.323
-margin_bottom = 391.078
+margin_left = 561.657
+margin_top = 44.0782
+margin_right = 710.657
+margin_bottom = 393.078
 __meta__ = {
 "_edit_use_anchors_": false
 }
