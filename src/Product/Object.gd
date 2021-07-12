@@ -12,6 +12,8 @@ var held = false
 
 signal clicked
 
+var id = 0x0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -20,6 +22,8 @@ func _physics_process(delta):
 	if held:
 		global_transform.origin = get_global_mouse_position()
 
+func setup(product_id):
+	id = product_id
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -40,5 +44,5 @@ func drop(impulse=Vector2.ZERO):
 
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport: Viewport) -> void:
-	print("free~!")
+	State.set_product_count(id, 1, -1)
 	queue_free()

@@ -6,7 +6,7 @@ const NEAR_HOUSE = 3
 
 
 var Sales = {
-	"total_money" : 0,
+	"total_cash" : 0,
 	"rating" : 0, 
 	"old" : {
 		"0-19" : {
@@ -62,6 +62,13 @@ var Sales = {
 	}
 }
 
+""" Stock
+0xA000 : {
+	"id" : 0xA000,
+	"count" : 2
+},
+"""
+
 var StoreState = {
 	"name" : "Post Exchange",
 	"rating" : 0, 
@@ -77,26 +84,54 @@ var StoreState = {
 		}
 	},
 	"sales" : {
-		"money" : 0,
-		"tatal_money" : 0,
+		"cash" : 6000,
+		"tatal_cash" : 0,
 		"yesterday" : Sales.duplicate(true),
 		"today" : Sales.duplicate(true),
+	},
+	"stock" : {
+
 	},
 	"display_stand" : {
 		"1" : {
 			"use" : false, 
-			"productId" : 0x0
+			"productId" : 0x0,
+			"count" : 0, 
 		},
 		"2" : {
 			"use" : false,
-			"productId" : 0x0
+			"productId" : 0x0,
+			"count" : 0, 
 		},
 		"3" : {
 			"use" : false,
-			"productId" : 0x0
+			"productId" : 0x0,
+			"count" : 0, 
 		}
 	},
 }
+
+func set_current_cash(cash, mask):
+	StoreState["sales"]["cash"] += (cash * mask)
+
+func get_current_cash():
+	return StoreState["sales"]["cash"]
+
+func set_product_count(id, count, mask):
+	if StoreState["stock"].has(id):
+		StoreState["stock"][id]["count"] += (count * mask)
+	else:
+		StoreState["stock"][id] = {
+			"id" : id,
+			"count" : count * mask
+		}		
+
+
+func get_total_product_count(id): 
+	if StoreState["stock"].has(id):
+		return StoreState["stock"][id]["count"]
+	
+	return 0
 
 func get_time()->String:
 	return "{hour}:{min}:{sec}".format({

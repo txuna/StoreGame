@@ -13,10 +13,13 @@ onready var Stock_NameContainer = $PosContainer/PosBack/Stock/NameContainer/vbox
 onready var Stock_SalesContainer = $PosContainer/PosBack/Stock/BuyContainer/vbox
 onready var Stock_StockContainer = $PosContainer/PosBack/Stock/StockContainer/vbox
 
+signal BuyProduct
 
 
 var current_tab = STATE
 var tab_list = []
+
+var buy_list = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,8 +42,16 @@ func _ready() -> void:
 	]
 	tab_switch(current_tab)
 
-func show_display():
+func show_display(tab_index=0):
 	visible = true 
+	if tab_index == STATE:
+		pass
+	
+	elif tab_index == SALES:
+		pass
+		
+	elif tab_index == STOCK:
+		load_stock()
 
 #################################################################
 	
@@ -56,12 +67,14 @@ func init_stock():
 
 func load_stock():
 	init_stock()
+	$PosContainer/PosBack/Stock/MoneyValue.text = str(State.get_current_cash()) + "$"
 	var product_list = Products.get_products()
 	for id in product_list:
 		var product = product_list[id]
 		make_product_name(product["name"])
 		make_buy(product)
-
+		make_stock(product["id"])
+		
 	
 func make_product_name(text:String):
 	var label = UIKit.make_label(text, 24)
@@ -71,14 +84,12 @@ func make_product_name(text:String):
 func make_buy(product):
 	# normal pressed, hover, disable
 	var hbox = UIKit.make_hbox()
-	hbox.name = str(product["id"])
 	var plus_btn = UIKit.make_texture_btn(
 		"res://assets/art/ui/plus.png",
 		"res://assets/art/ui/plus_pressed.png",
 		"res://assets/art/ui/plus_pressed.png")
 	
 	var count = UIKit.make_label("1", 36)
-	count.name = "count"
 
 	var minus_btn = UIKit.make_texture_btn(
 		"res://assets/art/ui/minus.png",
@@ -86,7 +97,6 @@ func make_buy(product):
 		"res://assets/art/ui/minus_pressed.png")
 	
 	var price = UIKit.make_label(str(product["buy"])+"$", 36)	
-	price.name = "price"
 		
 	var buy_btn = UIKit.make_texture_btn(
 		"res://assets/art/ui/buy_btn.png",
@@ -94,8 +104,18 @@ func make_buy(product):
 		"res://assets/art/ui/buy_btn_pressed.png",
 		"res://assets/art/ui/buy_btn_pressed.png")
 		
-	plus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], product["buy"], 1])	
-	minus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], product["buy"], -1])	
+	# 쇼핑리스트에 추가
+	buy_list[product["id"]] = {
+		"id" : product["id"],
+		"count" : 1,
+		"price" : product["buy"],
+	}
+		
+	#plus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], product["buy"], 1])	
+	#minus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], product["buy"], -1])	
+	plus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], count, price, product["buy"], 1])	
+	minus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], count, price, product["buy"], -1])	
+	buy_btn.connect("pressed", self, "_on_pressed_buy_btn", [product["id"]])
 	
 	hbox.add_child(plus_btn)
 	hbox.add_child(count)
@@ -104,17 +124,28 @@ func make_buy(product):
 	hbox.add_child(buy_btn)
 	Stock_SalesContainer.add_child(hbox)
 	
-func make_stock():
-	pass
+func make_stock(id):
+	var count = State.get_total_product_count(id)
+	var count_label = UIKit.make_label(str(count)+" pcs", 24)
+	Stock_StockContainer.add_child(count_label) 
 
-func _on_count_btn_pressed(id, price, mask):
-	var hbox = Stock_SalesContainer.get_node(str(id))
-	var value = int(hbox.get_node("count").text)
+
+func _on_count_btn_pressed(id, count, price, buy, mask):
+	var value = int(count.text)
 	value += (1*mask)
 	if value < 0 or value > 10:
 		return
-	hbox.get_node("count").text = str(value)
-	hbox.get_node("price").text = str(value * price) + "$"
+	count.text = str(value)
+	price.text = str(value * buy) + "$"
+	
+	buy_list[id]["count"] = value 
+	buy_list[id]["price"] = value * buy
+	
+	
+func _on_pressed_buy_btn(id):
+	emit_signal("BuyProduct", buy_list[id])
+	
+	
 #################################################################
 
 func _on_TextureButton_pressed() -> void:

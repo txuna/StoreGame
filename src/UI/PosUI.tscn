@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/art/ui/pos_tab_panel.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/ui/cancel_pressed.png" type="Texture" id=2]
@@ -36,6 +36,10 @@ font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 24
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
 font_data = ExtResource( 11 )
 
 [node name="PosUI" type="Control"]
@@ -129,7 +133,7 @@ __meta__ = {
 margin_left = 42.0
 margin_top = 40.0
 margin_right = 161.0
-margin_bottom = 392.0
+margin_bottom = 282.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -271,10 +275,10 @@ texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 16 )
 
 [node name="StockContainer" type="ScrollContainer" parent="PosContainer/PosBack/Stock"]
-margin_left = 561.657
-margin_top = 44.0782
-margin_right = 710.657
-margin_bottom = 393.078
+margin_left = 562.0
+margin_top = 44.0
+margin_right = 711.0
+margin_bottom = 252.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -300,6 +304,30 @@ margin_bottom = 68.0
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "32개"
+
+[node name="Money" type="Label" parent="PosContainer/PosBack/Stock"]
+margin_left = 42.0
+margin_top = 340.0
+margin_right = 132.0
+margin_bottom = 382.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Cash :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoneyValue" type="Label" parent="PosContainer/PosBack/Stock"]
+margin_left = 150.0
+margin_top = 340.0
+margin_right = 248.0
+margin_bottom = 382.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Balance"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tabs" type="Control" parent="PosContainer"]
 margin_right = 40.0

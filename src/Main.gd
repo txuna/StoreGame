@@ -9,6 +9,7 @@ func _ready() -> void:
 
 
 func setup():
+	
 	var title = $UiLayer/TitleUI
 	title.visible = true
 	title.connect("GameStart", self, "_on_game_start")
@@ -22,6 +23,7 @@ func _on_game_start():
 		game.start_game()
 	else:
 		_on_error("Game dont had start_game method")
+		
 		
 func _on_error(msg:String):
 	print(msg)

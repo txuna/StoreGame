@@ -22,8 +22,8 @@ func setup():
 	add_child(clock_timer)
 	clock_timer.start()
 	
-	load_product()
-	load_product()
+	#load_product()
+	#load_product()
 	
 func _on_clock_timeout():
 	State.set_time(time_gap)
@@ -31,12 +31,14 @@ func _on_clock_timeout():
 
 
 
-func load_product():
-	var cola_instance = preload("res://src/Product/Cola.tscn").instance()
-	cola_instance.connect("clicked", self, "_on_product_pickable_clicked")
-	cola_instance
-	get_node("InStore/Storage").add_child(cola_instance)
-	cola_instance.position = $InStore/Delivery.position
+func load_product(id, count):
+	for i in range(count):
+		var instance = Products.get_products()[id]["scene"].instance()
+		instance.connect("clicked", self, "_on_product_pickable_clicked")
+		instance.setup(id)
+		get_node("InStore/Storage").add_child(instance)
+		instance.position = $InStore/Delivery.position
+
 
 func _on_product_pickable_clicked(object):
 	if !held_object:
