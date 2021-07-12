@@ -1,8 +1,5 @@
 extends Node
 
-class_name Products
-
-
 var ProductList = {
 	0xA000 : {
 		"name" : "Cola",

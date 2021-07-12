@@ -1,8 +1,5 @@
 extends Node
 
-
-class_name UIkit
-
 func make_dynamic_font(font_size)->DynamicFont:
 	# font 설정
 	var dynamic_font = DynamicFont.new()
