@@ -47,7 +47,7 @@ func _ready() -> void:
 			
 		}
 	]
-	tab_switch(current_tab)
+	#tab_switch(current_tab)
 
 func show_display(tab_index=0):
 	visible = true 
@@ -178,11 +178,12 @@ func tab_switch(index):
 		if count == index:
 			i["Btn"].pressed = true 
 			i["Tab"].visible = true
+			show_display(current_tab)
 		else:
 			i["Btn"].pressed = false 
 			i["Tab"].visible = false 
 		count+=1
-
+	
 
 
 func _on_EventBtn_pressed() -> void:

@@ -109,18 +109,36 @@ var StoreState = {
 			"count" : 0, 
 		}
 	},
+	"next_display_stand_price" : 1000,
 }
+
+func get_display_stand_price():
+	return StoreState["next_display_stand_price"]
+	
+func set_display_stand_price(value):
+	StoreState["next_display_stand_price"] *= value  
+
+func get_all_display_stand():
+	return StoreState["display_stand"]
 
 func get_displaystand(index):
 	return StoreState["display_stand"][index]
 
 func set_displaystand(index, id, use, count):
-	StoreState["display_stand"][index]["productId"] = id
-	StoreState["display_stand"][index]["use"] = use 
-	StoreState["display_stand"][index]["count"] = count
+	if not StoreState["display_stand"].has(index):
+		StoreState["display_stand"][index] = {
+			"productId" : id,
+			"use" : use,
+			"count" : count
+		}
+	else:
+		StoreState["display_stand"][index]["productId"] = id
+		StoreState["display_stand"][index]["use"] = use 
+		StoreState["display_stand"][index]["count"] = count
 
 func change_displaystand_count(index, count, mask):
 	StoreState["display_stand"][index]["count"] += (count * mask)
+
 
 
 func set_current_cash(cash, mask):
