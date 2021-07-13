@@ -10,11 +10,11 @@
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
 
-[node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource( 1 )
-
-[node name="VisibilityNotifier2D" parent="." index="2"]
+[node name="VisibilityNotifier2D" parent="." index="1"]
 position = Vector2( 8.73085, 2.35969 )
 
-[node name="CollisionPolygon2D" parent="." index="3"]
+[node name="CollisionPolygon2D" parent="." index="2"]
 polygon = PoolVector2Array( 29.0878, 28.2645, -35.9012, 28.4518, -42.269, 18.5255, 20.6599, -40.0958, 28.7133, -33.1661 )
+
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource( 1 )

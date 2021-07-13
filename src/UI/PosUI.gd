@@ -3,11 +3,13 @@ extends Control
 
 const STATE = 0
 const SALES = 1
-const STOCK = 2 
+const STOCK = 2
+const EVENT = 3 
 
 onready var StateTab = $PosContainer/PosBack/State
 onready var SalesTab = $PosContainer/PosBack/Sales
 onready var StockTab = $PosContainer/PosBack/Stock
+onready var EventTab = $PosContainer/PosBack/Event
 
 onready var Stock_NameContainer = $PosContainer/PosBack/Stock/NameContainer/vbox
 onready var Stock_SalesContainer = $PosContainer/PosBack/Stock/BuyContainer/vbox
@@ -38,6 +40,11 @@ func _ready() -> void:
 		{
 			"Btn" : $PosContainer/Tabs/StockBtn,
 			"Tab" : StockTab
+		},
+		{
+			"Btn" : $PosContainer/Tabs/EventBtn,
+			"Tab" : EventTab
+			
 		}
 	]
 	tab_switch(current_tab)
@@ -53,7 +60,7 @@ func show_display(tab_index=0):
 	elif tab_index == STOCK:
 		load_stock()
 
-#################################################################
+############################STOCK#####################################
 	
 func init_stock():
 	for child in Stock_NameContainer.get_children():
@@ -130,7 +137,7 @@ func make_stock(id):
 	Stock_StockContainer.add_child(count_label) 
 
 
-func _on_count_btn_pressed(id, count, price, buy, mask):
+func _on_count_btn_pressed(id, count:Label, price:Label, buy:int, mask):
 	var value = int(count.text)
 	value += (1*mask)
 	if value < 0 or value > 10:
@@ -176,3 +183,7 @@ func tab_switch(index):
 			i["Tab"].visible = false 
 		count+=1
 
+
+
+func _on_EventBtn_pressed() -> void:
+	tab_switch(EVENT)

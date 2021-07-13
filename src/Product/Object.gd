@@ -25,16 +25,26 @@ func _physics_process(delta):
 func setup(product_id):
 	id = product_id
 
+func get_id():
+	return id
+
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			emit_signal("clicked", self)
+			
+		if held and event.button_index == BUTTON_WHEEL_UP:
+			rotate(0.05)
+			
+		if held and event.button_index == BUTTON_WHEEL_DOWN:
+			rotate(-0.05)
 					
 func pickup():
 	if held:
 		return
 	mode = RigidBody2D.MODE_STATIC
 	held = true
+		
 
 func drop(impulse=Vector2.ZERO):
 	if held:

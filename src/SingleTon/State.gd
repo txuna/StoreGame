@@ -93,23 +93,35 @@ var StoreState = {
 
 	},
 	"display_stand" : {
-		"1" : {
+		0x0001 : {
 			"use" : false, 
 			"productId" : 0x0,
 			"count" : 0, 
 		},
-		"2" : {
+		0x0002 : {
 			"use" : false,
 			"productId" : 0x0,
 			"count" : 0, 
 		},
-		"3" : {
+		0x0003 : {
 			"use" : false,
 			"productId" : 0x0,
 			"count" : 0, 
 		}
 	},
 }
+
+func get_displaystand(index):
+	return StoreState["display_stand"][index]
+
+func set_displaystand(index, id, use, count):
+	StoreState["display_stand"][index]["productId"] = id
+	StoreState["display_stand"][index]["use"] = use 
+	StoreState["display_stand"][index]["count"] = count
+
+func change_displaystand_count(index, count, mask):
+	StoreState["display_stand"][index]["count"] += (count * mask)
+
 
 func set_current_cash(cash, mask):
 	StoreState["sales"]["cash"] += (cash * mask)
@@ -132,6 +144,7 @@ func get_total_product_count(id):
 		return StoreState["stock"][id]["count"]
 	
 	return 0
+
 
 func get_time()->String:
 	return "{hour}:{min}:{sec}".format({

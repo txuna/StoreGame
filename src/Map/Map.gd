@@ -37,6 +37,7 @@ func load_product(id, count):
 		instance.connect("clicked", self, "_on_product_pickable_clicked")
 		instance.setup(id)
 		get_node("InStore/Storage").add_child(instance)
+		instance.add_to_group("products")
 		instance.position = $InStore/Delivery.position
 
 

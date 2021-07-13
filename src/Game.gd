@@ -3,6 +3,7 @@ extends Node2D
 const STATE = 0
 const SALES = 1
 const STOCK = 2 
+const EVENT = 3
 
 var map = preload("res://src/Map/Map.tscn") 
 var msgbox = null
