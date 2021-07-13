@@ -110,7 +110,7 @@ var Sales = {
 
 var StoreState = {
 	"name" : "Post Exchange",
-	"rating" : 0, 
+	"rating" : 0.05, 
 	"pos" : NEAR_HOUSE,
 	"date" : {
 		"day" : Monday,
@@ -122,7 +122,7 @@ var StoreState = {
 	},
 	"sales" : {
 		"cash" : 6000,
-		"tatal_cash" : 0,
+		"total_cash" : 0,
 		"yesterday" : Sales.duplicate(true),
 		"today" : Sales.duplicate(true),
 	},
@@ -198,7 +198,6 @@ func set_product_count(id, count, mask):
 func get_total_product_count(id): 
 	if StoreState["stock"].has(id):
 		return StoreState["stock"][id]["count"]
-	
 	return 0
 
 
@@ -206,7 +205,7 @@ func get_time():
 	return StoreState["date"]["time"]
 
 func get_day():
-	var value =  StoreState["date"]["day"]
+	var value = StoreState["date"]["day"]
 	return day[value]
 
 
@@ -229,6 +228,21 @@ func set_time(sec):
 			time["min"] += 1  
 	else:
 		time["sec"] += sec
+
+func get_today_cash():
+	return StoreState["sales"]["today"]["total_cash"]
+
+func get_name():
+	return StoreState["name"]
+	
+func get_rating():
+	return StoreState["rating"]
+
+func get_total_cash():
+	return StoreState["sales"]["total_cash"]
+	
+func get_pos():
+	 return StoreState["pos"]
 
 
 

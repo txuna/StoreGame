@@ -15,6 +15,7 @@ func _ready() -> void:
 
 
 func setup():
+	show_cash()
 	var time = State.get_time()
 	Clock.get_node("Label2").text = State.get_day()["str"]
 	Clock.get_node("Label").text = "{hour}:{min}:{sec}".format({
@@ -77,6 +78,8 @@ func _on_clock_timeout():
 		"min" : time["min"],
 		"sec" : time["sec"]})
 
+func show_cash():
+	$InStore/CashTexture/Cash.text = str(State.get_current_cash()) + "$"
 
 func load_product(id, count):
 	for i in range(count):

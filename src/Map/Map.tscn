@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/art/map/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/map/sky.png" type="Texture" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://src/Map/Map.gd" type="Script" id=8]
 [ext_resource path="res://assets/font/NanumSquareRoundB.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://assets/font/NanumBarunpenB.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://assets/art/ui/msgbox.png" type="Texture" id=11]
+
+[sub_resource type="DynamicFont" id=3]
+size = 56
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -273,6 +278,27 @@ scale = Vector2( 0.613205, 1.49213 )
 polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
 
 [node name="Storage" type="Node2D" parent="InStore"]
+
+[node name="CashTexture" type="TextureRect" parent="InStore"]
+margin_left = -930.0
+margin_top = -512.0
+margin_right = -475.0
+margin_bottom = -319.0
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cash" type="Label" parent="InStore/CashTexture"]
+margin_left = 51.7764
+margin_top = 60.0
+margin_right = 418.776
+margin_bottom = 133.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "3000$"
+align = 1
 
 [node name="Clock" type="Sprite" parent="."]
 position = Vector2( 1726.94, 192.092 )

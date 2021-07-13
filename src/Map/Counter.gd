@@ -17,5 +17,5 @@ func _ready() -> void:
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			emit_signal("LoadPosUI", STOCK)
+			emit_signal("LoadPosUI", STATE)
 			#get_node("/root/Main/UiLayer/PosUI").show_display()

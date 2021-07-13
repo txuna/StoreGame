@@ -15,6 +15,7 @@ onready var Stock_NameContainer = $PosContainer/PosBack/Stock/NameContainer/vbox
 onready var Stock_SalesContainer = $PosContainer/PosBack/Stock/BuyContainer/vbox
 onready var Stock_StockContainer = $PosContainer/PosBack/Stock/StockContainer/vbox
 
+
 signal BuyProduct
 
 
@@ -52,13 +53,36 @@ func _ready() -> void:
 func show_display(tab_index=0):
 	visible = true 
 	if tab_index == STATE:
-		pass
+		load_state()
 	
 	elif tab_index == SALES:
 		pass
 		
 	elif tab_index == STOCK:
 		load_stock()
+
+############################STATE#####################################
+
+func load_state():
+	StateTab.get_node("StoreNameValue").text = State.get_name()
+	StateTab.get_node("DateValue").text = "{day}:{hour}:{min}:{sec}".format(
+		{
+			"day" : State.get_day()["str"],
+			"hour" : State.get_time()["hour"],
+			"min" : State.get_time()["min"],
+			"sec" : State.get_time()["sec"]})
+
+	StateTab.get_node("CashValue").text = str(State.get_current_cash()) + "$"
+	StateTab.get_node("TodayCashValue").text = str(State.get_today_cash()) + "$"
+	StateTab.get_node("TotalCashValue").text = str(State.get_total_cash()) + "$"
+	StateTab.get_node("RatingValue").text = str(State.get_rating()) + " / 10"
+	var pos = State.get_pos()
+	if pos == State.NEAR_HOUSE:
+		StateTab.get_node("PositionValue").text = "Near Residence"
+	elif pos == State.NEAR_COMPANY:
+		StateTab.get_node("PositionValue").text = "Near Company"
+	elif pos == State.NEAR_SCHOOL:
+		StateTab.get_node("PositionValue").text = "Near School"
 
 ############################STOCK#####################################
 	

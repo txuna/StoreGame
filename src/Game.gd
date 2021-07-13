@@ -43,7 +43,9 @@ func _on_buy_product(product:Dictionary):
 	State.set_current_cash(product["price"], -1)
 	State.set_product_count(product["id"], product["count"], 1)
 	get_node("Map").load_product(product["id"], product["count"])
+	get_node("Map").show_cash()
 	emit_signal("LoadPosUI", STOCK)
+	
 
 func _on_buy_display_stand(index:int):
 	var cash = State.get_current_cash()
@@ -55,7 +57,7 @@ func _on_buy_display_stand(index:int):
 	State.set_current_cash(price, -1)
 	State.set_display_stand_price(2)
 	get_node("Map").show_display_stand(index)
-
+	get_node("Map").show_cash()
 
 func _on_error():
 	pass
