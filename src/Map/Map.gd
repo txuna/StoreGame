@@ -7,7 +7,7 @@ onready var Background = $Background
 var DisplayStand = preload("res://src/Map/DisplayStand.tscn")
 
 var held_object = null
-var time_gap = 1
+var time_gap = 48 # 게임시간 1초에 현실시간 48초가 흐름
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,14 +15,20 @@ func _ready() -> void:
 
 
 func setup():
-	Clock.get_node("Label").text = State.get_time()
+	var time = State.get_time()
+	Clock.get_node("Label2").text = State.get_day()["str"]
+	Clock.get_node("Label").text = "{hour}:{min}:{sec}".format({
+		"hour" : time["hour"],
+		"min" : time["min"],
+		"sec" : time["sec"]})
+		
 	var clock_timer = Timer.new()
-	clock_timer.wait_time = time_gap
+	clock_timer.wait_time = 1
 	clock_timer.connect("timeout", self, "_on_clock_timeout")
 	add_child(clock_timer)
 	clock_timer.start()
 	
-	# 진열대 넘버 설정
+	# 진열대 넘버 설정 및 가지고 있는 진열태 표시
 	var index = 1
 	for display in $InStore/Displays.get_children():
 		var plus_btn = display.get_node("PlusButton")
@@ -35,6 +41,7 @@ func setup():
 		plus_btn.visible = true
 		display_stand.visible = false
 	
+		# 소유중인 진열대 체크
 		var display_stand_list = State.get_all_display_stand()
 		for id in display_stand_list:
 			if id == display_stand.get_display_stand_number():
@@ -44,22 +51,31 @@ func setup():
 				
 		index+=1
 		
-		
+
+# 특정 진열대를 보여줌
 func show_display_stand(index):
 	for display in $InStore/Displays.get_children():
 		var display_stand = display.get_node("DisplayStand")
 		var plus_btn = display.get_node("PlusButton")
 		if display_stand.get_display_stand_number() == index:
 			display_stand.visible = true
-			print("SET")
 			display_stand.setup()
 			plus_btn.visible = false
 			
 			
 	
 func _on_clock_timeout():
+	$Background.rotation_degrees+=0.2
+	if $Background.rotation_degrees >= 360:
+		$Background.rotation_degrees = 0
+
+	Clock.get_node("Label2").text = State.get_day()["str"]
 	State.set_time(time_gap)
-	Clock.get_node("Label").text = State.get_time()
+	var time = State.get_time()
+	Clock.get_node("Label").text = "{hour}:{min}:{sec}".format({
+		"hour" : time["hour"],
+		"min" : time["min"],
+		"sec" : time["sec"]})
 
 
 func load_product(id, count):

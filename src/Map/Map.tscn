@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/art/map/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/map/sky.png" type="Texture" id=2]
@@ -9,16 +9,22 @@
 [ext_resource path="res://assets/art/map/clock.png" type="Texture" id=7]
 [ext_resource path="res://src/Map/Map.gd" type="Script" id=8]
 [ext_resource path="res://assets/font/NanumSquareRoundB.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://assets/font/NanumBarunpenB.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 10 )
 
 [node name="Map" type="Node2D"]
 script = ExtResource( 8 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 971.258, 613.642 )
+rotation = 1.5708
 scale = Vector2( 5.5, 5.5 )
 texture = ExtResource( 2 )
 
@@ -274,14 +280,26 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="Clock"]
-margin_left = -51.2998
-margin_top = -10.0433
-margin_right = 65.7002
-margin_bottom = 17.9567
+margin_left = -48.6302
+margin_top = -16.7175
+margin_right = 68.3698
+margin_bottom = 11.2825
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "00:00:00"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Clock"]
+margin_left = -24.7979
+margin_top = 14.1146
+margin_right = 46.2021
+margin_bottom = 46.1146
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Monday"
 __meta__ = {
 "_edit_use_anchors_": false
 }

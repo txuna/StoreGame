@@ -4,6 +4,45 @@ const NEAR_SCHOOL = 1
 const NEAR_COMPANY = 2
 const NEAR_HOUSE = 3
 
+const Monday = 1
+const Tuesday = 2
+const Wednesday = 3
+const Thursday = 4
+const Friday = 5
+const Satureday = 6
+const Sunday = 7
+
+var day = {
+	Monday : {
+		"value" : Monday,
+		"str" : "Monday"
+	},
+	Tuesday : {
+		"value" : Tuesday,
+		"str" : "Tuesday"
+	},
+	Wednesday : {
+		"value" : Wednesday,
+		"str" : "Wednesday"
+	},
+	Thursday : {
+		"value" : Thursday,
+		"str" : "Thursday"
+	},
+	Friday : {
+		"value" : Friday,
+		"str" : "Friday"
+	},
+	Satureday: {
+		"value" : Satureday,
+		"str" : "Satureday"
+	},
+	Sunday : {
+		"value" : Sunday,
+		"str" : "Sunday"
+	},
+}
+
 
 var Sales = {
 	"total_cash" : 0,
@@ -74,11 +113,9 @@ var StoreState = {
 	"rating" : 0, 
 	"pos" : NEAR_HOUSE,
 	"date" : {
-		"year" : 2021,
-		"month" : 7,
-		"day" : 11,
+		"day" : Monday,
 		"time" : {
-			"hour" : 12,
+			"hour" : 6,
 			"min" : 00,
 			"sec" : 00
 		}
@@ -136,6 +173,7 @@ func set_displaystand(index, id, use, count):
 		StoreState["display_stand"][index]["use"] = use 
 		StoreState["display_stand"][index]["count"] = count
 
+
 func change_displaystand_count(index, count, mask):
 	StoreState["display_stand"][index]["count"] += (count * mask)
 
@@ -164,23 +202,33 @@ func get_total_product_count(id):
 	return 0
 
 
-func get_time()->String:
-	return "{hour}:{min}:{sec}".format({
-		"hour" : StoreState["date"]["time"]["hour"],
-		"min" : StoreState["date"]["time"]["min"],
-		"sec" : StoreState["date"]["time"]["sec"],
-	})
+func get_time():
+	return StoreState["date"]["time"]
+
+func get_day():
+	var value =  StoreState["date"]["day"]
+	return day[value]
 
 
-func set_time(sec=0):
-	StoreState["date"]["time"]["sec"]+=sec
-"""
-	if StoreState["date"]["time"]["sec"] + sec >= 60:
-		pass
-"""
-	
-
-
+func set_time(sec):
+	var time = StoreState["date"]["time"]
+	if time["sec"] + sec >= 60:
+		var gap = (time["sec"] + sec) - 60
+		time["sec"] = gap 
+		if time["min"]+1 >= 60:
+			time["min"] = 0
+			if time["hour"]+1 >= 24:
+				time["hour"] = 0
+				if StoreState["date"]["day"]+1 > Sunday:
+					StoreState["date"]["day"] = Monday
+				else:
+					StoreState["date"]["day"] += 1
+			else:
+				time["hour"] += 1
+		else:
+			time["min"] += 1  
+	else:
+		time["sec"] += sec
 
 
 
