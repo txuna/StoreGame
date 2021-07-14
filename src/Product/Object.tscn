@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Product/Object.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/ui/msgbox.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/ui/cancel.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/ui/cancel_pressed.png" type="Texture" id=4]
+[ext_resource path="res://assets/font/NanumBarunpenB.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.5
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 5 )
 
 [node name="Object" type="RigidBody2D"]
 input_pickable = true
@@ -21,4 +28,105 @@ scale = Vector2( 0.7, 0.7 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Detail" type="TextureRect" parent="."]
+visible = false
+margin_left = 48.0
+margin_top = -74.0
+margin_right = 266.0
+margin_bottom = 179.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="TextureButton" parent="Detail"]
+visible = false
+margin_left = 79.8897
+margin_top = 30.0787
+margin_right = 94.8897
+margin_bottom = 45.0787
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="Detail"]
+margin_left = 59.1644
+margin_top = 54.5588
+margin_right = 166.164
+margin_bottom = 75.5588
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "[ Product Name ]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameValue" type="Label" parent="Detail"]
+margin_left = 67.6556
+margin_top = 80.5834
+margin_right = 150.656
+margin_bottom = 101.583
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "[Name]"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShlefLife" type="Label" parent="Detail"]
+margin_left = 48.276
+margin_top = 104.923
+margin_right = 178.276
+margin_bottom = 125.923
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "[ Remain shelf life ]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShelfLifeValue" type="Label" parent="Detail"]
+margin_left = 24.9977
+margin_top = 128.279
+margin_right = 200.998
+margin_bottom = 149.279
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "3 days 7 hour "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="State" type="Label" parent="Detail"]
+margin_left = 83.48
+margin_top = 153.439
+margin_right = 137.48
+margin_bottom = 174.439
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "[ State ]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StateValue" type="Label" parent="Detail"]
+margin_left = 76.4098
+margin_top = 180.663
+margin_right = 140.41
+margin_bottom = 201.663
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Very Good"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
