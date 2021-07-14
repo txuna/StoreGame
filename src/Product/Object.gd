@@ -46,8 +46,8 @@ func show_detail():
 	var product = Products.get_products()[id]
 	$Detail/NameValue.text = product["name"]
 	
-	var remain_shelf_life = get_node("ShelfLifeTimer").wait_time
-	var days = remain_shelf_life / GAME_DAY
+	var remain_shelf_life = get_node("ShelfLifeTimer").get_time_left()
+	var days = int(remain_shelf_life / GAME_DAY)
 	remain_shelf_life = int(remain_shelf_life) % GAME_DAY 
 	var hours = remain_shelf_life / GAME_HOUR
 	
@@ -68,10 +68,10 @@ func _input_event(viewport, event, shape_idx):
 			emit_signal("clicked", self)
 			
 		if held and event.button_index == BUTTON_WHEEL_UP:
-			rotate(0.05)
+			rotate(-0.05)
 			
 		if held and event.button_index == BUTTON_WHEEL_DOWN:
-			rotate(-0.05)
+			rotate(0.05)
 			
 		if event.button_index == BUTTON_RIGHT:
 			if event.pressed: 
