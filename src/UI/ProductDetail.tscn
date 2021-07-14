@@ -1,0 +1,253 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/art/ui/pos_tab_panel.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/ui/cancel.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/ui/cancel_pressed.png" type="Texture" id=3]
+[ext_resource path="res://src/UI/ProductDetail.gd" type="Script" id=4]
+[ext_resource path="res://assets/font/NanumBarunpenB.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 5 )
+
+[node name="ProductDetail" type="Control"]
+margin_left = 391.995
+margin_top = 212.034
+margin_right = 431.995
+margin_bottom = 252.034
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 989.0
+margin_bottom = 591.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect"]
+margin_left = 779.533
+margin_top = 75.4041
+margin_right = 843.533
+margin_bottom = 139.404
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+
+[node name="ProductName" type="Label" parent="TextureRect"]
+margin_left = 123.473
+margin_top = 84.0949
+margin_right = 312.473
+margin_bottom = 126.095
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Product Name :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProductNameValue" type="Label" parent="TextureRect"]
+margin_left = 331.268
+margin_top = 82.4585
+margin_right = 504.268
+margin_bottom = 124.458
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Product Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buy" type="Label" parent="TextureRect"]
+margin_left = 123.672
+margin_top = 136.29
+margin_right = 322.672
+margin_bottom = 178.29
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Pruchase Price :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyValue" type="Label" parent="TextureRect"]
+margin_left = 333.71
+margin_top = 139.491
+margin_right = 522.71
+margin_bottom = 181.491
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Product Name :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sell" type="Label" parent="TextureRect"]
+margin_left = 124.808
+margin_top = 190.215
+margin_right = 313.808
+margin_bottom = 232.215
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Selling Price :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SellValue" type="Label" parent="TextureRect"]
+margin_left = 335.712
+margin_top = 192.884
+margin_right = 524.712
+margin_bottom = 234.884
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Product Name :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShelfLife" type="Label" parent="TextureRect"]
+margin_left = 126.142
+margin_top = 240.939
+margin_right = 315.142
+margin_bottom = 282.939
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Shelf Life :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShelfLifeValue" type="Label" parent="TextureRect"]
+margin_left = 337.715
+margin_top = 243.608
+margin_right = 526.715
+margin_bottom = 285.608
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Product Name :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Moisture" type="Label" parent="TextureRect"]
+margin_left = 126.672
+margin_top = 293.29
+margin_right = 253.672
+margin_bottom = 335.29
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Moisture :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoistureValue" type="Label" parent="TextureRect"]
+margin_left = 335.712
+margin_top = 295.0
+margin_right = 524.712
+margin_bottom = 337.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Product Name :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Satiety" type="Label" parent="TextureRect"]
+margin_left = 128.672
+margin_top = 341.29
+margin_right = 244.672
+margin_bottom = 383.29
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Satiety : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SatietyValue" type="Label" parent="TextureRect"]
+margin_left = 336.38
+margin_top = 341.719
+margin_right = 525.38
+margin_bottom = 383.719
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Product Name :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="Label" parent="TextureRect"]
+margin_left = 129.672
+margin_top = 385.29
+margin_right = 238.672
+margin_bottom = 427.29
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Health : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthValue" type="Label" parent="TextureRect"]
+margin_left = 337.715
+margin_top = 387.771
+margin_right = 526.715
+margin_bottom = 429.771
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Product Name :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Type" type="Label" parent="TextureRect"]
+margin_left = 129.672
+margin_top = 428.005
+margin_right = 238.672
+margin_bottom = 470.005
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Temperature : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TypeValue" type="Label" parent="TextureRect"]
+margin_left = 337.24
+margin_top = 426.002
+margin_right = 446.24
+margin_bottom = 468.002
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Health : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Taste" type="Label" parent="TextureRect"]
+margin_left = 126.675
+margin_top = 472.954
+margin_right = 309.675
+margin_bottom = 514.954
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Taste : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TasteValue" type="Label" parent="TextureRect"]
+margin_left = 334.94
+margin_top = 474.452
+margin_right = 517.94
+margin_bottom = 516.452
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Temperature : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="TextureRect/TextureButton" to="." method="_on_TextureButton_pressed"]

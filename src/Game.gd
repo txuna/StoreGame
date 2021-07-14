@@ -6,8 +6,9 @@ const STOCK = 2
 const EVENT = 3
 
 var map = preload("res://src/Map/Map.tscn") 
-var msgbox = null
+#var msgbox = null
 signal LoadPosUI
+signal ShowMsgBox
 
 var PosTabIndex = 0
 
@@ -22,7 +23,9 @@ func start_game():
 	
 	
 func setup():
-	msgbox = get_node("../UiLayer/MsgBox")
+	var msgbox = get_node("../UiLayer/MsgBox")
+	connect("ShowMsgBox", msgbox, "show_display")
+	
 	var posui = get_node("../UiLayer/PosUI")
 	posui.connect("BuyProduct", self, "_on_buy_product")
 	connect("LoadPosUI", posui, "show_display")
@@ -37,7 +40,8 @@ func load_map():
 func _on_buy_product(product:Dictionary):
 	var cash = State.get_current_cash()
 	if cash < product["price"]:
-		msgbox.show_display("Lack of Cash!")
+		emit_signal("ShowMsgBox", "Lack of Money!")
+		#msgbox.show_display("Lack of Cash!")
 		return 	
 	
 	State.set_current_cash(product["price"], -1)
@@ -51,7 +55,8 @@ func _on_buy_display_stand(index:int):
 	var cash = State.get_current_cash()
 	var price = State.get_display_stand_price() 
 	if cash < price:
-		msgbox.show_display("Lack of Cash!")
+		emit_signal("ShowMsgBox", "Lack of Money!")
+		#msgbox.show_display("Lack of Cash!")
 		return 
 		
 	State.set_current_cash(price, -1)

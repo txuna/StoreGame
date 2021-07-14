@@ -14,9 +14,11 @@ signal clicked
 
 var id = 0x0
 
+var product_state = true # 유통기한 전인가 후인가
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 func _physics_process(delta):
 	if held:
@@ -24,6 +26,19 @@ func _physics_process(delta):
 
 func setup(product_id):
 	id = product_id
+	var timer = Timer.new()
+	timer.wait_time = Products.get_products()[id]
+	timer.one_shot = true
+	timer.connect("timeout", self, "finish_product_shelf_life") 
+	add_child(timer)
+	timer.start() 
+
+# 상품의 유통기한이 지났는지 아닌지 확인하는 코드 
+func finish_product_shelf_life():
+	product_state = false
+	
+func get_product_state():
+	return product_state
 
 func get_id():
 	return id

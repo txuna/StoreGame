@@ -17,7 +17,7 @@ onready var Stock_StockContainer = $PosContainer/PosBack/Stock/StockContainer/vb
 
 
 signal BuyProduct
-
+signal ShowDetail
 
 var current_tab = STATE
 var tab_list = []
@@ -26,6 +26,9 @@ var buy_list = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var product_detail = get_node("../ProductDetail")
+	connect("ShowDetail", product_detail, "show_display")
+	
 	var tabs = $PosContainer/PosBack
 	for tab in tabs.get_children():
 		tab.visible = false
@@ -102,15 +105,16 @@ func load_stock():
 	var product_list = Products.get_products()
 	for id in product_list:
 		var product = product_list[id]
-		make_product_name(product["name"])
+		make_product_name(product["name"], product["id"])
 		make_buy(product)
 		make_stock(product["id"])
 		
 	
-func make_product_name(text:String):
+func make_product_name(text:String, id:int):
 	var label = UIKit.make_label(text, 24)
 	Stock_NameContainer.add_child(label)
-	
+	label.set_mouse_filter(1)
+	label.connect("gui_input", self, "_on_show_product_detail", [id])
 	
 func make_buy(product):
 	# normal pressed, hover, disable
@@ -141,7 +145,6 @@ func make_buy(product):
 		"count" : 1,
 		"price" : product["buy"],
 	}
-		
 	#plus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], product["buy"], 1])	
 	#minus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], product["buy"], -1])	
 	plus_btn.connect("pressed", self, "_on_count_btn_pressed", [product["id"], count, price, product["buy"], 1])	
@@ -176,6 +179,10 @@ func _on_count_btn_pressed(id, count:Label, price:Label, buy:int, mask):
 func _on_pressed_buy_btn(id):
 	emit_signal("BuyProduct", buy_list[id])
 	
+func _on_show_product_detail(event, id):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			emit_signal("ShowDetail", id)
 	
 #################################################################
 
