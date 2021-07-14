@@ -68,10 +68,10 @@ func _input_event(viewport, event, shape_idx):
 			emit_signal("clicked", self)
 			
 		if held and event.button_index == BUTTON_WHEEL_UP:
-			rotate(-0.05)
+			rotate(-0.07)
 			
 		if held and event.button_index == BUTTON_WHEEL_DOWN:
-			rotate(0.05)
+			rotate(0.07)
 			
 		if event.button_index == BUTTON_RIGHT:
 			if event.pressed: 

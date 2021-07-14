@@ -27,8 +27,9 @@ func setup():
 	connect("ShowMsgBox", msgbox, "show_display")
 	
 	var posui = get_node("../UiLayer/PosUI")
-	posui.connect("BuyProduct", self, "_on_buy_product")
-	connect("LoadPosUI", posui, "show_display")
+	posui.connect("BuyProduct", self, "_on_buy_product") 
+	connect("LoadPosUI", posui, "tab_switch")
+	#connect("LoadPosUI", posui, "show_display")
 	
 
 func load_map():

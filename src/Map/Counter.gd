@@ -11,7 +11,8 @@ signal LoadPosUI
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var posui = get_node("/root/Main/UiLayer/PosUI")
-	connect("LoadPosUI", posui, "show_display")
+	#connect("LoadPosUI", posui, "show_display")
+	connect("LoadPosUI", posui, "tab_switch")
 
 
 func _input_event(viewport, event, shape_idx):

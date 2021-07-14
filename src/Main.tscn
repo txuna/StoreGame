@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/UI/UiLayer.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/UI/PosUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/MsgBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/ProductDetail.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/NewUI.tscn" type="PackedScene" id=8]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -29,4 +30,7 @@ margin_right = -168.265
 margin_bottom = -177.255
 
 [node name="ProductDetail" parent="UiLayer" instance=ExtResource( 7 )]
+visible = false
+
+[node name="NewUI" parent="UiLayer" instance=ExtResource( 8 )]
 visible = false

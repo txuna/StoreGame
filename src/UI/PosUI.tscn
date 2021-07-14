@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/art/ui/pos_tab_panel.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/ui/cancel_pressed.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/art/ui/buy_btn.png" type="Texture" id=17]
 [ext_resource path="res://assets/art/ui/event.png" type="Texture" id=18]
 [ext_resource path="res://assets/art/ui/event_pressed.png" type="Texture" id=19]
+[ext_resource path="res://assets/art/ui/breaking_news.png" type="Texture" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -73,6 +74,7 @@ __meta__ = {
 }
 
 [node name="State" type="Control" parent="PosContainer/PosBack"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -508,8 +510,21 @@ __meta__ = {
 
 [node name="Event" type="Control" parent="PosContainer/PosBack"]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 144.793
+margin_top = 79.1066
+margin_right = 184.793
+margin_bottom = 119.107
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="PosContainer/PosBack/Event"]
+margin_left = 182.228
+margin_top = -7.76941
+margin_right = 491.228
+margin_bottom = 90.2306
+texture = ExtResource( 20 )
+expand = true
 
 [node name="Tabs" type="Control" parent="PosContainer"]
 margin_left = -10.0908

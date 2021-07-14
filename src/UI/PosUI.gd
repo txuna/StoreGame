@@ -63,6 +63,14 @@ func show_display(tab_index=0):
 		
 	elif tab_index == STOCK:
 		load_stock()
+		
+	elif tab_index == EVENT:
+		load_event()
+		
+############################EVENT#####################################		
+func load_event():
+	pass
+
 
 ############################STATE#####################################
 

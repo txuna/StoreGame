@@ -8,6 +8,7 @@ extends StaticBody2D
 var display_stand_number = 1
 var current_product_id = 0x0
 
+
 # 진열된 상품 == 해당 영역에 들어간 상품의 종류들
 var basket = {}
 
