@@ -15,8 +15,11 @@ func _ready() -> void:
 
 
 func setup():
+	
 	show_cash()
 	var time = State.get_time()
+	var rotation_count = (time["hour"] * 3600 +  time["min"] * 60 + time["sec"]) / 48 
+	$Background.rotation_degrees = 0.2 * rotation_count
 	Clock.get_node("Label2").text = State.get_day()["str"]
 	Clock.get_node("Label").text = "{hour}:{min}:{sec}".format({
 		"hour" : time["hour"],
