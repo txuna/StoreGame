@@ -31,6 +31,18 @@ func setup():
 	connect("LoadPosUI", posui, "tab_switch")
 	#connect("LoadPosUI", posui, "show_display")
 	
+	State.setup()
+	NewsList.setup()
+	var timer = Timer.new() 
+	timer.wait_time = 5
+	timer.one_shot = false
+	timer.autostart = true 
+	timer.connect("timeout", self, "save_data")
+	add_child(timer)
+
+func save_data():
+	SaveData.save_data()
+	
 
 func load_map():
 	var map_instance = map.instance()

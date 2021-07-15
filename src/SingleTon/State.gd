@@ -129,6 +129,9 @@ var StoreState = {
 	"stock" : {
 
 	},
+	"news" : [
+		
+	], 
 	"display_stand" : {
 		0x0001 : {
 			"use" : false, 
@@ -148,6 +151,17 @@ var StoreState = {
 	},
 	"next_display_stand_price" : 1000,
 }
+
+func setup() -> void:
+	var data = SaveData.get_data_storestate()
+	if data.empty():
+		return 
+	else:
+		StoreState = data
+
+
+func get_storestate():
+	return StoreState
 
 func get_display_stand_price():
 	return StoreState["next_display_stand_price"]

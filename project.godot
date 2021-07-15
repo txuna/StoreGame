@@ -24,6 +24,8 @@ config/icon="res://icon.png"
 State="*res://src/SingleTon/State.gd"
 UIKit="*res://src/SingleTon/Uikit.gd"
 Products="*res://src/SingleTon/ProductList.gd"
+SaveData="*res://src/SingleTon/SaveData.gd"
+NewsList="*res://src/SingleTon/NewsList.gd"
 
 [display]
 
