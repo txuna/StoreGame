@@ -105,6 +105,7 @@ var Sales = {
 0xA000 : {
 	"id" : 0xA000,
 	"count" : 2
+	"shelf_life" : []
 },
 """
 
@@ -136,17 +137,20 @@ var StoreState = {
 		0x0001 : {
 			"use" : false, 
 			"productId" : 0x0,
-			"count" : 0, 
+			"count" : 0,  #  productId와 상응하는 아이템의 카운트 - basket의 핵심부분만 불러온 부분
+			"basket" : {},  #진열대 속에 담긴것 
 		},
 		0x0002 : {
 			"use" : false,
 			"productId" : 0x0,
 			"count" : 0, 
+			"basket" : {},  #진열대 속에 담긴것 
 		},
 		0x0003 : {
 			"use" : false,
 			"productId" : 0x0,
 			"count" : 0, 
+			"basket" : {},  #진열대 속에 담긴것 
 		}
 	},
 	"next_display_stand_price" : 1000,
@@ -175,17 +179,19 @@ func get_all_display_stand():
 func get_displaystand(index):
 	return StoreState["display_stand"][index]
 
-func set_displaystand(index, id, use, count):
+func set_displaystand(index, id, use, count, basket):
 	if not StoreState["display_stand"].has(index):
 		StoreState["display_stand"][index] = {
 			"productId" : id,
 			"use" : use,
-			"count" : count
+			"count" : count,
+			"basket" : {}
 		}
 	else:
 		StoreState["display_stand"][index]["productId"] = id
 		StoreState["display_stand"][index]["use"] = use 
 		StoreState["display_stand"][index]["count"] = count
+		StoreState["display_stand"][index]["basket"] = basket
 
 
 func change_displaystand_count(index, count, mask):
@@ -205,7 +211,7 @@ func set_product_count(id, count, mask):
 	else:
 		StoreState["stock"][id] = {
 			"id" : id,
-			"count" : count * mask
+			"count" : count * mask,
 		}		
 
 

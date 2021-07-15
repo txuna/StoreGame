@@ -35,6 +35,9 @@ func setup(product_id):
 func finish_product_shelf_life():
 	product_state = false
 	
+func get_remain_shelf_life_time():
+	return get_node("ShelfLifeTimer").get_time_left()
+	
 func get_product_state():
 	return product_state
 
@@ -46,7 +49,7 @@ func show_detail():
 	var product = Products.get_products()[id]
 	$Detail/NameValue.text = product["name"]
 	
-	var remain_shelf_life = get_node("ShelfLifeTimer").get_time_left()
+	var remain_shelf_life = get_remain_shelf_life_time()
 	var days = int(remain_shelf_life / GAME_DAY)
 	remain_shelf_life = int(remain_shelf_life) % GAME_DAY 
 	var hours = remain_shelf_life / GAME_HOUR

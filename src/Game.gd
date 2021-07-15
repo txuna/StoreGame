@@ -58,6 +58,7 @@ func _on_buy_product(product:Dictionary):
 		return 	
 	
 	State.set_current_cash(product["price"], -1)
+	#var shelf_life = Products.get_products()[product["id"]]["shelf_life"]
 	State.set_product_count(product["id"], product["count"], 1)
 	get_node("Map").load_product(product["id"], product["count"])
 	get_node("Map").show_cash()

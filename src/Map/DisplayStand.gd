@@ -39,14 +39,19 @@ func add_items():
 #func _process(delta: float) -> void:
 #	pass
 
-#  진열대 구매후 셋업
-func setup():
+#  진열대 구매후 셋업 기본값으로 콜라로 설정되어 있다.
+func setup(productId=0xA000):
 	$CollisionShape2D.disabled = false 
 	$DetectProduct/CollisionShape2D.disabled = false 
 	$Wall/StaticBody2D/CollisionShape2D.disabled = false 
 	$Wall/StaticBody2D2/CollisionShape2D.disabled = false
 	add_items()
-	_on_OptionButton_item_selected(0)
+	var index = $OptionButton.get_item_index(productId) 
+	$OptionButton.select(index)
+	current_product_id = productId 
+	
+	#print(index, productId)
+	#_on_OptionButton_item_selected(index)
 
 
 # 옵션 박스로 선택된 것과 일치하는 상품 코드인지 확인하여 증가 
@@ -56,7 +61,8 @@ func _on_DetectProduct_body_entered(body: Node) -> void:
 		if not basket.has(id):
 			basket[id] = {
 				"id" : id,
-				"count" : 1
+				"count" : 1,
+				#"shelf_life_list" : [] #저장할 때 Storage검사해서 그떄 넣자
 			}
 			
 		else:
@@ -91,5 +97,5 @@ func get_product_count(id):
 # 값이 변경된다면 현재 영역에 들어가 있는 아이템과 변경된 값과 일치된것이 무엇인지 알아야 함
 func _on_OptionButton_item_selected(index: int) -> void:
 	current_product_id = $OptionButton.get_item_id(index)
-	State.set_displaystand(display_stand_number, current_product_id, true, get_product_count(current_product_id))
+	State.set_displaystand(display_stand_number, current_product_id, true, get_product_count(current_product_id), basket)
 	#print(State.get_displaystand(display_stand_number))

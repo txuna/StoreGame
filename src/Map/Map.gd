@@ -46,12 +46,15 @@ func setup():
 		var display_stand_list = State.get_all_display_stand()
 		for id in display_stand_list:
 			if id == display_stand.get_display_stand_number():
+				var productId = display_stand_list[id]["productId"]
 				plus_btn.visible = false 
 				display_stand.visible = true
-				display_stand.setup()
+				display_stand.setup(productId)
 				
 		index+=1
-		
+
+func load_product_from_save_file():
+	pass
 
 # 특정 진열대를 보여줌
 func show_display_stand(index):

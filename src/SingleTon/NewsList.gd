@@ -14,11 +14,11 @@ var NewsList = {
 			"en" : ""
 		},
 		"content" : {
-			"ko" : "기상청에따르면 {Today}부터 본격적인 {sweltering}가 시작된다고 보고있습니다. ",
+			"ko" : "기상청에따르면 내일부터 3일간 북태평양으로부터 유입되는 고온 다습한 공기가 한반도로의 유입되면서 본격적인 무더위가 시작될것으로 보고 있다. 더불어 탈수증장에 걸리지 않도록 수분기 있는 식품을 자주 사먹기를 권장한다. ",
 			"en" : ""
 		},
 		"effect" : {
-			"type" : Product, # or Gender or  Product 
+			"type" : Product, # or Gender or  AgeGroup
 			"detail" : {},
 		},
 		"open" : false, 
