@@ -48,11 +48,10 @@ func setup(productId=0xA000):
 	add_items()
 	var index = $OptionButton.get_item_index(productId) 
 	$OptionButton.select(index)
-	current_product_id = productId 
-	
-	#print(index, productId)
-	#_on_OptionButton_item_selected(index)
+	_on_OptionButton_item_selected(index)
 
+func get_product_position():
+	return $CreateProduct.global_position
 
 # 옵션 박스로 선택된 것과 일치하는 상품 코드인지 확인하여 증가 
 func _on_DetectProduct_body_entered(body: Node) -> void:
@@ -63,12 +62,16 @@ func _on_DetectProduct_body_entered(body: Node) -> void:
 				"id" : id,
 				"count" : 1,
 				#"shelf_life_list" : [] #저장할 때 Storage검사해서 그떄 넣자
-			}
-			
+			}	
 		else:
 			basket[id]["count"]+=1
 		
+		# 진열대에 담겨져 있는 바구니 값 변경
+		#State.change_displaystand_basket(display_stand_number, basket)
+		
 		if current_product_id == id:
+			#State.set_product_in_storage(id, 1, -1)
+			$Count.text = str(basket[id]["count"]) +"pcs"
 			State.change_displaystand_count(display_stand_number, 1, 1)
 			#print(State.get_displaystand(display_stand_number))
 
@@ -77,13 +80,17 @@ func _on_DetectProduct_body_exited(body: Node) -> void:
 	if body.is_in_group("products"):
 		var id = body.get_id()
 		if basket.has(id):
-			if basket[id]["count"] - 1 <= 0:
-				basket.erase(id)
-
-			else:
-				basket[id]["count"]-=1
-
+			basket[id]["count"] -= 1
+		else:
+			basket[id] = {
+				"id" : id,
+				"count" : 0
+			}
+		#State.change_displaystand_basket(display_stand_number, basket)
+		
 		if current_product_id == id:
+			#State.set_product_in_storage(id, 1, 1)
+			$Count.text = str(basket[id]["count"]) +"pcs"
 			State.change_displaystand_count(display_stand_number, 1, -1)
 			#print(State.get_displaystand(display_stand_number))
 			
@@ -97,5 +104,9 @@ func get_product_count(id):
 # 값이 변경된다면 현재 영역에 들어가 있는 아이템과 변경된 값과 일치된것이 무엇인지 알아야 함
 func _on_OptionButton_item_selected(index: int) -> void:
 	current_product_id = $OptionButton.get_item_id(index)
-	State.set_displaystand(display_stand_number, current_product_id, true, get_product_count(current_product_id), basket)
+	if basket.has(current_product_id):
+		$Count.text = str(basket[current_product_id]["count"]) +"pcs"
+	else:
+		$Count.text = "0pcs"
+	State.set_displaystand(display_stand_number, current_product_id, true, get_product_count(current_product_id))
 	#print(State.get_displaystand(display_stand_number))

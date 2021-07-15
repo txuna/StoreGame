@@ -45,16 +45,25 @@ func setup():
 		# 소유중인 진열대 체크
 		var display_stand_list = State.get_all_display_stand()
 		for id in display_stand_list:
+			display_stand_list[id]["count"] = 0
 			if id == display_stand.get_display_stand_number():
 				var productId = display_stand_list[id]["productId"]
 				plus_btn.visible = false 
 				display_stand.visible = true
 				display_stand.setup(productId)
 				
+				
 		index+=1
-
+	load_product_from_save_file()
+		
+		
+# 진열대에 있는 템들을 창고로 올려보내기  - Stock 이용 
 func load_product_from_save_file():
-	pass
+	var stocks = State.get_stock()
+	for id in stocks:
+		var product = stocks[id]
+		load_product(id, product["count"])
+		
 
 # 특정 진열대를 보여줌
 func show_display_stand(index):
@@ -84,14 +93,14 @@ func _on_clock_timeout():
 func show_cash():
 	$InStore/CashTexture/Cash.text = str(State.get_current_cash()) + "$"
 
-func load_product(id, count):
+func load_product(id, count, pos=$InStore/Delivery.position):
 	for i in range(count):
 		var instance = Products.get_products()[id]["scene"].instance()
 		instance.connect("clicked", self, "_on_product_pickable_clicked")
 		instance.setup(id)
 		get_node("InStore/Storage").add_child(instance)
 		instance.add_to_group("products")
-		instance.position = $InStore/Delivery.position
+		instance.position = pos
 
 
 func _on_product_pickable_clicked(object):
