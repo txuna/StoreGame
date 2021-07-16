@@ -25,3 +25,17 @@ func _on_StartBtn_pressed() -> void:
 func _on_ConvenienceStore_pressed(extra_arg_0: String) -> void:
 	region = extra_arg_0
 	$RegionDetail/TextureRect.visible = true
+	show_detail()
+	
+
+func show_detail():
+	$RegionDetail.visible = true
+	var region_info = Region.get_region(region)
+	$RegionDetail/TextureRect/AgeGroupValue.text = "0~19({0-19}%), 20~39({20-39}%)\n40~59({40-59}%), 60~79({60-79}%)".format({
+		"0-19" : region_info["age_group"]["0-19"],
+		"20-39" : region_info["age_group"]["20-39"],
+		"40-59" : region_info["age_group"]["40-59"],
+		"60-79" : region_info["age_group"]["60-79"]})
+	$RegionDetail/TextureRect/GenderRatioValue.text = "Male : {male}%, Female : {female}%".format({"male" : region_info["gender"]["male"], "female" : region_info["gender"]["female"]})
+	$RegionDetail/TextureRect/IncomeLevelValue.text = "{income} Level".format({"income" : region_info["income_level"]})
+	$RegionDetail/TextureRect/PopulationValue.text = str(region_info["population"]) +"people"

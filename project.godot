@@ -26,6 +26,7 @@ UIKit="*res://src/SingleTon/Uikit.gd"
 Products="*res://src/SingleTon/ProductList.gd"
 SaveData="*res://src/SingleTon/SaveData.gd"
 NewsList="*res://src/SingleTon/NewsList.gd"
+Region="*res://src/SingleTon/Region.gd"
 
 [display]
 

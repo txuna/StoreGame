@@ -146,6 +146,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="RegionDetail"]
+visible = false
 margin_left = 142.339
 margin_top = 89.8984
 margin_right = 1102.34
@@ -205,10 +206,10 @@ __meta__ = {
 }
 
 [node name="GenderRatio" type="Label" parent="RegionDetail/TextureRect"]
-margin_left = 125.876
-margin_top = 136.566
-margin_right = 344.876
-margin_bottom = 178.566
+margin_left = 123.474
+margin_top = 191.224
+margin_right = 342.474
+margin_bottom = 233.224
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Gender Ratio :"
@@ -217,10 +218,10 @@ __meta__ = {
 }
 
 [node name="GenderRatioValue" type="Label" parent="RegionDetail/TextureRect"]
-margin_left = 349.567
-margin_top = 134.696
-margin_right = 649.567
-margin_bottom = 176.696
+margin_left = 347.164
+margin_top = 189.354
+margin_right = 648.164
+margin_bottom = 231.354
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Male : 70% Female : 30%"
@@ -229,10 +230,10 @@ __meta__ = {
 }
 
 [node name="Population" type="Label" parent="RegionDetail/TextureRect"]
-margin_left = 128.281
-margin_top = 188.948
-margin_right = 347.281
-margin_bottom = 230.948
+margin_left = 125.879
+margin_top = 243.606
+margin_right = 344.879
+margin_bottom = 285.606
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Population"
@@ -241,10 +242,10 @@ __meta__ = {
 }
 
 [node name="PopulationValue" type="Label" parent="RegionDetail/TextureRect"]
-margin_left = 351.972
-margin_top = 191.754
-margin_right = 570.972
-margin_bottom = 233.754
+margin_left = 349.569
+margin_top = 246.412
+margin_right = 568.569
+margin_bottom = 288.412
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "32100 people"
@@ -253,10 +254,10 @@ __meta__ = {
 }
 
 [node name="IncomeLevel" type="Label" parent="RegionDetail/TextureRect"]
-margin_left = 126.676
-margin_top = 242.637
-margin_right = 345.676
-margin_bottom = 284.637
+margin_left = 125.403
+margin_top = 290.152
+margin_right = 344.403
+margin_bottom = 332.152
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Income Level : "
@@ -265,10 +266,10 @@ __meta__ = {
 }
 
 [node name="IncomeLevelValue" type="Label" parent="RegionDetail/TextureRect"]
-margin_left = 352.492
-margin_top = 244.51
-margin_right = 571.492
-margin_bottom = 286.51
+margin_left = 351.22
+margin_top = 292.025
+margin_right = 570.22
+margin_bottom = 334.025
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "3,000,000$"
