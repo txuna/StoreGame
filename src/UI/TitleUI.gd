@@ -2,6 +2,7 @@ extends Control
 
 
 signal GameStart
+signal SelectMap
 
 const NEW = 0
 const CONTINUE = 1
@@ -20,4 +21,5 @@ func _on_GameStart_pressed() -> void:
 
 
 func _on_TextureButton2_pressed() -> void:
-	emit_signal("GameStart", NEW)
+	#emit_signal("GameStart", NEW)
+	emit_signal("SelectMap")

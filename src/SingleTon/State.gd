@@ -1,9 +1,5 @@
 extends Node
 
-const NEAR_SCHOOL = 1
-const NEAR_COMPANY = 2
-const NEAR_HOUSE = 3
-
 const Monday = 1
 const Tuesday = 2
 const Wednesday = 3
@@ -112,7 +108,7 @@ var Sales = {
 var StoreState = {
 	"name" : "Post Exchange",
 	"rating" : 0.05, 
-	"pos" : NEAR_HOUSE,
+	"pos" : "A",
 	"date" : {
 		"day" : Monday,
 		"time" : {
@@ -161,6 +157,8 @@ func setup() -> void:
 	else:
 		StoreState = data
 
+func set_region(region:String):
+	StoreState["pos"] = region
 
 func get_storestate():
 	return StoreState

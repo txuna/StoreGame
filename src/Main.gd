@@ -15,7 +15,13 @@ func setup():
 	var title = $UiLayer/TitleUI
 	title.visible = true
 	title.connect("GameStart", self, "_on_game_start")
+	title.connect("SelectMap", self, "load_select_map")
 	
+	var select_map = $UiLayer/SelectMap
+	select_map.connect("GameStart", self, "_on_game_start")
+	
+func load_select_map():
+	$UiLayer/SelectMap.visible = true
 	
 func _on_game_start(type):
 	if type == NEW:

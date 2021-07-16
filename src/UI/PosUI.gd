@@ -88,12 +88,7 @@ func load_state():
 	StateTab.get_node("TotalCashValue").text = str(State.get_total_cash()) + "$"
 	StateTab.get_node("RatingValue").text = str(State.get_rating()) + " / 10"
 	var pos = State.get_pos()
-	if pos == State.NEAR_HOUSE:
-		StateTab.get_node("PositionValue").text = "Near Residence"
-	elif pos == State.NEAR_COMPANY:
-		StateTab.get_node("PositionValue").text = "Near Company"
-	elif pos == State.NEAR_SCHOOL:
-		StateTab.get_node("PositionValue").text = "Near School"
+	StateTab.get_node("PositionValue").text = pos
 
 ############################STOCK#####################################
 	
