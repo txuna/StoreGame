@@ -124,8 +124,13 @@ var StoreState = {
 		"today" : Sales.duplicate(true),
 	},
 	# 모든 상품의 개수  
+	"total_stock_count" : 0,
 	"stock" : {
 
+	},
+	# 인덱스별로 상품 개별 관리 0~255
+	"products": {
+		
 	},
 	"news" : [
 		
@@ -156,6 +161,47 @@ func setup() -> void:
 		return 
 	else:
 		StoreState = data
+
+
+func remove_product_index(index):
+	if StoreState["products"].has(index):
+		StoreState["products"].erase(index)
+
+func set_product_index(index, id, shelf_ife):
+	StoreState["products"][index] = {
+		"id" : id, 
+		"index" : index, 
+		"shelf_life" : shelf_ife,
+		"display_number" : 0, 
+		"in_display" : false, 
+		"state" : true
+	}
+	
+# 0~255중에 남는 인덱스 찾기 # 못찾을 시 ? 대응법 필요
+func find_free_index():
+	var index = 0
+	for use_index in StoreState["products"]:
+		if index == use_index:
+			index+=1
+		else:
+			break
+	return index
+
+func get_product_all_index():
+	return StoreState["products"]
+
+func get_product_index(index):
+	return StoreState["products"][index]
+
+func change_product_index(index, type:String, value):
+	StoreState["products"][index][type] = value
+	
+	
+func get_total_stock_count():
+	return StoreState["total_stock_count"]
+
+func set_total_stock_count(count, mask):
+	StoreState["total_stock_count"] += (count * mask)
 
 func set_region(region:String):
 	StoreState["pos"] = region
@@ -206,6 +252,8 @@ func set_product_count(id, count, mask):
 			"id" : id,
 			"count" : count * mask,
 		}		
+
+	set_total_stock_count(count, mask)
 
 func get_total_product_count(id): 
 	if StoreState["stock"].has(id):

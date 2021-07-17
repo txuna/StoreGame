@@ -9,58 +9,69 @@ var held = false
 
 signal clicked
 
-export var id = 0x0
-export var in_display = false
-export var display_number = 0x0
+var info:Dictionary
 
-var product_state = true # 유통기한 전인가 후인가
 
+# Products.get_products()[id]["shelf_life"] * 1800
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var timer = Timer.new()
-	timer.name = "ShelfLifeTimer"
-	timer.wait_time = Products.get_products()[id]["shelf_life"] * 1800
-	timer.one_shot = true
-	timer.connect("timeout", self, "finish_product_shelf_life") 
+	var timer = Timer.new() 
+	timer.name = "ShelfTimer"
+	timer.wait_time = 1
+	timer.connect("timeout", self, "check_shelf_life")
 	add_child(timer)
 	timer.start() 
+	
 
 func _physics_process(delta):
 	if held:
 		global_transform.origin = get_global_mouse_position()
 
-func setup(product_id):
-	id = product_id
+
+func setup(arg_index, arg_id):
+	info = State.get_product_index(arg_index)
 
 
+func check_shelf_life():
+	if info["shelf_life"] <= 0:
+		info["state"] = false 
+		get_node("ShelfTimer").stop()
+		
+	else:
+		info["shelf_life"] -= 1		
+
+
+func get_product_index():
+	return info["index"]
+	
 # 상품의 유통기한이 지났는지 아닌지 확인하는 코드 
 func finish_product_shelf_life():
-	product_state = false
+	info["state"] = false
 	
 func get_remain_shelf_life_time():
-	return get_node("ShelfLifeTimer").get_time_left()
+	return info["shelf_life"]
 	
 func get_product_state():
-	return product_state
+	return info["state"]
 
 func get_id():
-	return id
+	return info["id"]
 	
 func set_display_number(number):
-	display_number = number
+	info["display_number"] = number
 	
 func get_display_number():
-	return display_number
+	return info["display_number"]
 	
 func is_display():
-	return in_display
+	return info["in_display"]
 	
 func set_is_display(value):
-	in_display = value
+	info["in_display"] = value
 	
 func show_detail():
 	$Detail.visible = true
-	var product = Products.get_products()[id]
+	var product = Products.get_products()[info["id"]]
 	$Detail/NameValue.text = product["name"]
 	
 	var remain_shelf_life = get_remain_shelf_life_time()
@@ -70,7 +81,7 @@ func show_detail():
 	
 	$Detail/ShelfLifeValue.text = "{day}days {hour}hours".format({"day" : days, "hour" : hours})
 	
-	if product_state == true:
+	if info["state"] == true:
 		$Detail/StateValue.text = "Very Good"
 	else:
 		$Detail/StateValue.text = "Bad"
@@ -111,5 +122,6 @@ func drop(impulse=Vector2.ZERO):
 
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport: Viewport) -> void:
-	State.set_product_count(id, 1, -1)
+	State.set_product_count(info["id"], 1, -1)
+	State.remove_product_index(info["index"])
 	queue_free()

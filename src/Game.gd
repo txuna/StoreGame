@@ -5,6 +5,8 @@ const SALES = 1
 const STOCK = 2 
 const EVENT = 3
 
+const MAX_COUNT = 255 # 상품이 존재하는 갯수
+
 var map = preload("res://src/Map/Map.tscn") 
 #var msgbox = null
 signal LoadPosUI
@@ -54,13 +56,24 @@ func _on_buy_product(product:Dictionary):
 	var cash = State.get_current_cash()
 	if cash < product["price"]:
 		emit_signal("ShowMsgBox", "Lack of Money!")
-		#msgbox.show_display("Lack of Cash!")
 		return 	
+		
+	if State.get_total_stock_count() >= MAX_COUNT:
+		emit_signal("ShowMsgBox", "No space left on storage.")
+		return 
 	
 	State.set_current_cash(product["price"], -1)
-	#var shelf_life = Products.get_products()[product["id"]]["shelf_life"]
+	
+	# 개별상품 관리를 위한 인덱스 부여
+	var shelf_life = Products.get_products()[product["id"]]["shelf_life"]
+	var index = State.find_free_index()
+	State.set_product_index(index, product["id"], shelf_life * 1800)
+	
 	State.set_product_count(product["id"], product["count"], 1)
-	get_node("Map").load_product(product["id"], product["count"])
+	
+	for i in product["count"]:
+		get_node("Map").load_product(index, product["id"])
+		
 	get_node("Map").show_cash()
 	emit_signal("LoadPosUI", STOCK)
 	
@@ -70,7 +83,6 @@ func _on_buy_display_stand(index:int):
 	var price = State.get_display_stand_price() 
 	if cash < price:
 		emit_signal("ShowMsgBox", "Lack of Money!")
-		#msgbox.show_display("Lack of Cash!")
 		return 
 		
 	State.set_current_cash(price, -1)
