@@ -132,7 +132,6 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport: Viewport) -> void:
 	position = spawn_pos
 	mode = RigidBody2D.MODE_RIGID
 	apply_central_impulse(Vector2.ZERO)
-	print("VISIBLE")
 """
 	State.set_product_count(info["id"], 1, -1)
 	State.remove_product_index(info["index"])

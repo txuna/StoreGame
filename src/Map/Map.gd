@@ -114,3 +114,7 @@ func _unhandled_input(event):
 		if held_object and !event.pressed:
 			held_object.drop(Input.get_last_mouse_speed())
 			held_object = null
+
+
+func _on_Debug_pressed() -> void:
+	get_node("/root/Main/UiLayer/DebugTab").show_display()
