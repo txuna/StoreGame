@@ -48,7 +48,6 @@ func setup():
 		# 소유중인 진열대 체크
 		var display_stand_list = State.get_all_display_stand()
 		for id in display_stand_list:
-			display_stand_list[id]["count"] = 0
 			if id == display_stand.get_display_stand_number():
 				var productId = display_stand_list[id]["productId"]
 				plus_btn.visible = false 
@@ -99,7 +98,7 @@ func show_cash():
 func load_product(index, id):
 	var instance = Products.get_products()[id]["scene"].instance()
 	instance.connect("clicked", self, "_on_product_pickable_clicked")
-	instance.setup(index, id)
+	instance.setup(index, $InStore/Delivery.position)
 	get_node("InStore/Storage").add_child(instance)
 	instance.add_to_group("products")
 	instance.position = $InStore/Delivery.position

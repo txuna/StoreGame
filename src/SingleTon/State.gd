@@ -125,10 +125,11 @@ var StoreState = {
 	},
 	# 모든 상품의 개수  
 	"total_stock_count" : 0,
+	# stock :: 같은 id를 가진 상품이 몇개 있는지 
 	"stock" : {
 
 	},
-	# 인덱스별로 상품 개별 관리 0~255
+	# 인덱스별로 상품 개별 관리 0~255,
 	"products": {
 		
 	},
@@ -162,6 +163,17 @@ func setup() -> void:
 	else:
 		StoreState = data
 
+## 어차피 프로그램 다시 키면 물건들이 다 창고로 이동하기 때문에 초기화 필요
+	for index in get_product_all_index():
+		print(index)
+		StoreState["products"][index]["in_display"] = false 
+		StoreState["products"][index]["display_number"] = 0 
+
+	for display_number in get_all_display_stand():
+		StoreState["display_stand"][display_number]["count"] = 0
+		
+	#print(StoreState["products"])
+	#print(StoreState["stock"])
 
 func remove_product_index(index):
 	if StoreState["products"].has(index):
@@ -185,6 +197,8 @@ func find_free_index():
 			index+=1
 		else:
 			break
+	if index >= 256:
+		print("find_free_index too much value") 
 	return index
 
 func get_product_all_index():

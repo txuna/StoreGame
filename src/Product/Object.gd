@@ -8,9 +8,11 @@ var dragging = false
 var held = false
 
 signal clicked
+signal ProductVanish
 
 var info:Dictionary
 
+var spawn_pos:Vector2
 
 # Products.get_products()[id]["shelf_life"] * 1800
 # Called when the node enters the scene tree for the first time.
@@ -28,7 +30,8 @@ func _physics_process(delta):
 		global_transform.origin = get_global_mouse_position()
 
 
-func setup(arg_index, arg_id):
+func setup(arg_index, pos):
+	spawn_pos = pos
 	info = State.get_product_index(arg_index)
 
 
@@ -68,6 +71,8 @@ func is_display():
 	
 func set_is_display(value):
 	info["in_display"] = value
+	#print(State.StoreState["products"][info["index"]])
+	
 	
 func show_detail():
 	$Detail.visible = true
@@ -121,7 +126,23 @@ func drop(impulse=Vector2.ZERO):
 		held = false
 
 
+# 게임을 꺼도 해당함수가 실행이 됨
 func _on_VisibilityNotifier2D_viewport_exited(viewport: Viewport) -> void:
+	mode = RigidBody2D.MODE_STATIC 
+	position = spawn_pos
+	mode = RigidBody2D.MODE_RIGID
+	apply_central_impulse(Vector2.ZERO)
+	print("VISIBLE")
+"""
 	State.set_product_count(info["id"], 1, -1)
 	State.remove_product_index(info["index"])
+	print("------------------------------------------")
+	print(State.StoreState["products"])
+	print(State.StoreState["stock"])
+	print("------------------------------------------")
 	queue_free()
+"""
+
+
+
+
