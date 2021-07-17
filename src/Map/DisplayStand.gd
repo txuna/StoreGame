@@ -66,14 +66,11 @@ func _on_DetectProduct_body_entered(body: Node) -> void:
 		else:
 			basket[id]["count"]+=1
 		
-		# 진열대에 담겨져 있는 바구니 값 변경
-		#State.change_displaystand_basket(display_stand_number, basket)
-		
 		if current_product_id == id:
-			#State.set_product_in_storage(id, 1, -1)
+			body.set_display_number(display_stand_number)
+			body.set_is_display(true)
 			$Count.text = str(basket[id]["count"]) +"pcs"
 			State.change_displaystand_count(display_stand_number, 1, 1)
-			#print(State.get_displaystand(display_stand_number))
 
 
 func _on_DetectProduct_body_exited(body: Node) -> void:
@@ -86,13 +83,12 @@ func _on_DetectProduct_body_exited(body: Node) -> void:
 				"id" : id,
 				"count" : 0
 			}
-		#State.change_displaystand_basket(display_stand_number, basket)
 		
 		if current_product_id == id:
-			#State.set_product_in_storage(id, 1, 1)
+			body.set_display_number(0x0)
+			body.set_is_display(false)
 			$Count.text = str(basket[id]["count"]) +"pcs"
 			State.change_displaystand_count(display_stand_number, 1, -1)
-			#print(State.get_displaystand(display_stand_number))
 			
 
 func get_product_count(id):

@@ -9,7 +9,9 @@ var held = false
 
 signal clicked
 
-var id = 0x0
+export var id = 0x0
+export var in_display = false
+export var display_number = 0x0
 
 var product_state = true # 유통기한 전인가 후인가
 
@@ -43,6 +45,18 @@ func get_product_state():
 
 func get_id():
 	return id
+	
+func set_display_number(number):
+	display_number = number
+	
+func get_display_number():
+	return display_number
+	
+func is_display():
+	return in_display
+	
+func set_is_display(value):
+	in_display = value
 	
 func show_detail():
 	$Detail.visible = true
