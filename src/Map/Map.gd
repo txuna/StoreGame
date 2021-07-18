@@ -7,7 +7,8 @@ onready var Background = $Background
 var DisplayStand = preload("res://src/Map/DisplayStand.tscn")
 
 var held_object = null
-var time_gap = 48 # 게임시간 1초에 현실시간 48초가 흐름
+#var time_gap = 48 # 게임시간 1초에 현실시간 48초가 흐름
+var time_gap = 72
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,8 +19,8 @@ func setup():
 	
 	show_cash()
 	var time = State.get_time()
-	var rotation_count = (time["hour"] * 3600 +  time["min"] * 60 + time["sec"]) / 48 
-	$Background.rotation_degrees = 0.2 * rotation_count
+	var rotation_count = (time["hour"] * 3600 +  time["min"] * 60 + time["sec"]) / 72 #48
+	$Background.rotation_degrees = 0.3 * rotation_count
 	Clock.get_node("Label2").text = State.get_day()["str"]
 	Clock.get_node("Label").text = "{hour}:{min}:{sec}".format({
 		"hour" : time["hour"],
@@ -80,7 +81,7 @@ func show_display_stand(index):
 			
 	
 func _on_clock_timeout():
-	$Background.rotation_degrees+=0.2
+	$Background.rotation_degrees+=0.3
 	if $Background.rotation_degrees >= 360:
 		$Background.rotation_degrees = 0
 

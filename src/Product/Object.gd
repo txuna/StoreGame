@@ -1,8 +1,8 @@
 extends RigidBody2D
 
 
-const GAME_DAY = 1800
-const GAME_HOUR = 75
+const GAME_DAY = 1200 # 1800
+const GAME_HOUR = 50 # 75
 
 var dragging = false 
 var held = false

@@ -66,8 +66,8 @@ func _on_buy_product(product:Dictionary):
 	
 	# 개별상품 관리를 위한 인덱스 부여
 	var shelf_life = Products.get_products()[product["id"]]["shelf_life"]
-	var index = State.find_free_index()
-	State.set_product_index(index, product["id"], shelf_life * 1800) #index와 count의 차이 : index는 개별상품에 대한 관리이고 count는 id가 같은 상품끼리 통틀어서 관리함 
+	var index = State.find_free_index()                        # 1800
+	State.set_product_index(index, product["id"], shelf_life * 1200) #index와 count의 차이 : index는 개별상품에 대한 관리이고 count는 id가 같은 상품끼리 통틀어서 관리함 
 	
 	State.set_product_count(product["id"], product["count"], 1)
 	
