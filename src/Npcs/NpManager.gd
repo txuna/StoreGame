@@ -10,6 +10,9 @@ const Age4 = 3 # 60 - 79
 
 var region
 
+const Male = 1
+const Female = 2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	region =  Region.get_region(State.get_pos())
@@ -37,29 +40,33 @@ func start_manager():
 		
 
 func _on_spawn_npc(age_index):
-	if check_rating():
-		print("spawn! : {age}".format({"age" : age_index}))
+	if not check_rating():
+		return 
+
+	randomize()
+	var value = int(rand_range(0, 100))
+	var gender
+	if value <= region["gender"]["male"]:
+		gender = Male
 	else:
-		print("Failed spawn : {age}".format({"age" : age_index}))
+		gender = Female
+		
+	# 이제 생성되는 시간과 평일인지 주말인지, 뉴스 영향 및 나이대에 따른 니즈 등등 설정
 
 
+# rating 확률에 따라 npc생성 확률
 func check_rating():
 	var rating = State.get_rating()
 	var pivot = rating / 10 * 100
 	pivot = stepify(pivot, 0.1) * 10
+	randomize()
 	var value = int(rand_range(0, 1000))
 	
-	print("pivot : {pivot} and age : {age}".format({"pivot" : pivot, "age" : value}))
+	#print("pivot : {pivot} and age : {age}".format({"pivot" : pivot, "age" : value}))
 	if value <= pivot:
 		return true
 	else:
 		return false
-	
-
-
-
-
-
 
 
 

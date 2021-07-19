@@ -297,7 +297,7 @@ func set_time(sec):
 			time["min"] -= 60
 			time["hour"] +=1 
 			
-		if time["hour"] >= 60:
+		if time["hour"] >= 24:
 			StoreState["date"]["day"] += 1
 			time["hour"] -= 24
 			
