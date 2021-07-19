@@ -8,6 +8,7 @@ const EVENT = 3
 const MAX_COUNT = 255 # 상품이 존재하는 갯수
 
 var map = preload("res://src/Map/Map.tscn") 
+var NpcManager = preload("res://src/Npcs/NpManager.tscn")
 #var msgbox = null
 signal LoadPosUI
 signal ShowMsgBox
@@ -41,7 +42,15 @@ func setup():
 	timer.autostart = true 
 	timer.connect("timeout", self, "save_data")
 	add_child(timer)
+	
+	load_npc_manager()
 
+func load_npc_manager():
+	var npc_manager = NpcManager.instance()
+	add_child(npc_manager)
+	npc_manager.start_manager()
+	
+	
 func save_data():
 	SaveData.save_data()
 	
@@ -53,8 +62,12 @@ func load_map():
 	
 
 func _on_buy_product(product:Dictionary):
+	if product.empty():
+		emit_signal("ShowMsgBox", "Something is Wrong!")
+		return 
+		
 	var cash = State.get_current_cash()
-	if cash < product["price"]:
+	if  cash < product["price"]:
 		emit_signal("ShowMsgBox", "Lack of Money!")
 		return 	
 		
@@ -79,6 +92,10 @@ func _on_buy_product(product:Dictionary):
 	
 
 func _on_buy_display_stand(index:int):
+	if index <= 0 or index >= 11:
+		emit_signal("ShowMsgBox", "Something is wrong!")
+		return 
+		
 	var cash = State.get_current_cash()
 	var price = State.get_display_stand_price() 
 	if cash < price:

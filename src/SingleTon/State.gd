@@ -107,7 +107,7 @@ var Sales = {
 
 var StoreState = {
 	"name" : "Post Exchange",
-	"rating" : 0.05, 
+	"rating" : 0.1, 
 	"pos" : "A",
 	"date" : {
 		"day" : Monday,
@@ -283,26 +283,27 @@ func get_day():
 	var value = StoreState["date"]["day"]
 	return day[value]
 
-
 func set_time(sec):
 	var time = StoreState["date"]["time"]
-	if time["sec"] + sec >= 60:
-		var gap = (time["sec"] + sec) - 60
-		time["sec"] = gap 
-		if time["min"]+1 >= 60:
-			time["min"] = 0
-			if time["hour"]+1 >= 24:
-				time["hour"] = 0
-				if StoreState["date"]["day"]+1 > Sunday:
-					StoreState["date"]["day"] = Monday
-				else:
-					StoreState["date"]["day"] += 1
-			else:
-				time["hour"] += 1
+	time["sec"] += sec 
+	while true:
+		if time["sec"] >= 60:
+			time["sec"] -= 60
+			time["min"] += 1
 		else:
-			time["min"] += 1  
-	else:
-		time["sec"] += sec
+			break
+			
+		if time["min"] >= 60:
+			time["min"] -= 60
+			time["hour"] +=1 
+			
+		if time["hour"] >= 60:
+			StoreState["date"]["day"] += 1
+			time["hour"] -= 24
+			
+		if StoreState["date"]["day"] > Sunday:
+			StoreState["date"]["day"] = Monday
+						
 
 func get_today_cash():
 	return StoreState["sales"]["today"]["total_cash"]
