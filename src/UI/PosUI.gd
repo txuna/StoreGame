@@ -86,7 +86,7 @@ func load_state():
 	StateTab.get_node("CashValue").text = str(State.get_current_cash()) + "$"
 	StateTab.get_node("TodayCashValue").text = str(State.get_today_cash()) + "$"
 	StateTab.get_node("TotalCashValue").text = str(State.get_total_cash()) + "$"
-	StateTab.get_node("RatingValue").text = str(State.get_rating()) + " / 10"
+	StateTab.get_node("RatingValue").text = str(State.get_rating()) + " / 5"
 	var pos = State.get_pos()
 	StateTab.get_node("PositionValue").text = pos +" Region"
 

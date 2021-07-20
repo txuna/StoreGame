@@ -17,8 +17,8 @@ func show_display(id):
 	$TextureRect/BuyValue.text = str(product["buy"])+"$"
 	$TextureRect/SellValue.text = str(product["sell"] )+ "$"
 	$TextureRect/ShelfLifeValue.text = str(product["shelf_life"]) + " days"
-	$TextureRect/MoistureValue.text = str(product["moisture"]) + "%"
-	$TextureRect/SatietyValue.text = str(product["satiety"] )+ "%"
+	$TextureRect/MoistureValue.text = str(product["moisture"] * 10) + "%"
+	$TextureRect/SatietyValue.text = str(product["satiety"] * 10 )+ "%"
 	$TextureRect/HealthValue.text = str(product["health"]) + "/10 points"
 	$TextureRect/TypeValue.text = Products.get_temperature_str(product["temperature"]) 
 	$TextureRect/TasteValue.text = str(product["taste"]) + "/10 points"

@@ -7,8 +7,8 @@ extends Node
 # taste : 10점 만점
 
 const Cool = 1
-const Hot = 2
-const Normal = 3
+const Warm = 2
+const Lukewarm = 3
 
 var ProductList = {
 	0xA000 : {
@@ -17,12 +17,12 @@ var ProductList = {
 		"buy" : 700,
 		"sell" : 1100,
 		"scene" : preload("res://src/Product/Cola.tscn"),
-		"shelf_life" : 6, 
-		"moisture" : 65,
-		"satiety" : 5,
-		"health" : 1,
+		"shelf_life" : 3.0, 
+		"moisture" : 6.5,
+		"satiety" : 0.0,
+		"health" : -0.5,
 		"temperature" : Cool,
-		"taste" : 7,
+		"taste" : 7.0,
 	},
 	0xA001 : {
 		"name" : "Milk",
@@ -30,12 +30,12 @@ var ProductList = {
 		"buy" : 500,
 		"sell" : 700,
 		"scene" : preload("res://src/Product/Milk.tscn"),
-		"shelf_life" : 2, 
-		"moisture" : 60,
-		"satiety" : 25,
-		"health" : 4,
+		"shelf_life" : 2.0, 
+		"moisture" : 5.5,
+		"satiety" : 0.5,
+		"health" : 1.5,
 		"temperature" : Cool,
-		"taste" : 2,
+		"taste" : 2.0,
 	},
 	0xA002 : {
 		"name" : "SandWich",
@@ -43,20 +43,59 @@ var ProductList = {
 		"buy" : 800,
 		"sell" : 1300,
 		"scene" : preload("res://src/Product/SandWich.tscn"),
-		"shelf_life" : 3, 
-		"moisture" : 65,
-		"satiety" : 35,
-		"health" : 3,
-		"temperature" : Normal,
-		"taste" : 5,
+		"shelf_life" : 2.0, 
+		"moisture" : 0.0,
+		"satiety" : 3.0,
+		"health" : 3.8,
+		"temperature" : Lukewarm,
+		"taste" : 2.8,
+	},
+	0xA003 : {
+		"name" : "Hamburger",
+		"id" : 0xA003, 
+		"buy" : 1100,
+		"sell" : 1500,
+		"scene" : preload("res://src/Product/SandWich.tscn"),
+		"shelf_life" : 2.0, 
+		"moisture" : 0.0,
+		"satiety" : 5.5,
+		"health" : 0.5,
+		"temperature" : Lukewarm,
+		"taste" : 5.0,
+	},
+	0xA004 : {
+		"name" : "Gimbap",
+		"id" : 0xA004, 
+		"buy" : 500,
+		"sell" : 800,
+		"scene" : preload("res://src/Product/SandWich.tscn"),
+		"shelf_life" : 2.0, 
+		"moisture" : 0.0,
+		"satiety" : 3.5,
+		"health" : 2.7,
+		"temperature" : Lukewarm,
+		"taste" : 3.0,
+	},
+	0xA005 : {
+		"name" : "Water",
+		"id" : 0xA005, 
+		"buy" : 500,
+		"sell" : 800,
+		"scene" : preload("res://src/Product/SandWich.tscn"),
+		"shelf_life" : 4.0, 
+		"moisture" : 8.5,
+		"satiety" : 0.5,
+		"health" : 3.5,
+		"temperature" : Cool,
+		"taste" : 1.5,
 	},
 }
 
 func get_temperature_str(tem):
 	var dict = {
 		Cool : "Cool",
-		Normal : "Normal",
-		Hot : "Hot"
+		Lukewarm : "Lukewarm",
+		Warm : "Warm"
 	}
 	return dict[tem]
 

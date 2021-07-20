@@ -107,7 +107,7 @@ var Sales = {
 
 var StoreState = {
 	"name" : "Post Exchange",
-	"rating" : 0.1, 
+	"rating" : 5.0, 
 	"pos" : "A",
 	"date" : {
 		"day" : Monday,
