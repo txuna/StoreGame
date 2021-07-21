@@ -22,20 +22,31 @@ var gender_value = {
 	Female : "Female"
 }
 
+var npc_texture_list = [
+	load("res://assets/art/npc/npc1.png"),
+	load("res://assets/art/npc/npc2.png"),
+	load("res://assets/art/npc/npc3.png"),
+]
+
+var velocity = Vector2.ZERO
 
 func _ready() -> void:
-	pass # Replace with function body.
+	position = get_parent().get_spawn_npc_position()
 
 
 func _physics_process(delta: float) -> void:
-	pass
+	velocity.x += 15 * delta
+	velocity.y += 50
+	velocity = move_and_slide(velocity, Vector2.UP)
 
 
 func get_random_texture():
-	pass
+	randomize()
+	return int(rand_range(0, 2))
 	
+# NPC를 우클릭하면 상세탭이 나오고 물건 구매나, 돈이 부족할 때, 원하는 상품이 없을 떄 메시지를 띄운다.
 
-# Info 
+# Info  suggestion이 0인거은 돈 부족으로 인한 구매 불가
 # suggestion, age, gender, cash 
 func setup(info:Dictionary):
-	$Sprite.texture = get_random_texture()
+	$Sprite.texture = npc_texture_list[get_random_texture()]

@@ -43,7 +43,7 @@ texture = ExtResource( 1 )
 position = Vector2( 716.422, 374.327 )
 
 [node name="Displays" type="Node2D" parent="InStore"]
-position = Vector2( -75.2924, 39.8113 )
+position = Vector2( -0.541359, 41.1461 )
 
 [node name="display" type="Node2D" parent="InStore/Displays"]
 position = Vector2( -503.192, 286.353 )
@@ -81,35 +81,35 @@ position = Vector2( 454.244, 276.099 )
 [node name="DisplayStand" parent="InStore/Displays/display5" instance=ExtResource( 4 )]
 
 [node name="display6" type="Node2D" parent="InStore/Displays"]
-position = Vector2( -370.242, 2.20917 )
+position = Vector2( -434.459, 10.5336 )
 
 [node name="PlusButton" parent="InStore/Displays/display6" instance=ExtResource( 6 )]
 
 [node name="DisplayStand" parent="InStore/Displays/display6" instance=ExtResource( 4 )]
 
 [node name="display7" type="Node2D" parent="InStore/Displays"]
-position = Vector2( -128.901, -2.97736 )
+position = Vector2( -193.118, 5.3471 )
 
 [node name="PlusButton" parent="InStore/Displays/display7" instance=ExtResource( 6 )]
 
 [node name="DisplayStand" parent="InStore/Displays/display7" instance=ExtResource( 4 )]
 
 [node name="display8" type="Node2D" parent="InStore/Displays"]
-position = Vector2( 111.489, -4.86517 )
+position = Vector2( 47.2719, 3.45929 )
 
 [node name="PlusButton" parent="InStore/Displays/display8" instance=ExtResource( 6 )]
 
 [node name="DisplayStand" parent="InStore/Displays/display8" instance=ExtResource( 4 )]
 
 [node name="display9" type="Node2D" parent="InStore/Displays"]
-position = Vector2( 347.634, -6.27936 )
+position = Vector2( 283.417, 2.0451 )
 
 [node name="PlusButton" parent="InStore/Displays/display9" instance=ExtResource( 6 )]
 
 [node name="DisplayStand" parent="InStore/Displays/display9" instance=ExtResource( 4 )]
 
 [node name="display10" type="Node2D" parent="InStore/Displays"]
-position = Vector2( 588.991, -7.68726 )
+position = Vector2( 524.774, 0.637203 )
 
 [node name="PlusButton" parent="InStore/Displays/display10" instance=ExtResource( 6 )]
 
@@ -225,9 +225,9 @@ position = Vector2( 1.84497, -648.269 )
 collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D2"]
-position = Vector2( 130.748, -116.405 )
+position = Vector2( 130.748, -114.723 )
 scale = Vector2( 0.613205, 1.49213 )
-polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
+polygon = PoolVector2Array( 870.376, 427.133, -1251.3, 411.187, -1265.14, 433.733, 901.94, 441.894 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="InStore/Walls"]
 position = Vector2( -693.437, -672.08 )
@@ -235,8 +235,8 @@ rotation = -0.57486
 collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D3"]
-position = Vector2( 130.748, -116.405 )
-scale = Vector2( 0.613205, 1.49213 )
+position = Vector2( 169.817, 94.7077 )
+scale = Vector2( 0.613205, 0.817401 )
 polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="InStore/Walls"]
@@ -245,8 +245,8 @@ rotation = -2.45864
 collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D4"]
-position = Vector2( 130.748, -116.405 )
-scale = Vector2( 0.613205, 1.49213 )
+position = Vector2( 86.8175, 90.6419 )
+scale = Vector2( 0.613205, 1.06941 )
 polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="InStore/Walls"]
@@ -255,8 +255,8 @@ rotation = -3.13202
 collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D5"]
-position = Vector2( 130.748, -116.405 )
-scale = Vector2( 0.613205, 1.49213 )
+position = Vector2( 109.707, 144.66 )
+scale = Vector2( 0.613205, 0.957965 )
 polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="InStore/Walls"]
@@ -265,7 +265,7 @@ rotation = -4.3986
 collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D6"]
-position = Vector2( 130.748, -116.405 )
+position = Vector2( 82.4836, -90.3495 )
 scale = Vector2( 0.613205, 1.49213 )
 polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
 
@@ -275,7 +275,7 @@ rotation = -1.99379
 collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InStore/Walls/StaticBody2D7"]
-position = Vector2( 130.748, -116.405 )
+position = Vector2( 135.599, -100.348 )
 scale = Vector2( 0.613205, 1.49213 )
 polygon = PoolVector2Array( 859.224, 408.21, -1060.78, 410.891, -1060.78, 432.337, 863.224, 433.677 )
 
@@ -341,4 +341,7 @@ texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SpawnNpc" type="Position2D" parent="."]
+position = Vector2( 264.561, 944.171 )
 [connection signal="pressed" from="Debug" to="." method="_on_Debug_pressed"]

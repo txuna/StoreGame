@@ -151,7 +151,6 @@ func load_npc(info):
 	get_node("/root/Main/Game/Map").add_child(npc)
 	
 	
-	
 
 func _on_spawn_npc(age_index):
 	if not check_rating():
@@ -171,7 +170,7 @@ func _on_spawn_npc(age_index):
 	
 	var suggestion = setup_npc_suggestion(age_index, gender, cash)
 	if suggestion <= 0:
-		print("Lack of Cash!")
+		#print("Lack of Cash!")
 		return
 	
 	

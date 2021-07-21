@@ -10,7 +10,7 @@
 extents = Vector2( 98.4333, 16.0249 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 97.8764, 78.6864 )
+extents = Vector2( 99.2194, 116.688 )
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 4 )
@@ -61,24 +61,27 @@ region_rect = Rect2( 0, 0, 512, 200 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 5.89807, 90.2891 )
+extents = Vector2( 5.89807, 117.643 )
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 5.07831, 91.5302 )
+extents = Vector2( 5.07831, 119.142 )
 
 [sub_resource type="DynamicFont" id=16]
 size = 24
 font_data = ExtResource( 4 )
 
 [node name="DisplayStand" type="StaticBody2D"]
+collision_layer = 16
 collision_mask = 4
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 48.1629 )
+scale = Vector2( 1, 0.623728 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.353424, 55.744 )
+position = Vector2( 0.353424, 86.0163 )
 shape = SubResource( 1 )
 
 [node name="DetectProduct" type="Area2D" parent="."]
@@ -86,7 +89,7 @@ collision_layer = 16
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectProduct"]
-position = Vector2( 0.00384521, -38.8771 )
+position = Vector2( 0.59845, -22.8228 )
 shape = SubResource( 2 )
 
 [node name="OptionButton" type="OptionButton" parent="."]
@@ -113,7 +116,8 @@ __meta__ = {
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
 position = Vector2( -110, 91 )
-collision_mask = 6
+collision_layer = 16
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D"]
 position = Vector2( 6.34962, -110.489 )
@@ -121,7 +125,8 @@ shape = SubResource( 14 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Wall"]
 position = Vector2( 107.5, -8.5 )
-collision_mask = 6
+collision_layer = 16
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D2"]
 position = Vector2( -4.36536, -11.8692 )

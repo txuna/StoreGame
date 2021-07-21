@@ -15,8 +15,11 @@ func _ready() -> void:
 	setup()
 
 
-func setup():
+func get_spawn_npc_position():
+	return $SpawnNpc.position
 	
+
+func setup():	
 	show_cash()
 	var time = State.get_time()
 	var rotation_count = (time["hour"] * 3600 +  time["min"] * 60 + time["sec"]) / 72 #48
