@@ -1,12 +1,15 @@
 extends Node2D
 
 
+const NPC = preload("res://src/Npcs/Npc.tscn")
 const DAY = 1200.0
 
 const Age1 = 0 # 0 - 19 
 const Age2 = 1 # 20 - 39
 const Age3 = 2 # 40 - 59
 const Age4 = 3 # 60 - 79
+
+const SATIETY_BONUS = 1.3
 
 var region
 
@@ -15,29 +18,37 @@ const Female = 2
 
 var age_ability = {
 	Age1 : {
-		"taste" : [4, 9],
-		"moisture" : [2, 8],
-		"satiety" : [3, 9],
+		"taste" : [3.9, 10],
+		"moisture" : [2, 10],
+		"satiety" : [3, 8],
 		"health" : [0, 3],
 	},
 	Age2 : {
-		"taste" : [3, 7],
-		"moisture" : [3, 8],
+		"taste" : [2.5, 10],
+		"moisture" : [3.2, 10],
 		"satiety" : [4, 7],
-		"health" : [1, 5],		
+		"health" : [1.3, 5],		
 	},
 	Age3 : {
-		"taste" : [1, 5],
-		"moisture" : [3, 6],
-		"satiety" : [1, 6],
-		"health" : [3, 7],		
+		"taste" : [1, 5.5],
+		"moisture" : [2.7, 7.3],
+		"satiety" : [1.5, 6],
+		"health" : [3.5, 7],		
 	},
 	Age4 : {
-		"taste" : [0, 4],
-		"moisture" : [2, 5],
-		"satiety" : [0, 6],
-		"health" : [5, 9],		
+		"taste" : [0, 4.7],
+		"moisture" : [2, 5.5],
+		"satiety" : [0.5, 6],
+		"health" : [5, 10],		
 	}
+}
+
+var age_income_boost = {
+	1 : 5,
+	2 : 10,
+	3 : 15,
+	4 : 20,
+	5 : 25,
 }
 
 var age_cash = {
@@ -55,6 +66,57 @@ var test = {
 	0xA003 : 0,
 	0xA004 : 0,
 	0xA005 : 0,
+	0xA006 : 0,
+	0xA007 : 0,
+	0xA008 : 0,
+	0xA009 : 0,
+}
+
+var matching_age = {
+	Age1 : "0-19",
+	Age2 : "20-39",
+	Age3 : "40-59",
+	Age4 : "60-79"
+}
+
+var matching_gender = {
+	Male : "Male",
+	Female : "Female"
+}
+
+var logging = {
+	"0-19" : {
+		"Male": {
+			
+		},
+		"Female" : {
+			
+		}
+	},
+	"20-39" : {
+		"Male": {
+			
+		},
+		"Female" : {
+			
+		}
+	},
+	"40-59" : {
+		"Male": {
+			
+		},
+		"Female" : {
+			
+		}
+	},
+	"60-79" : {
+		"Male": {
+			
+		},
+		"Female" : {
+			
+		}
+	},
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -83,11 +145,23 @@ func start_manager():
 		age_index+=1
 		
 
+func load_npc(info):
+	var npc = NPC.instance() 
+	npc.setup(info)
+	get_node("/root/Main/Game/Map").add_child(npc)
+	
+	
+	
+
 func _on_spawn_npc(age_index):
 	if not check_rating():
 		return 
 
 	randomize()
+	var cash = int(rand_range(age_cash[age_index][0], age_cash[age_index][1]))
+	# income_level에 맞는 소지금 증가
+	cash = int(cash * (1 + age_income_boost[region["income_level"]] / 100))
+	
 	var value = int(rand_range(0, 100))
 	var gender:int
 	if value <= region["gender"]["male"]:
@@ -95,23 +169,56 @@ func _on_spawn_npc(age_index):
 	else:
 		gender = Female
 	
-	var suggestion = setup_npc_suggestion(age_index)
+	var suggestion = setup_npc_suggestion(age_index, gender, cash)
 	if suggestion <= 0:
 		print("Lack of Cash!")
 		return
 	
+	
+	load_npc({
+		"suggestion" : suggestion,
+		"gender" : gender,
+		"age" : age_index,
+		"cash" : cash
+	})
+	
+	
+	### Debugging!!
+	"""
 	print("Spawn NPC! age : {age}, gender : {gender}, suggestion : {suggestion}".format({
 		"age" : age_index,
 		"gender" : gender,
 		"suggestion" : Products.get_products()[suggestion]["name"]
 	}))
-	test[suggestion]+=1
-	print(test)
+	"""
+
+	"""
+	var age_str = matching_age[age_index]
+	var gender_str = matching_gender[gender]
+	var product_str = Products.get_products()[suggestion]["name"]
+	
+	if not logging[age_str][gender_str].has(product_str):
+		logging[age_str][gender_str][product_str] = 1
+	else:
+		logging[age_str][gender_str][product_str] += 1
+
+	
+	print("=================================================")
+	for age in logging:
+		print("Age : {age}".format({"age" : age}))
+		print("[Male]")
+		for product_name in logging[age]["Male"]:
+			print("{product} : {count}".format({"product" : product_name, "count" : logging[age]["Male"][product_name]}))
+		
+		print("[Female]")
+		for product_name in logging[age]["Female"]:
+			print("{product} : {count}".format({"product" : product_name, "count" : logging[age]["Female"][product_name]}))
+	print("=================================================")
+	"""
 
 # 추천하는 아이템 ID 반환
-func setup_npc_suggestion(age_index):
+func setup_npc_suggestion(age_index, gender, cash):
 	# 이제 생성되는 시간과 평일인지 주말인지, 뉴스 영향 및 나이대에 따른 니즈 등등 설정 + 소지금도 체크
-	var cash = int(rand_range(age_cash[age_index][0], age_cash[age_index][1]))
 
 	var state = age_ability[age_index]
 	var goal = {
@@ -123,12 +230,12 @@ func setup_npc_suggestion(age_index):
 	for ability in state:
 		goal[ability] = stepify(rand_range(state[ability][0], state[ability][1]), 0.1)
 	
-	# Set Time Bonus 
-	#setup_time_effect()
-	# Set News Bonus 
-	#setup_news_effect()
 	# Set Gender Bonus 
-	#setup_gender_effect()
+	setup_gender_effect(goal, gender)
+	# Set Time Bonus 
+	setup_time_effect(goal)
+	# Set News Bonus 
+	#setup_news_effect(goal)
 	
 	# Product List와 비교 남는 능력치가 가장 작은 것이 선발 
 	var min_value = 100
@@ -151,23 +258,61 @@ func setup_npc_suggestion(age_index):
 		# 만약 갭이 작다면
 		if temp <= min_value:
 			# 기존의 상품보다 비싸다면 pass 
-			#if not suggestion == 0 and product["sell"] > products[suggestion]["sell"]:
-			#	continue
+			if temp == min_value and suggestion != 0:
+				if product["sell"] > products[suggestion]["sell"]:
+					continue 
+
 			min_value = temp
 			suggestion = product["id"]
 	
 	
 	return suggestion
 
+# 젠더 버프, Female : taste 10% health 10% Male : satiety : 10% 증가 moisture : 10%
+func setup_gender_effect(goal, gender):
+	var value = 0
+	if gender == Female:
+		value = goal["taste"]
+		value = stepify(value * 1.1, 0.1)
+		if value >= 10:
+			value = 10
+		goal["taste"] = value 
+		
+		value = goal["health"]
+		value = stepify(value * 1.1, 0.1)
+		if value >= 10:
+			value = 10
+		goal["health"] = value 
+		
+	elif gender == Male:
+		value = goal["satiety"]
+		value = stepify(value * 1.1, 0.1)
+		if value >= 10:
+			value = 10
+		goal["satiety"] = value 
 
-func setup_gender_effect():
-	pass
+		value = goal["moisture"]
+		value = stepify(value * 1.1, 0.1)
+		if value >= 10:
+			value = 10
+		goal["moisture"] = value 
 
-func setup_time_effect():
-	pass
+
+func setup_time_effect(goal):
+	var hour = State.get_time()["hour"]
+	
+	# 식사 시간 보너스 허기의 목표치를 30% 늘린다. 단 10이 넘어가면 10으로 설정 기존 상품 능력치 너프
+	if (hour >= 6 and hour <= 8) or (hour >= 12 and hour <= 14) or (hour >= 18 and hour <= 20):
+		var value = goal["satiety"]
+		value = stepify(value * SATIETY_BONUS, 0.1)
+		if value >= 10:
+			value = 10
+		goal["satiety"] = value
+
 	
 	
-func setup_news_effect():
+# 특정 제품에 대한 홍보라면 30%확률로 goal확인하지 않고 해당 제품 구매 단) cash 체크
+func setup_news_effect(goal):
 	pass
 	
 
