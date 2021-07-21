@@ -30,19 +30,29 @@ var npc_texture_list = [
 
 var velocity = Vector2.ZERO
 
+const LEFT = -1
+const RIGHT = 1
+const IDLE = 0
+
+var direction = RIGHT 
+
 func _ready() -> void:
 	position = get_parent().get_spawn_npc_position()
+	$BuyTimer.wait_time = int(rand_range(3, 10))
+	$BuyTimer.one_shot = true
+	$BuyTimer.start()
 
 
 func _physics_process(delta: float) -> void:
-	velocity.x += 15 * delta
-	velocity.y += 50
+	velocity.x += 30 * direction * delta
+	velocity.y += 50 * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
 func get_random_texture():
 	randomize()
-	return int(rand_range(0, 2))
+	var temp = [0, 1, 2]
+	return temp[randi() % temp.size()]
 	
 # NPC를 우클릭하면 상세탭이 나오고 물건 구매나, 돈이 부족할 때, 원하는 상품이 없을 떄 메시지를 띄운다.
 
@@ -50,3 +60,36 @@ func get_random_texture():
 # suggestion, age, gender, cash 
 func setup(info:Dictionary):
 	$Sprite.texture = npc_texture_list[get_random_texture()]
+
+
+
+func _on_MoveTimer_timeout() -> void:
+	randomize()
+	var temp = [LEFT, RIGHT, IDLE]
+	direction = temp[randi() % temp.size()]
+	if direction == LEFT:
+		$Sprite.flip_h = true 
+	else:
+		$Sprite.flip_h = false
+	$MoveTimer.wait_time = int(rand_range(1, 4))
+
+
+
+# 구매 물품이 있다면 Good,  없다면 Ummm... 돈이 없다면 No Money :(  그리고 rating 평가
+func _on_BuyTimer_timeout() -> void:
+	$Chatbox.visible = true
+	$Tween.interpolate_property($Chatbox, "rect_scale", Vector2(0, 0), Vector2(1, 1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	$ChatTimer.start()
+	yield($Tween, "tween_all_completed")
+	
+
+func _on_ExitChat_pressed() -> void:
+	$Chatbox.visible = false
+
+
+func _on_ChatTimer_timeout() -> void:
+	$Tween.interpolate_property($Chatbox, "rect_scale", Vector2(1, 1), Vector2(0, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	$Chatbox.visible = false

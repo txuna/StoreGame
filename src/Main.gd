@@ -20,8 +20,10 @@ func setup():
 	var select_map = $UiLayer/SelectMap
 	select_map.connect("GameStart", self, "_on_game_start")
 	
+	
 func load_select_map():
 	$UiLayer/SelectMap.visible = true
+	
 	
 func _on_game_start(type):
 	if type == NEW:

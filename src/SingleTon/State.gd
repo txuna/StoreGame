@@ -43,7 +43,7 @@ var day = {
 var Sales = {
 	"total_cash" : 0,
 	"rating" : 0, 
-	"old" : {
+	"age" : {
 		"0-19" : {
 			"count" : 0,
 			"product" : {
@@ -107,7 +107,7 @@ var Sales = {
 
 var StoreState = {
 	"name" : "Post Exchange",
-	"rating" : 5.0, 
+	"rating" : 2.0, 
 	"pos" : "A",
 	"date" : {
 		"day" : Monday,
