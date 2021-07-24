@@ -8,6 +8,8 @@ const Friday = 5
 const Satureday = 6
 const Sunday = 7
 
+const MAX_CAHS = 10000000
+
 var day = {
 	Monday : {
 		"value" : Monday,
@@ -174,9 +176,17 @@ func setup() -> void:
 	#print(StoreState["products"])
 	#print(StoreState["stock"])
 
+func check_max_min_cash(cash, mask):
+	var temp = StoreState["sales"]["cash"] + (cash * mask)
+	if temp <= MAX_CAHS and temp >= 0:
+		return true
+	else:
+		return false
+
 func remove_product_index(index):
 	if StoreState["products"].has(index):
 		StoreState["products"].erase(index)
+
 
 func set_product_index(index, id, shelf_ife):
 	StoreState["products"][index] = {
@@ -191,14 +201,18 @@ func set_product_index(index, id, shelf_ife):
 # 0~255중에 남는 인덱스 찾기 # 못찾을 시 ? 대응법 필요
 func find_free_index():
 	var index = 0
-	for use_index in StoreState["products"]:
-		if index == use_index:
-			index+=1
+	while true:
+		if StoreState["products"].has(index):
+			index+=1 
+			if index >= 256:
+				if OS.is_debug_build():
+					print("find_free_index too much value") 
+				return -1
 		else:
 			break
-	if index >= 256:
-		print("find_free_index too much value") 
-	return index
+		
+	return index 
+	
 
 func get_product_all_index():
 	return StoreState["products"]
@@ -213,8 +227,10 @@ func change_product_index(index, type:String, value):
 func get_total_stock_count():
 	return StoreState["total_stock_count"]
 
+
 func set_total_stock_count(count, mask):
 	StoreState["total_stock_count"] += (count * mask)
+
 
 func set_region(region:String):
 	StoreState["pos"] = region
@@ -252,10 +268,20 @@ func change_displaystand_count(index, count, mask):
 
 
 func set_current_cash(cash, mask):
+	if not check_max_min_cash(cash, mask):
+		return 
 	StoreState["sales"]["cash"] += (cash * mask)
 
 func get_current_cash():
 	return StoreState["sales"]["cash"]
+
+
+func has_product_in_products(index):
+	if StoreState["products"].has(index):
+		return true
+	
+	return false
+	
 
 func set_product_count(id, count, mask):
 	if StoreState["stock"].has(id):
@@ -267,6 +293,7 @@ func set_product_count(id, count, mask):
 		}		
 
 	set_total_stock_count(count, mask)
+	
 
 func get_total_product_count(id): 
 	if StoreState["stock"].has(id):

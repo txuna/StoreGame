@@ -36,9 +36,10 @@ autostart = true
 [node name="BuyTimer" type="Timer" parent="."]
 
 [node name="Chatbox" type="TextureRect" parent="."]
+visible = false
 margin_left = 21.0
 margin_top = -66.0
-margin_right = 199.0
+margin_right = 353.0
 margin_bottom = -18.0
 rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 0, 48 )
@@ -49,9 +50,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Chatbox"]
-margin_left = 17.0
+margin_left = 20.0
 margin_top = 13.0
-margin_right = 154.0
+margin_right = 298.0
 margin_bottom = 34.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -62,10 +63,10 @@ __meta__ = {
 }
 
 [node name="ExitChat" type="TextureButton" parent="Chatbox"]
-margin_left = 153.854
-margin_top = 9.0
-margin_right = 164.854
-margin_bottom = 21.0
+margin_left = 297.908
+margin_top = 9.7937
+margin_right = 308.908
+margin_bottom = 21.7937
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 4 )

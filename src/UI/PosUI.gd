@@ -182,6 +182,7 @@ func _on_count_btn_pressed(id, count:Label, price:Label, buy:int, mask):
 func _on_pressed_buy_btn(id):
 	emit_signal("BuyProduct", buy_list[id])
 	
+	
 func _on_show_product_detail(event, id):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:

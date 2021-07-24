@@ -13,10 +13,6 @@ var time_gap = 72
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup()
-
-
-func get_spawn_npc_position():
-	return $SpawnNpc.position
 	
 
 func setup():	

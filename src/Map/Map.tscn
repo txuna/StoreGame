@@ -341,7 +341,4 @@ texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="SpawnNpc" type="Position2D" parent="."]
-position = Vector2( 264.561, 944.171 )
 [connection signal="pressed" from="Debug" to="." method="_on_Debug_pressed"]

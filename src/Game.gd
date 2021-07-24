@@ -60,7 +60,55 @@ func load_map():
 	var map_instance = map.instance()
 	map_instance.name = "Map"
 	add_child(map_instance)
+
+
+# Stock 탭 정리 
+# products 탭 정리 
+# DisplayStand는 정리안해도 object가 queue_free하는 과정에서 자동으로 될듯 바로 free하면 DisplayStand.gd에서 exit 에러 뜰듯한데
+# 위에 다 체크 및 정리하고 나서 Cash 정리
+# 정산 및 레이팅
+func _on_npc_buy_product(product):
+	var id = product.get_id() 
+	var index = product.get_product_index()
+	var dispay_number = product.get_display_number()
+	var flag = true
 	
+	if State.get_total_product_count(id) > 0:
+		State.set_product_count(id, 1, -1)
+	else:
+		if OS.is_debug_build():
+			print("get_total_product_count() {id}".format({"id" : id}))
+		flag = false
+		
+	if State.has_product_in_products(index):
+		State.remove_product_index(index)
+	else:
+		if OS.is_debug_build():
+			print("has_product_in_products() {index}".format({"index" : index}))
+		flag = false 
+		
+	if not flag:
+		if OS.is_debug_build():
+			print("ERROR in _on_npc_buy_products")
+		return #ERROR 
+		
+	
+	if OS.is_debug_build():
+		print("Sell index {index}".format({"index" : index}))	
+		
+	
+	var price = Products.get_products()[id]["sell"]
+	# 유통기한이 지났다면
+	if not product.get_product_state():
+		if OS.is_debug_build():
+			print("The expiration date has passed {index} and {id}".format({"index" : index, "id" : id}))
+		price = 0
+	State.set_current_cash(price ,1)
+
+	get_node("Map").show_cash()
+	
+	product.queue_free()
+
 
 func _on_buy_product(product:Dictionary):
 	if product.empty():
@@ -72,19 +120,29 @@ func _on_buy_product(product:Dictionary):
 		emit_signal("ShowMsgBox", "Lack of Money!")
 		return 	
 		
-	if State.get_total_stock_count() >= MAX_COUNT:
-		emit_signal("ShowMsgBox", "No space left on storage.")
+	if State.get_total_stock_count() + product["count"] >= MAX_COUNT:
+		emit_signal("ShowMsgBox", "No space left on storage. Left {number} space".format({"space" : MAX_COUNT - State.get_total_stock_count()}))
 		return 
 	
 	State.set_current_cash(product["price"], -1)
 	State.set_product_count(product["id"], product["count"], 1)
 	
 	# 개별상품 관리를 위한 인덱스 부여
+	var flag = false
 	for i in range(product["count"]):
 		var shelf_life = Products.get_products()[product["id"]]["shelf_life"]
 		var index = State.find_free_index()                        # 1800
+		if index == -1:
+			if OS.is_debug_build():
+				print("in _on_buy_product() get index -1, failed load product")
+			if not flag:
+				flag = true 
+				continue
+			else:
+				 break
 		State.set_product_index(index, product["id"], shelf_life * 1200) #index와 count의 차이 : index는 개별상품에 대한 관리이고 count는 id가 같은 상품끼리 통틀어서 관리함 
 		get_node("Map").load_product(index, product["id"])
+	
 	
 		
 	get_node("Map").show_cash()

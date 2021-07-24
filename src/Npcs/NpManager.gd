@@ -148,7 +148,9 @@ func start_manager():
 func load_npc(info):
 	var npc = NPC.instance() 
 	npc.setup(info)
-	get_node("/root/Main/Game/Map").add_child(npc)
+	npc.connect("NpcBuyProduct", get_node("/root/Main/Game"), "_on_npc_buy_product")
+	npc.add_to_group("Npcs")
+	get_node("/root/Main/Game/Map/InStore/Npcs").add_child(npc)
 	
 	
 
@@ -169,9 +171,9 @@ func _on_spawn_npc(age_index):
 		gender = Female
 	
 	var suggestion = setup_npc_suggestion(age_index, gender, cash)
-	if suggestion <= 0:
+	#if suggestion <= 0:
 		#print("Lack of Cash!")
-		return
+	#	return
 	
 	
 	load_npc({
