@@ -35,8 +35,9 @@ const RIGHT = 1
 const IDLE = 0
 
 var direction = RIGHT 
-
 var npc_info 
+
+signal NpcBuyProduct
 
 func _ready() -> void:
 	$MoveTimer.wait_time = int(rand_range(2, 10))
@@ -94,13 +95,36 @@ Npc는 구매할 때 Storage노드 검사
 # 구매 물품체크는 Map의 진열대 체크
 # 구매 물품이 있다면 Good,  없다면 Ummm... 돈이 없다면 No Money :(  그리고 rating 평가
 func _on_BuyTimer_timeout() -> void:
+	return 
 	buy_product()
 
 	
 	
 # 확률적으로 msg float
+"""
+1. suggestion 체크 0x0이냐 아니냐 확인
+2. Map/InStore product 체크
+3. 만약 존재한다면 구매 시그널을 Game에 보낸다. 
+"""
+
 func buy_product():
-	pass 
+	# 돈 부족
+	if npc_info["suggestion"] == 0x0:
+		return 
+		
+	var product = get_parent().get_product_in_store()
+	# 진열중인 상품이 존재하지 않을 떄 및 원하는 상품이 진열중이지 않을 때
+	if product == null:
+		return 
+		
+	
+	# Game씬에서 해당 물건이 정확히 있는지 재점검 해야한다. 
+	"""
+	emit_signal("NpcBuyProduct", {
+		"id" : product.get_id(),
+		"display_number" : product.get_display_number()
+	})
+	"""
 	
 
 func float_msg_buy(msg):
@@ -127,7 +151,13 @@ func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
 			$Detail.visible = true
+			$Tween.interpolate_property($Detail, "rect_scale", Vector2(0, 0), Vector2(1, 1), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+			yield($Tween, "tween_all_completed")
 
 
 func _on_DetailExit_pressed() -> void:
+	$Tween.interpolate_property($Detail, "rect_scale", Vector2(1, 1), Vector2(0, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
 	$Detail.visible = false

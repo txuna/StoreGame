@@ -72,6 +72,7 @@ func is_display():
 func set_is_display(value):
 	info["in_display"] = value
 	#print(State.StoreState["products"][info["index"]])
+		
 	
 	
 func show_detail():

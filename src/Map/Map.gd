@@ -81,7 +81,14 @@ func show_display_stand(index):
 			display_stand.setup()
 			plus_btn.visible = false
 			
+
+# condition : id, in_display, 
+func get_product_in_store(productId, in_display):
+	for product in $InStore/Storage.get_children():
+		if productId == product.get_id() and in_display == product.is_display():
+			return product
 			
+	return null
 	
 func _on_clock_timeout():
 	$Background.rotation_degrees+=0.3
