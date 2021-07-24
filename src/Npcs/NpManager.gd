@@ -178,7 +178,8 @@ func _on_spawn_npc(age_index):
 		"suggestion" : suggestion,
 		"gender" : gender,
 		"age" : age_index,
-		"cash" : cash
+		"cash" : cash,
+		"name" : "James Smith"
 	})
 	
 	

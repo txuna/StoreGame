@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Npcs/Npc.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/NanumBarunpenB.ttf" type="DynamicFontData" id=2]
@@ -10,6 +10,10 @@
 radius = 41.4448
 
 [sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
 font_data = ExtResource( 2 )
 
 [node name="Npc" type="KinematicBody2D"]
@@ -26,13 +30,12 @@ scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
 
 [node name="MoveTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 autostart = true
 
 [node name="BuyTimer" type="Timer" parent="."]
 
 [node name="Chatbox" type="TextureRect" parent="."]
-visible = false
 margin_left = 21.0
 margin_top = -66.0
 margin_right = 199.0
@@ -46,13 +49,14 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Chatbox"]
-margin_left = 15.3263
-margin_top = 13.7517
-margin_right = 109.326
-margin_bottom = 34.7517
+margin_left = 17.0
+margin_top = 13.0
+margin_right = 154.0
+margin_bottom = 34.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Umm.. Ok Good!"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -75,7 +79,129 @@ __meta__ = {
 [node name="ChatTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="Detail" type="TextureRect" parent="."]
+visible = false
+margin_left = -360.024
+margin_top = -352.414
+margin_right = -6.02441
+margin_bottom = -1.41418
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DetailExit" type="TextureButton" parent="Detail"]
+margin_left = 284.0
+margin_top = 66.0
+margin_right = 323.0
+margin_bottom = 103.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="Detail"]
+margin_left = 33.0937
+margin_top = 106.107
+margin_right = 127.094
+margin_bottom = 148.107
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Name : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameValue" type="Label" parent="Detail"]
+margin_left = 133.284
+margin_top = 106.405
+margin_right = 293.284
+margin_bottom = 148.405
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "James Smith"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cash" type="Label" parent="Detail"]
+margin_left = 32.4243
+margin_top = 146.892
+margin_right = 126.424
+margin_bottom = 188.892
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Cash :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CashValue" type="Label" parent="Detail"]
+margin_left = 136.127
+margin_top = 146.994
+margin_right = 230.127
+margin_bottom = 188.994
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "3000$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Age" type="Label" parent="Detail"]
+margin_left = 32.1874
+margin_top = 186.139
+margin_right = 126.187
+margin_bottom = 228.139
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Age : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AgeValue" type="Label" parent="Detail"]
+margin_left = 132.0
+margin_top = 188.0
+margin_right = 288.0
+margin_bottom = 230.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "20 ~ 39 olds"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gender" type="Label" parent="Detail"]
+margin_left = 32.0244
+margin_top = 232.414
+margin_right = 144.024
+margin_bottom = 274.414
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Gender : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GenderValue" type="Label" parent="Detail"]
+margin_left = 144.024
+margin_top = 232.414
+margin_right = 238.024
+margin_bottom = 274.414
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Male"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
 [connection signal="timeout" from="BuyTimer" to="." method="_on_BuyTimer_timeout"]
 [connection signal="pressed" from="Chatbox/ExitChat" to="." method="_on_ExitChat_pressed"]
 [connection signal="timeout" from="ChatTimer" to="." method="_on_ChatTimer_timeout"]
+[connection signal="pressed" from="Detail/DetailExit" to="." method="_on_DetailExit_pressed"]

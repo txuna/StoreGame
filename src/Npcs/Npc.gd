@@ -8,10 +8,10 @@ const Age3 = 2
 const Age4 = 3 
 
 var age_value = {
-	Age1 : [0, 19],
-	Age2 : [20, 39],
-	Age3 : [40, 59],
-	Age4 : [60, 79]
+	Age1 : "0 ~ 19",
+	Age2 : "20 ~ 39",
+	Age3 : "40 ~ 59",
+	Age4 : "60 ~ 79"
 }
 
 const Male = 1
@@ -36,7 +36,10 @@ const IDLE = 0
 
 var direction = RIGHT 
 
+var npc_info 
+
 func _ready() -> void:
+	$MoveTimer.wait_time = int(rand_range(2, 10))
 	position = get_parent().get_spawn_npc_position()
 	$BuyTimer.wait_time = int(rand_range(3, 10))
 	$BuyTimer.one_shot = true
@@ -44,8 +47,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	velocity.x += 30 * direction * delta
-	velocity.y += 50 * delta
+	velocity.x = 45 * direction
+	velocity.y += 75
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
@@ -60,7 +63,15 @@ func get_random_texture():
 # suggestion, age, gender, cash 
 func setup(info:Dictionary):
 	$Sprite.texture = npc_texture_list[get_random_texture()]
+	npc_info = info
+	set_detail()
 
+
+func set_detail():
+	$Detail/NameValue.text = npc_info["name"]
+	$Detail/CashValue.text = str(npc_info["cash"]) + "$"
+	$Detail/AgeValue.text = age_value[npc_info["age"]] + "olds"
+	$Detail/GenderValue.text = gender_value[npc_info["gender"]] 
 
 
 func _on_MoveTimer_timeout() -> void:
@@ -73,12 +84,29 @@ func _on_MoveTimer_timeout() -> void:
 		$Sprite.flip_h = false
 	$MoveTimer.wait_time = int(rand_range(1, 4))
 
+"""
+Npc는 구매할 때 Storage노드 검사   
+원하는 상품찾을때 ( productid와 in_display 체크 
+그리고 산다면 해당상품이 어느 진열대인지 display_number 확인후 값조정
+"""
 
 
+# 구매 물품체크는 Map의 진열대 체크
 # 구매 물품이 있다면 Good,  없다면 Ummm... 돈이 없다면 No Money :(  그리고 rating 평가
 func _on_BuyTimer_timeout() -> void:
+	buy_product()
+
+	
+	
+# 확률적으로 msg float
+func buy_product():
+	pass 
+	
+
+func float_msg_buy(msg):
 	$Chatbox.visible = true
-	$Tween.interpolate_property($Chatbox, "rect_scale", Vector2(0, 0), Vector2(1, 1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Chatbox/Label.text = msg
+	$Tween.interpolate_property($Chatbox, "rect_scale", Vector2(0, 0), Vector2(1.3, 1.3), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 	$ChatTimer.start()
 	yield($Tween, "tween_all_completed")
@@ -93,3 +121,13 @@ func _on_ChatTimer_timeout() -> void:
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	$Chatbox.visible = false
+
+
+func _input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_RIGHT and event.pressed:
+			$Detail.visible = true
+
+
+func _on_DetailExit_pressed() -> void:
+	$Detail.visible = false
