@@ -43,3 +43,7 @@ func _on_game_start(type):
 		
 func _on_error(msg:String):
 	print(msg)
+
+
+func _on_Main_tree_exiting() -> void:
+	SaveData.save_data("Main")

@@ -165,6 +165,7 @@ func setup() -> void:
 	else:
 		StoreState = data
 
+
 ## 어차피 프로그램 다시 키면 물건들이 다 창고로 이동하기 때문에 초기화 필요
 	for index in get_product_all_index():
 		StoreState["products"][index]["in_display"] = false 

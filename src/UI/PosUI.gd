@@ -161,6 +161,7 @@ func make_buy(product):
 	hbox.add_child(buy_btn)
 	Stock_SalesContainer.add_child(hbox)
 	
+	
 func make_stock(id):
 	var count = State.get_total_product_count(id)
 	var count_label = UIKit.make_label(str(count)+" pcs", 24)

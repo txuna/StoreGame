@@ -14,7 +14,9 @@ var data = {
 	"News" : {}, 
 }
 
-func save_data():
+func save_data(caller_name="Empty"):
+	if OS.is_debug_build():
+		print("Save! {caller_name}".format({"caller_name" : caller_name}))
 	var file = File.new() 
 	var error = file.open(PATH, File.WRITE)
 	if error == OK:
@@ -23,13 +25,15 @@ func save_data():
 		file.store_var(data) 
 		file.close()
 	else:
-		print("save_data ERROR")
+		if OS.is_debug_build():
+			print("save_data ERROR")
 		return # ERROR
 	
 
 func load_new_game():
-	save_data()
+	save_data("load_new_game")
 	load_data()
+
 
 # once : load_data함수가 한번 실패했을 시 한번 더 기회를 주는 매개변수 
 	
@@ -37,10 +41,11 @@ func load_data(once=true):
 	var file = File.new() 
 	if not file.file_exists(PATH):
 		if once == false:
-			print("load_data once - isn't existed file")
+			if OS.is_debug_build():
+				print("load_data once - isn't existed file")
 			return #ERROR! 
 		else:
-			save_data()
+			save_data("load_data")
 			load_data(false)
 		
 	var error = file.open(PATH, File.READ)
@@ -48,7 +53,8 @@ func load_data(once=true):
 		data = file.get_var() 
 		file.close()
 	else:
-		print("load_data ERROR")
+		if OS.is_debug_build():
+			print("load_data ERROR")
 		return #ERROR
 
 func get_data_storestate():

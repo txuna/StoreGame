@@ -12,10 +12,11 @@ var time_gap = 72
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	background_setup()
 	setup()
 	
 
-func setup():	
+func background_setup():	
 	show_cash()
 	var time = State.get_time()
 	var rotation_count = (time["hour"] * 3600 +  time["min"] * 60 + time["sec"]) / 72 #48
@@ -30,8 +31,10 @@ func setup():
 	clock_timer.wait_time = 1
 	clock_timer.connect("timeout", self, "_on_clock_timeout")
 	add_child(clock_timer)
-	clock_timer.start()
-	
+	clock_timer.start()	
+
+
+func setup():	
 	# 진열대 넘버 설정 및 가지고 있는 진열태 표시
 	var index = 1
 	for display in $InStore/Displays.get_children():
@@ -102,6 +105,7 @@ func _on_clock_timeout():
 func show_cash():
 	$InStore/CashTexture/Cash.text = str(State.get_current_cash()) + "$"
 
+
 func load_product(index, id):
 	var instance = Products.get_products()[id]["scene"].instance()
 	instance.connect("clicked", self, "_on_product_pickable_clicked")
@@ -115,6 +119,7 @@ func _on_product_pickable_clicked(object):
 	if !held_object:
 		held_object = object
 		held_object.pickup()
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:

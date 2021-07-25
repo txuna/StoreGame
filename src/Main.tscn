@@ -42,3 +42,4 @@ visible = false
 
 [node name="DebugTab" parent="UiLayer" instance=ExtResource( 10 )]
 visible = false
+[connection signal="tree_exiting" from="." to="." method="_on_Main_tree_exiting"]

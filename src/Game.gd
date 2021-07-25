@@ -36,14 +36,15 @@ func setup():
 	
 	State.setup()
 	NewsList.setup()
+	"""
 	var timer = Timer.new() 
 	timer.wait_time = 5
 	timer.one_shot = false
 	timer.autostart = true 
 	timer.connect("timeout", self, "save_data")
 	add_child(timer)
-	
-	load_npc_manager()
+	"""
+	#load_npc_manager()
 
 
 func load_npc_manager():
@@ -51,9 +52,6 @@ func load_npc_manager():
 	add_child(npc_manager)
 	npc_manager.start_manager()
 	
-	
-func save_data():
-	SaveData.save_data()
 	
 
 func load_map():
@@ -108,7 +106,9 @@ func _on_npc_buy_product(product):
 	get_node("Map").show_cash()
 	
 	product.queue_free()
-
+	
+	#Save!
+	#SaveData.save_data()
 
 func _on_buy_product(product:Dictionary):
 	if product.empty():
@@ -142,12 +142,13 @@ func _on_buy_product(product:Dictionary):
 				 break
 		State.set_product_index(index, product["id"], shelf_life * 1200) #index와 count의 차이 : index는 개별상품에 대한 관리이고 count는 id가 같은 상품끼리 통틀어서 관리함 
 		get_node("Map").load_product(index, product["id"])
-	
-	
 		
 	get_node("Map").show_cash()
 	emit_signal("LoadPosUI", STOCK)
 	
+	#Save!
+	#SaveData.save_data()
+
 
 func _on_buy_display_stand(index:int):
 	if index <= 0 or index >= 11:
@@ -164,6 +165,10 @@ func _on_buy_display_stand(index:int):
 	State.set_display_stand_price(2)
 	get_node("Map").show_display_stand(index)
 	get_node("Map").show_cash()
+	
+	#Save!
+	#SaveData.save_data()
+	
 
 func _on_error():
 	pass

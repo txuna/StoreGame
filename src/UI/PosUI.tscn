@@ -311,7 +311,7 @@ __meta__ = {
 margin_left = 42.0
 margin_top = 40.7063
 margin_right = 161.0
-margin_bottom = 282.706
+margin_bottom = 290.706
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -342,7 +342,7 @@ text = "SandWich"
 margin_left = 287.0
 margin_top = 41.0
 margin_right = 700.0
-margin_bottom = 388.0
+margin_bottom = 541.0
 rect_scale = Vector2( 0.5, 0.5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -456,7 +456,7 @@ texture_hover = ExtResource( 16 )
 margin_left = 562.0
 margin_top = 44.0
 margin_right = 711.0
-margin_bottom = 252.0
+margin_bottom = 294.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

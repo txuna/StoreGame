@@ -71,6 +71,8 @@ func _on_DetectProduct_body_entered(body: Node) -> void:
 			body.set_is_display(true)
 			$Count.text = str(basket[id]["count"]) +"pcs"
 			State.change_displaystand_count(display_stand_number, 1, 1)
+			#Save!
+			#SaveData.save_data()
 
 
 func _on_DetectProduct_body_exited(body: Node) -> void:
@@ -89,7 +91,8 @@ func _on_DetectProduct_body_exited(body: Node) -> void:
 			body.set_is_display(false)
 			$Count.text = str(basket[id]["count"]) +"pcs"
 			State.change_displaystand_count(display_stand_number, 1, -1)
-			
+			#Save!
+			#SaveData.save_data()
 
 func get_product_count(id):
 	if basket.has(id):
@@ -105,4 +108,3 @@ func _on_OptionButton_item_selected(index: int) -> void:
 	else:
 		$Count.text = "0pcs"
 	State.set_displaystand(display_stand_number, current_product_id, true, get_product_count(current_product_id))
-	#print(State.get_displaystand(display_stand_number))

@@ -63,6 +63,7 @@ func get_id():
 func set_display_number(number):
 	info["display_number"] = number
 	
+	
 func get_display_number():
 	return info["display_number"]
 	

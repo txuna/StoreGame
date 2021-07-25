@@ -206,6 +206,7 @@ position = Vector2( 224.222, 473.788 )
 texture = ExtResource( 5 )
 
 [node name="Npcs" type="Node2D" parent="InStore"]
+position = Vector2( -676, 404 )
 
 [node name="Delivery" type="Position2D" parent="InStore"]
 position = Vector2( 111.362, -452.577 )
