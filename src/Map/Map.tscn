@@ -332,6 +332,9 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "3000$"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Clock" type="Sprite" parent="."]
 position = Vector2( 1726.94, 192.092 )

@@ -111,6 +111,7 @@ var StoreState = {
 	"name" : "Post Exchange",
 	"rating" : 2.0, 
 	"pos" : "A",
+	"is_open" : false,
 	"date" : {
 		"day" : Monday,
 		"time" : {
@@ -175,7 +176,12 @@ func setup() -> void:
 		StoreState["products"][index]["is_correct_display"] = false 
 		StoreState["products"][index]["display_number"] = 0 
 
-		
+func is_open():
+	return StoreState["is_open"]
+
+func set_open(value):
+	StoreState["is_open"] = value
+	
 
 func check_max_min_cash(cash, mask):
 	var temp = StoreState["sales"]["cash"] + (cash * mask)

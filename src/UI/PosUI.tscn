@@ -249,12 +249,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="State" type="Label" parent="PosContainer/PosBack/State"]
+margin_left = 606.843
+margin_top = 135.192
+margin_right = 776.843
+margin_bottom = 177.192
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "State"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatusBtn" type="TextureButton" parent="PosContainer/PosBack/State"]
+margin_left = 565.127
+margin_top = 188.277
+margin_right = 821.127
+margin_bottom = 268.277
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Sales" type="Control" parent="PosContainer/PosBack"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="Stock" type="Control" parent="PosContainer/PosBack"]
+visible = false
 margin_left = 130.0
 margin_top = 81.0
 margin_right = 786.0
@@ -598,6 +621,10 @@ texture_hover = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="PosContainer/PosBack/State/StatusBtn" to="." method="_on_StatusBtn_pressed"]
+[connection signal="gui_input" from="PosContainer/PosBack/Stock/NameContainer" to="." method="_on_NameContainer_gui_input"]
+[connection signal="gui_input" from="PosContainer/PosBack/Stock/BuyContainer" to="." method="_on_BuyContainer_gui_input"]
+[connection signal="gui_input" from="PosContainer/PosBack/Stock/StockContainer" to="." method="_on_StockContainer_gui_input"]
 [connection signal="pressed" from="PosContainer/Tabs/StateBtn" to="." method="_on_StateBtn_pressed"]
 [connection signal="pressed" from="PosContainer/Tabs/SalesBtn" to="." method="_on_SalesBtn_pressed"]
 [connection signal="pressed" from="PosContainer/Tabs/StockBtn" to="." method="_on_StockBtn_pressed"]

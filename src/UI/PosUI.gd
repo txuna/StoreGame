@@ -89,6 +89,31 @@ func load_state():
 	StateTab.get_node("RatingValue").text = str(State.get_rating()) + " / 5"
 	var pos = State.get_pos()
 	StateTab.get_node("PositionValue").text = pos +" Region"
+	load_is_open()
+	
+	
+	
+func load_is_open():
+	var value = State.is_open()
+	## OPEN 
+	if value:
+		set_statusBtn("res://assets/art/state/open.png", "res://assets/art/state/open_pressed.png")
+		
+	else:
+		set_statusBtn("res://assets/art/state/close.png", "res://assets/art/state/close_pressed.png")
+	
+
+func set_statusBtn(image:String, image_pressed:String):
+	$PosContainer/PosBack/State/StatusBtn.texture_normal = load(image)
+	$PosContainer/PosBack/State/StatusBtn.texture_hover = load(image_pressed)
+	$PosContainer/PosBack/State/StatusBtn.texture_pressed = load(image_pressed)
+
+
+func _on_StatusBtn_pressed() -> void:
+	var value = State.is_open()
+	State.set_open(not value)
+	load_state()
+
 
 ############################STOCK#####################################
 	
@@ -189,6 +214,40 @@ func _on_show_product_detail(event, id):
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			emit_signal("ShowDetail", id)
 	
+
+
+func _on_NameContainer_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and current_tab == STOCK:
+		if event.button_index == BUTTON_WHEEL_UP:
+			$PosContainer/PosBack/Stock/BuyContainer.scroll_vertical -= 30
+			$PosContainer/PosBack/Stock/StockContainer.scroll_vertical -= 15
+		
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			$PosContainer/PosBack/Stock/BuyContainer.scroll_vertical += 30
+			$PosContainer/PosBack/Stock/StockContainer.scroll_vertical += 15
+
+
+func _on_BuyContainer_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and current_tab == STOCK:
+		if event.button_index == BUTTON_WHEEL_UP:
+			$PosContainer/PosBack/Stock/StockContainer.scroll_vertical -= 15 
+			$PosContainer/PosBack/Stock/NameContainer.scroll_vertical -= 15
+
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			$PosContainer/PosBack/Stock/StockContainer.scroll_vertical += 15 
+			$PosContainer/PosBack/Stock/NameContainer.scroll_vertical += 15
+			
+
+func _on_StockContainer_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and current_tab == STOCK:
+		if event.button_index == BUTTON_WHEEL_UP:
+			$PosContainer/PosBack/Stock/BuyContainer.scroll_vertical -= 30
+			$PosContainer/PosBack/Stock/NameContainer.scroll_vertical -= 15
+		
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			$PosContainer/PosBack/Stock/BuyContainer.scroll_vertical += 30
+			$PosContainer/PosBack/Stock/NameContainer.scroll_vertical += 15
+	
 #################################################################
 
 func _on_TextureButton_pressed() -> void:
@@ -224,3 +283,6 @@ func tab_switch(index):
 
 func _on_EventBtn_pressed() -> void:
 	tab_switch(EVENT)
+
+
+

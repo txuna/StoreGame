@@ -22,7 +22,7 @@ func show_display():
 		var products = State.get_product_all_index()
 		for index in products:
 			var product = products[index]
-			var label = UIKit.make_label(str(product), 32)
+			var label = UIKit.make_label(str(product), 28)
 			$TextureRect/VBoxContainer.add_child(label)
 
 	elif current_tab == "display":
