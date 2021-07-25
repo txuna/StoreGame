@@ -67,8 +67,25 @@ func load_product_from_save_file():
 	var products = State.get_product_all_index()
 	for index in products:
 		var product = products[index]
-		load_product(index, product["id"])
+		var pos = $InStore/Delivery.global_position # 창고에 있다면
 		
+		"""
+		for display in $InStore/Displays.get_children():
+			# 진열대에 있는거라면
+			if product["display_number"] == display.get_node("DisplayStand").get_display_stand_number():
+				pos = display.get_node("Position2D").global_position
+		"""	
+		load_product(index, product["id"], pos)
+		
+
+func load_product(index, id, pos=$InStore/Delivery.global_position):
+	var instance = Products.get_products()[id]["scene"].instance()
+	instance.connect("clicked", self, "_on_product_pickable_clicked")
+	instance.setup(index, $InStore/Delivery.position)
+	get_node("InStore/Storage").add_child(instance)
+	instance.add_to_group("products")
+	instance.global_position = pos
+
 
 # 특정 진열대를 보여줌
 func show_display_stand(index):
@@ -107,14 +124,6 @@ func _on_clock_timeout():
 func show_cash():
 	$InStore/CashTexture/Cash.text = str(State.get_current_cash()) + "$"
 
-
-func load_product(index, id):
-	var instance = Products.get_products()[id]["scene"].instance()
-	instance.connect("clicked", self, "_on_product_pickable_clicked")
-	instance.setup(index, $InStore/Delivery.position)
-	get_node("InStore/Storage").add_child(instance)
-	instance.add_to_group("products")
-	instance.position = $InStore/Delivery.position
 
 
 func _on_product_pickable_clicked(object):

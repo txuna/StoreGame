@@ -44,7 +44,7 @@ func setup():
 	timer.connect("timeout", self, "save_data")
 	add_child(timer)
 	"""
-	load_npc_manager()
+	#load_npc_manager()
 
 
 func load_npc_manager():
