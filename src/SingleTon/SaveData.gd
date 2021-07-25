@@ -16,7 +16,7 @@ var data = {
 
 func save_data(caller_name="Empty"):
 	if OS.is_debug_build():
-		print("Save! {caller_name}".format({"caller_name" : caller_name}))
+		print("Save! from {caller_name}".format({"caller_name" : caller_name}))
 	var file = File.new() 
 	var error = file.open(PATH, File.WRITE)
 	if error == OK:

@@ -67,11 +67,12 @@ func set_display_number(number):
 func get_display_number():
 	return info["display_number"]
 	
-func is_display():
-	return info["in_display"]
+############### 해당 상품과 진열대에 올바르게 있는가
+func is_correct_display():
+	return info["is_correct_display"]
 	
-func set_is_display(value):
-	info["in_display"] = value
+func set_is_correct_display(value):
+	info["is_correct_display"] = value
 	#print(State.StoreState["products"][info["index"]])
 		
 	

@@ -56,6 +56,7 @@ func get_product_position():
 # 옵션 박스로 선택된 것과 일치하는 상품 코드인지 확인하여 증가 
 func _on_DetectProduct_body_entered(body: Node) -> void:
 	if body.is_in_group("products"):
+		body.set_display_number(display_stand_number)
 		var id = body.get_id()
 		if not basket.has(id):
 			basket[id] = {
@@ -67,16 +68,14 @@ func _on_DetectProduct_body_entered(body: Node) -> void:
 			basket[id]["count"]+=1
 		
 		if current_product_id == id:
-			body.set_display_number(display_stand_number)
-			body.set_is_display(true)
+			body.set_is_correct_display(true)
 			$Count.text = str(basket[id]["count"]) +"pcs"
 			State.change_displaystand_count(display_stand_number, 1, 1)
-			#Save!
-			#SaveData.save_data()
 
 
 func _on_DetectProduct_body_exited(body: Node) -> void:
 	if body.is_in_group("products"):
+		body.set_display_number(0x0)
 		var id = body.get_id()
 		if basket.has(id):
 			basket[id]["count"] -= 1
@@ -87,20 +86,21 @@ func _on_DetectProduct_body_exited(body: Node) -> void:
 			}
 		
 		if current_product_id == id:
-			body.set_display_number(0x0)
-			body.set_is_display(false)
+			body.set_is_correct_display(false)
 			$Count.text = str(basket[id]["count"]) +"pcs"
 			State.change_displaystand_count(display_stand_number, 1, -1)
-			#Save!
-			#SaveData.save_data()
+
 
 func get_product_count(id):
 	if basket.has(id):
 		return basket[id]["count"]
 	else:
 		return 0
+		
 
 # 값이 변경된다면 현재 영역에 들어가 있는 아이템과 변경된 값과 일치된것이 무엇인지 알아야 함
+# 해당 진열대에 있는 상품과 옵션버튼과 동일해진다면
+# 
 func _on_OptionButton_item_selected(index: int) -> void:
 	current_product_id = $OptionButton.get_item_id(index)
 	if basket.has(current_product_id):
@@ -108,3 +108,9 @@ func _on_OptionButton_item_selected(index: int) -> void:
 	else:
 		$Count.text = "0pcs"
 	State.set_displaystand(display_stand_number, current_product_id, true, get_product_count(current_product_id))
+	# products index별로 set_is_correct_display() 세팅 
+	var products = get_node("/root/Main/Game/Map/InStore/Storage").get_children()
+	for product in products:
+		if product.get_display_number() == display_stand_number:
+			if product.get_id() == current_product_id:
+				product.set_is_correct_display(true)

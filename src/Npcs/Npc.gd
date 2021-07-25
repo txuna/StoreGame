@@ -163,6 +163,7 @@ func float_msg_buy(msg):
 	$ChatTimer.start()
 	yield($Tween, "tween_all_completed")
 	
+	
 
 func _on_ExitChat_pressed() -> void:
 	$Tween.interpolate_property($Chatbox, "rect_scale", Vector2(1, 1), Vector2(0, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

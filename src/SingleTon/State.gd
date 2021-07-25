@@ -168,14 +168,12 @@ func setup() -> void:
 
 ## 어차피 프로그램 다시 키면 물건들이 다 창고로 이동하기 때문에 초기화 필요
 	for index in get_product_all_index():
-		StoreState["products"][index]["in_display"] = false 
+		StoreState["products"][index]["is_correct_display"] = false 
 		StoreState["products"][index]["display_number"] = 0 
 
 	for display_number in get_all_display_stand():
 		StoreState["display_stand"][display_number]["count"] = 0
 		
-	#print(StoreState["products"])
-	#print(StoreState["stock"])
 
 func check_max_min_cash(cash, mask):
 	var temp = StoreState["sales"]["cash"] + (cash * mask)
@@ -195,7 +193,7 @@ func set_product_index(index, id, shelf_ife):
 		"index" : index, 
 		"shelf_life" : shelf_ife,
 		"display_number" : 0, 
-		"in_display" : false, 
+		"is_correct_display" : false, 
 		"state" : true
 	}
 	
