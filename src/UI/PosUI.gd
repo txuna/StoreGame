@@ -108,6 +108,11 @@ func set_statusBtn(image:String, image_pressed:String):
 	$PosContainer/PosBack/State/StatusBtn.texture_disabled = load(image_pressed)
 
 
+func active_status_btn():
+	$PosContainer/PosBack/State/StatusBtn.disabled = false 
+	$PosContainer/PosBack/State/StatusLabel.visible = false
+
+
 func _on_StatusBtn_pressed() -> void:
 	var value = State.is_open()
 	if not value == Global.CLOSE:
@@ -115,6 +120,7 @@ func _on_StatusBtn_pressed() -> void:
 		$PosContainer/PosBack/State/StatusLabel.visible = true
 	else:
 		$PosContainer/PosBack/State/StatusLabel.visible = false
+		
 	emit_signal("ChangeStatus", not value)
 	#load_state()
 

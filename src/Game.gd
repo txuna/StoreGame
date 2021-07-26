@@ -5,6 +5,7 @@ var NpcManager = preload("res://src/Npcs/NpManager.tscn")
 #var msgbox = null
 signal LoadPosUI
 signal ShowMsgBox
+signal ActiveStatusBtn
 
 var PosTabIndex = 0
 
@@ -26,8 +27,8 @@ func setup():
 	posui.connect("BuyProduct", self, "_on_buy_product") 
 	posui.connect("ChangeStatus", self, "_on_change_store_status") # 가게 문 닫고 열기
 	connect("LoadPosUI", posui, "tab_switch")
+	connect("ActiveStatusBtn", posui, "active_status_btn")
 
-	
 	State.setup()
 	NewsList.setup()
 
@@ -36,7 +37,11 @@ func setup():
 
 func load_npc_manager():
 	var npc_manager = NpcManager.instance()
+	npc_manager.connect("AllNpcExited", self, "_on_all_npc_exited")
+	npc_manager.name = "NpcManager"
 	add_child(npc_manager)	
+	if State.is_open():
+		npc_manager.start_manager()
 	
 
 func load_map():
@@ -51,11 +56,31 @@ func _on_change_store_status(status):
 	State.set_status(status)
 	emit_signal("LoadPosUI", Global.RELOAD)
 	if status == Global.OPEN:
-		pass
+		get_node("NpcManager").start_manager()
 		
 	# 맵에 존재하는 모든 NPC들이 문박으로 나가 queue_free함 -> 할때마다 group 개체수 체크 -> 0이되면 그떄 버튼 disable = false 
 	elif status == Global.CLOSE:
-		pass
+		get_node("NpcManager").stop_manager()
+		var nodes = get_tree().get_nodes_in_group("Npcs")
+		# 맵에 존재하는 모든 NPC에게 signal connect
+		
+		# 만약 이미 없는 상태라면
+		if  get_tree().get_nodes_in_group("Npcs").size() == 0:
+			_on_all_npc_exited()
+			return 
+			
+		# NPC가 맵에 존재하는 상태라면
+		for node in nodes:
+			node.connect("tree_exited", self, "_on_all_npc_exited")
+			
+		get_tree().call_group("Npcs", "exit_store")
+
+
+func _on_all_npc_exited():
+	if get_tree().get_nodes_in_group("Npcs").size() == 0:
+		print("All npc exited!")
+		emit_signal("ActiveStatusBtn")
+
 
 # Stock 탭 정리 
 # products 탭 정리 

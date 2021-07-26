@@ -185,3 +185,22 @@ func _on_DetailExit_pressed() -> void:
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	$Detail.visible = false
+	
+	
+# Buy Timer and Move Timer 중단
+# 문밖으로 퇴장한다. 나갈때 NpManager에서 시그널로 tree_exited가 되면 콜백함수 -> group 체크
+# 터치다운? 특정 flag단 상태에서? 
+func exit_store():
+	$BuyTimer.stop() 
+	$MoveTimer.stop()
+	
+	var timer = Timer.new()
+	timer.autostart = true 
+	timer.wait_time = 3
+	timer.one_shot = true
+	timer.connect("timeout", self, "_on_npc_exited")
+	add_child(timer)
+
+
+func _on_npc_exited():
+	queue_free()

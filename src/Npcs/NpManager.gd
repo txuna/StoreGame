@@ -3,8 +3,6 @@ extends Node2D
 
 const NPC = preload("res://src/Npcs/Npc.tscn")
 
-
-
 const SATIETY_BONUS = 1.3
 
 var region
@@ -113,6 +111,9 @@ var logging = {
 	},
 }
 
+
+signal AllNpcExited
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	region =  Region.get_region(State.get_pos())
@@ -126,6 +127,11 @@ func _ready() -> void:
 1200/2n 초마다 npc 생성
 """
 
+func stop_manager():
+	for timer in $Timers.get_children():
+		timer.queue_free()
+	
+
 func start_manager():
 	var age_index = 0
 	var n = region["population"] / 10
@@ -135,7 +141,7 @@ func start_manager():
 		timer.connect("timeout", self, "_on_spawn_npc", [age_index])
 		timer.wait_time = stepify(value, 0.1)
 		timer.autostart = true
-		add_child(timer)
+		$Timers.add_child(timer)
 		age_index+=1
 		
 
@@ -146,7 +152,11 @@ func load_npc(info):
 	npc.add_to_group("Npcs")
 	get_node("/root/Main/Game/Map/InStore/Npcs").add_child(npc)
 	
-	
+
+# 상점이 Close상태라서 나가는거랑 그냥 물건 구매후 나가는거 구별해야할듯
+func _on_npc_exited():
+	pass
+
 
 func _on_spawn_npc(age_index):
 	if not check_rating():
