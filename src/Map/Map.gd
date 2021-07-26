@@ -1,5 +1,6 @@
 extends Node2D
 
+signal LoadPosUI
 
 onready var Clock = $Clock
 onready var Background = $Background
@@ -119,6 +120,8 @@ func _on_clock_timeout():
 		"hour" : time["hour"],
 		"min" : time["min"],
 		"sec" : time["sec"]})
+		
+	emit_signal("LoadPosUI", Global.RELOAD)
 
 
 func show_cash():

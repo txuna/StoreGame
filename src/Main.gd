@@ -3,8 +3,7 @@ extends Node2D
 
 var game 
 
-const NEW = 0
-const CONTINUE = 1
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup()
@@ -26,10 +25,10 @@ func load_select_map():
 	
 	
 func _on_game_start(type):
-	if type == NEW:
+	if type == Global.NEW:
 		SaveData.load_new_game()
 		
-	elif type == CONTINUE:
+	elif type == Global.CONTINUE:
 		SaveData.load_data()
 		
 	var title = $UiLayer/TitleUI

@@ -5,6 +5,7 @@ const STATE = 0
 const SALES = 1
 const STOCK = 2 
 const EVENT = 3
+const RELOAD = 4
 
 signal LoadPosUI 
 

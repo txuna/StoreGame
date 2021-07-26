@@ -2,24 +2,18 @@ extends KinematicBody2D
 
 # Called when the node enters the scene tree for the first time.
 
-const Age1 = 0
-const Age2 = 1
-const Age3 = 2
-const Age4 = 3 
-
 var age_value = {
-	Age1 : "0 ~ 19",
-	Age2 : "20 ~ 39",
-	Age3 : "40 ~ 59",
-	Age4 : "60 ~ 79"
+	Global.Age1 : "0 ~ 19",
+	Global.Age2 : "20 ~ 39",
+	Global.Age3 : "40 ~ 59",
+	Global.Age4 : "60 ~ 79"
 }
 
-const Male = 1
-const Female = 2
+
 
 var gender_value = {
-	Male : "Male",
-	Female : "Female"
+	Global.Male : "Male",
+	Global.Female : "Female"
 }
 
 var npc_texture_list = [
@@ -30,11 +24,9 @@ var npc_texture_list = [
 
 var velocity = Vector2.ZERO
 
-const LEFT = -1
-const RIGHT = 1
-const IDLE = 0
 
-var direction = RIGHT 
+
+var direction = Global.RIGHT 
 var npc_info 
 
 signal NpcBuyProduct
@@ -89,9 +81,9 @@ func set_detail():
 
 func _on_MoveTimer_timeout() -> void:
 	randomize()
-	var temp = [LEFT, RIGHT, IDLE]
+	var temp = [Global.LEFT, Global.RIGHT, Global.IDLE]
 	direction = temp[randi() % temp.size()]
-	if direction == LEFT:
+	if direction == Global.LEFT:
 		$Sprite.flip_h = true 
 	else:
 		$Sprite.flip_h = false

@@ -1,12 +1,5 @@
 extends Node2D
 
-const STATE = 0
-const SALES = 1
-const STOCK = 2 
-const EVENT = 3
-
-const MAX_COUNT = 255 # 상품이 존재하는 갯수
-
 var map = preload("res://src/Map/Map.tscn") 
 var NpcManager = preload("res://src/Npcs/NpManager.tscn")
 #var msgbox = null
@@ -31,34 +24,38 @@ func setup():
 	
 	var posui = get_node("../UiLayer/PosUI")
 	posui.connect("BuyProduct", self, "_on_buy_product") 
+	posui.connect("ChangeStatus", self, "_on_change_store_status") # 가게 문 닫고 열기
 	connect("LoadPosUI", posui, "tab_switch")
-	#connect("LoadPosUI", posui, "show_display")
+
 	
 	State.setup()
 	NewsList.setup()
-	"""
-	var timer = Timer.new() 
-	timer.wait_time = 5
-	timer.one_shot = false
-	timer.autostart = true 
-	timer.connect("timeout", self, "save_data")
-	add_child(timer)
-	"""
-	#load_npc_manager()
+
+	load_npc_manager()
 
 
 func load_npc_manager():
 	var npc_manager = NpcManager.instance()
-	add_child(npc_manager)
-	npc_manager.start_manager()
-	
+	add_child(npc_manager)	
 	
 
 func load_map():
+	var posui = get_node("../UiLayer/PosUI")
 	var map_instance = map.instance()
 	map_instance.name = "Map"
+	map_instance.connect("LoadPosUI", posui, "tab_switch")
 	add_child(map_instance)
 
+
+func _on_change_store_status(status):
+	State.set_status(status)
+	emit_signal("LoadPosUI", Global.RELOAD)
+	if status == Global.OPEN:
+		pass
+		
+	# 맵에 존재하는 모든 NPC들이 문박으로 나가 queue_free함 -> 할때마다 group 개체수 체크 -> 0이되면 그떄 버튼 disable = false 
+	elif status == Global.CLOSE:
+		pass
 
 # Stock 탭 정리 
 # products 탭 정리 
@@ -107,8 +104,9 @@ func _on_npc_buy_product(product):
 	
 	product.queue_free()
 	
-	#Save!
-	#SaveData.save_data()
+	emit_signal("LoadPosUI", Global.RELOAD)
+
+
 
 func _on_buy_product(product:Dictionary):
 	if product.empty():
@@ -120,8 +118,8 @@ func _on_buy_product(product:Dictionary):
 		emit_signal("ShowMsgBox", "Lack of Money!")
 		return 	
 		
-	if State.get_total_stock_count() + product["count"] >= MAX_COUNT:
-		emit_signal("ShowMsgBox", "No space left on storage. Left {number} space".format({"space" : MAX_COUNT - State.get_total_stock_count()}))
+	if State.get_total_stock_count() + product["count"] >= Global.MAX_COUNT:
+		emit_signal("ShowMsgBox", "No space left on storage. Left {number} space".format({"space" : Global.MAX_COUNT - State.get_total_stock_count()}))
 		return 
 	
 	State.set_current_cash(product["price"], -1)
@@ -144,7 +142,7 @@ func _on_buy_product(product:Dictionary):
 		get_node("Map").load_product(index, product["id"])
 		
 	get_node("Map").show_cash()
-	emit_signal("LoadPosUI", STOCK)
+	emit_signal("LoadPosUI", Global.STOCK)
 	
 	#Save!
 	#SaveData.save_data()

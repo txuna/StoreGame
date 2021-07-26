@@ -179,7 +179,7 @@ func setup() -> void:
 func is_open():
 	return StoreState["is_open"]
 
-func set_open(value):
+func set_status(value):
 	StoreState["is_open"] = value
 	
 

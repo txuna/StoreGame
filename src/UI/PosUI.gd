@@ -1,11 +1,6 @@
 extends Control
 
 
-const STATE = 0
-const SALES = 1
-const STOCK = 2
-const EVENT = 3 
-
 onready var StateTab = $PosContainer/PosBack/State
 onready var SalesTab = $PosContainer/PosBack/Sales
 onready var StockTab = $PosContainer/PosBack/Stock
@@ -16,10 +11,12 @@ onready var Stock_SalesContainer = $PosContainer/PosBack/Stock/BuyContainer/vbox
 onready var Stock_StockContainer = $PosContainer/PosBack/Stock/StockContainer/vbox
 
 
+signal ChangeStatus
+
 signal BuyProduct
 signal ShowDetail
 
-var current_tab = STATE
+var current_tab = Global.STATE
 var tab_list = []
 
 var buy_list = {}
@@ -55,17 +52,18 @@ func _ready() -> void:
 
 func show_display(tab_index=0):
 	visible = true 
-	if tab_index == STATE:
+	if tab_index == Global.STATE:
 		load_state()
 	
-	elif tab_index == SALES:
+	elif tab_index == Global.SALES:
 		pass
 		
-	elif tab_index == STOCK:
+	elif tab_index == Global.STOCK:
 		load_stock()
 		
-	elif tab_index == EVENT:
+	elif tab_index == Global.EVENT:
 		load_event()
+		
 		
 ############################EVENT#####################################		
 func load_event():
@@ -107,13 +105,18 @@ func set_statusBtn(image:String, image_pressed:String):
 	$PosContainer/PosBack/State/StatusBtn.texture_normal = load(image)
 	$PosContainer/PosBack/State/StatusBtn.texture_hover = load(image_pressed)
 	$PosContainer/PosBack/State/StatusBtn.texture_pressed = load(image_pressed)
+	$PosContainer/PosBack/State/StatusBtn.texture_disabled = load(image_pressed)
 
 
 func _on_StatusBtn_pressed() -> void:
 	var value = State.is_open()
-	State.set_open(not value)
-	load_state()
-
+	if not value == Global.CLOSE:
+		$PosContainer/PosBack/State/StatusBtn.disabled = true
+		$PosContainer/PosBack/State/StatusLabel.visible = true
+	else:
+		$PosContainer/PosBack/State/StatusLabel.visible = false
+	emit_signal("ChangeStatus", not value)
+	#load_state()
 
 ############################STOCK#####################################
 	
@@ -217,7 +220,7 @@ func _on_show_product_detail(event, id):
 
 
 func _on_NameContainer_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and current_tab == STOCK:
+	if event is InputEventMouseButton and current_tab == Global.STOCK:
 		if event.button_index == BUTTON_WHEEL_UP:
 			$PosContainer/PosBack/Stock/BuyContainer.scroll_vertical -= 30
 			$PosContainer/PosBack/Stock/StockContainer.scroll_vertical -= 15
@@ -228,7 +231,7 @@ func _on_NameContainer_gui_input(event: InputEvent) -> void:
 
 
 func _on_BuyContainer_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and current_tab == STOCK:
+	if event is InputEventMouseButton and current_tab == Global.STOCK:
 		if event.button_index == BUTTON_WHEEL_UP:
 			$PosContainer/PosBack/Stock/StockContainer.scroll_vertical -= 15 
 			$PosContainer/PosBack/Stock/NameContainer.scroll_vertical -= 15
@@ -239,7 +242,7 @@ func _on_BuyContainer_gui_input(event: InputEvent) -> void:
 			
 
 func _on_StockContainer_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and current_tab == STOCK:
+	if event is InputEventMouseButton and current_tab == Global.STOCK:
 		if event.button_index == BUTTON_WHEEL_UP:
 			$PosContainer/PosBack/Stock/BuyContainer.scroll_vertical -= 30
 			$PosContainer/PosBack/Stock/NameContainer.scroll_vertical -= 15
@@ -254,19 +257,23 @@ func _on_TextureButton_pressed() -> void:
 	visible = false
 
 func _on_StateBtn_pressed() -> void:
-	tab_switch(STATE)
+	tab_switch(Global.STATE)
 
 
 func _on_SalesBtn_pressed() -> void:
-	tab_switch(SALES)
+	tab_switch(Global.SALES)
 
 
 func _on_StockBtn_pressed() -> void:
-	tab_switch(STOCK)
+	tab_switch(Global.STOCK)
 	load_stock()
 
 
 func tab_switch(index):
+	if index == Global.RELOAD and visible == true:
+		show_display(current_tab)
+		return 
+		
 	current_tab = index
 	var count = 0
 	for i in tab_list:
@@ -282,7 +289,5 @@ func tab_switch(index):
 
 
 func _on_EventBtn_pressed() -> void:
-	tab_switch(EVENT)
-
-
+	tab_switch(Global.EVENT)
 

@@ -2,40 +2,34 @@ extends Node2D
 
 
 const NPC = preload("res://src/Npcs/Npc.tscn")
-const DAY = 1200.0
 
-const Age1 = 0 # 0 - 19 
-const Age2 = 1 # 20 - 39
-const Age3 = 2 # 40 - 59
-const Age4 = 3 # 60 - 79
+
 
 const SATIETY_BONUS = 1.3
 
 var region
 
-const Male = 1
-const Female = 2
 
 var age_ability = {
-	Age1 : {
+	Global.Age1 : {
 		"taste" : [3.9, 10],
 		"moisture" : [2, 10],
 		"satiety" : [3, 8],
 		"health" : [0, 3],
 	},
-	Age2 : {
+	Global.Age2 : {
 		"taste" : [2.5, 10],
 		"moisture" : [3.2, 10],
 		"satiety" : [4, 7],
 		"health" : [1.3, 5],		
 	},
-	Age3 : {
+	Global.Age3 : {
 		"taste" : [1, 5.5],
 		"moisture" : [2.7, 7.3],
 		"satiety" : [1.5, 6],
 		"health" : [3.5, 7],		
 	},
-	Age4 : {
+	Global.Age4 : {
 		"taste" : [0, 4.7],
 		"moisture" : [2, 5.5],
 		"satiety" : [0.5, 6],
@@ -52,10 +46,10 @@ var age_income_boost = {
 }
 
 var age_cash = {
-	Age1 : [300, 4700],
-	Age2 : [1500, 10000],
-	Age3 : [1300, 7200],
-	Age4 : [500, 5200],
+	Global.Age1 : [300, 4700],
+	Global.Age2 : [1500, 10000],
+	Global.Age3 : [1300, 7200],
+	Global.Age4 : [500, 5200],
 }
 
 
@@ -73,15 +67,15 @@ var test = {
 }
 
 var matching_age = {
-	Age1 : "0-19",
-	Age2 : "20-39",
-	Age3 : "40-59",
-	Age4 : "60-79"
+	Global.Age1 : "0-19",
+	Global.Age2 : "20-39",
+	Global.Age3 : "40-59",
+	Global.Age4 : "60-79"
 }
 
 var matching_gender = {
-	Male : "Male",
-	Female : "Female"
+	Global.Male : "Male",
+	Global.Female : "Female"
 }
 
 var logging = {
@@ -136,7 +130,7 @@ func start_manager():
 	var age_index = 0
 	var n = region["population"] / 10
 	for key in region["age_group"]:
-		var value = DAY / (region["age_group"][key] * n)
+		var value = Global.DAY / (region["age_group"][key] * n)
 		var timer = Timer.new() 
 		timer.connect("timeout", self, "_on_spawn_npc", [age_index])
 		timer.wait_time = stepify(value, 0.1)
@@ -166,9 +160,9 @@ func _on_spawn_npc(age_index):
 	var value = int(rand_range(0, 100))
 	var gender:int
 	if value <= region["gender"]["male"]:
-		gender = Male
+		gender = Global.Male
 	else:
-		gender = Female
+		gender = Global.Female
 	
 	var suggestion = setup_npc_suggestion(age_index, gender, cash)
 	#if suggestion <= 0:
@@ -273,7 +267,7 @@ func setup_npc_suggestion(age_index, gender, cash):
 # 젠더 버프, Female : taste 10% health 10% Male : satiety : 10% 증가 moisture : 10%
 func setup_gender_effect(goal, gender):
 	var value = 0
-	if gender == Female:
+	if gender == Global.Female:
 		value = goal["taste"]
 		value = stepify(value * 1.1, 0.1)
 		if value >= 10:
@@ -286,7 +280,7 @@ func setup_gender_effect(goal, gender):
 			value = 10
 		goal["health"] = value 
 		
-	elif gender == Male:
+	elif gender == Global.Male:
 		value = goal["satiety"]
 		value = stepify(value * 1.1, 0.1)
 		if value >= 10:

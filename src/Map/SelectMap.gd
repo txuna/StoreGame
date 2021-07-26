@@ -1,7 +1,5 @@
 extends TextureRect
 
-const NEW = 0
-const CONTINUE = 1
 
 signal GameStart
 
@@ -18,7 +16,7 @@ func _on_Exitbtn_pressed() -> void:
 
 func _on_StartBtn_pressed() -> void:
 	State.set_region(region)
-	emit_signal("GameStart", NEW)
+	emit_signal("GameStart", Global.NEW)
 	queue_free()
 
 
