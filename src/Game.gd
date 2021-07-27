@@ -69,14 +69,15 @@ func _on_change_store_status(status):
 			_on_all_npc_exited()
 			return 
 			
-		# NPC가 맵에 존재하는 상태라면
+		# NPC가 맵에 존재하는 상태라면 및 플레이어가 상점을 닫는다면 시그널 설정 그외는 X
 		for node in nodes:
-			node.connect("tree_exited", self, "_on_all_npc_exited")
+			node.connect("NpcExited", self, "_on_all_npc_exited")
 			
 		get_tree().call_group("Npcs", "exit_store")
 
 
 func _on_all_npc_exited():
+	# NPC가 남아있다면 에러가 뜨는듯 # 게임종료시 남아있는 NPC가 exit 플래그 일때에러 발생
 	if get_tree().get_nodes_in_group("Npcs").size() == 0:
 		print("All npc exited!")
 		emit_signal("ActiveStatusBtn")
@@ -168,9 +169,6 @@ func _on_buy_product(product:Dictionary):
 		
 	get_node("Map").show_cash()
 	emit_signal("LoadPosUI", Global.STOCK)
-	
-	#Save!
-	#SaveData.save_data()
 
 
 func _on_buy_display_stand(index:int):
@@ -188,9 +186,7 @@ func _on_buy_display_stand(index:int):
 	State.set_display_stand_price(2)
 	get_node("Map").show_display_stand(index)
 	get_node("Map").show_cash()
-	
-	#Save!
-	#SaveData.save_data()
+
 	
 
 func _on_error():

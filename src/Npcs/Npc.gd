@@ -10,7 +10,6 @@ var age_value = {
 }
 
 
-
 var gender_value = {
 	Global.Male : "Male",
 	Global.Female : "Female"
@@ -23,28 +22,17 @@ var npc_texture_list = [
 ]
 
 var velocity = Vector2.ZERO
-
-
-
 var direction = Global.RIGHT 
 var npc_info 
 
+var exit_flag = false # true면 매장을 나가는중
+
 signal NpcBuyProduct
+signal NpcExited
 
-const FailMsg = [
-	"Where is the {name}?",
-	"Damn It!!!! There is No {name}",
-	"Reinvent the wheel.. {name}",
-	"I'm starving to death. Where's {name}"
-]
-
-const SuccessMsg = [
-	"Good Choice!!",
-	"Get a Great Deals!!",
-	"It's a no regret choice"
-]
 
 func _ready() -> void:
+	exit_flag = false
 	$MoveTimer.wait_time = int(rand_range(2, 10))
 	$BuyTimer.wait_time = int(rand_range(3, 10))
 	$BuyTimer.one_shot = true
@@ -52,7 +40,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	velocity.x = 45 * direction
+	velocity.x = 75 * direction
 	velocity.y += 75
 	velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -123,7 +111,7 @@ func buy_product():
 	if product == null:
 		if get_probability(30):
 			var product_id = npc_info["suggestion"]
-			float_msg_buy(FailMsg[randi() % FailMsg.size()].format({"name" : Products.get_products()[product_id]["name"]}))
+			float_msg_buy(Global.FailMsg[randi() % Global.FailMsg.size()].format({"name" : Products.get_products()[product_id]["name"]}))
 		return 
 	
 	
@@ -135,7 +123,7 @@ func buy_product():
 
 
 	if get_probability(30):
-		float_msg_buy(SuccessMsg[randi() % SuccessMsg.size()])
+		float_msg_buy(Global.SuccessMsg[randi() % Global.SuccessMsg.size()])
 
 
 
@@ -189,18 +177,36 @@ func _on_DetailExit_pressed() -> void:
 	
 # Buy Timer and Move Timer 중단
 # 문밖으로 퇴장한다. 나갈때 NpManager에서 시그널로 tree_exited가 되면 콜백함수 -> group 체크
-# 터치다운? 특정 flag단 상태에서? 
+# 터치다운? 특정 flag단 상태에서?
+# 특정 경로를따라 걷게한다음 해당 지점에 도달하게 된다면 _on_npc_exited
 func exit_store():
+	exit_flag = true
 	$BuyTimer.stop() 
 	$MoveTimer.stop()
 	
-	var timer = Timer.new()
-	timer.autostart = true 
-	timer.wait_time = 3
-	timer.one_shot = true
-	timer.connect("timeout", self, "_on_npc_exited")
-	add_child(timer)
+	if get_probability(30):
+		float_msg_buy(Global.ExitMsg[randi() % Global.ExitMsg.size()])
+		
+	
+	direction = Global.LEFT
+	$Sprite.flip_h = true
+
+# NPC가 Map의 특정 지점에 닿으면 signal 전송
+func get_exit_flag():
+	return exit_flag
 
 
+# NPC가 나가는도중 게임을 중단하면? 
 func _on_npc_exited():
+	emit_signal("NpcExited")
 	queue_free()
+
+
+
+
+
+
+
+
+
+

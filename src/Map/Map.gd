@@ -144,3 +144,16 @@ func _unhandled_input(event):
 
 func _on_Debug_pressed() -> void:
 	get_node("/root/Main/UiLayer/DebugTab").show_display()
+
+
+func _on_ExitArea_body_entered(body: Node) -> void:
+	if not body.is_in_group("Npcs"):
+		return 
+		
+	# 나가는 NPC가 아니라면
+	if not body.get_exit_flag():
+		return 
+		
+	# NPC 출구
+	body._on_npc_exited()	
+	

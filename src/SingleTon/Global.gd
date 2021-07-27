@@ -27,3 +27,33 @@ const RIGHT = 1
 const IDLE = 0
 
 const DAY = 1200.0
+
+const FailMsg = [
+	"Where is the {name}?",
+	"Damn It!!!! There is No {name}",
+	"Reinvent the wheel.. {name}",
+	"I'm starving to death. Where's {name}"
+]
+
+const SuccessMsg = [
+	"Good Choice!!",
+	"Get a Great Deals!!",
+	"It's a no regret choice"
+]
+
+const ExitMsg = [
+	"Oh! I want to do mot eye shopping...",
+	"I hate to exit! I'm going to stay here!!",
+	"Is it already time to go home?",
+	"Oh I must do my assignment by this Weekend."
+]
+
+
+
+
+
+
+
+
+
+

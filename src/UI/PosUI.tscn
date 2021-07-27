@@ -25,10 +25,6 @@
 size = 32
 font_data = ExtResource( 11 )
 
-[sub_resource type="DynamicFont" id=8]
-size = 24
-font_data = ExtResource( 11 )
-
 [sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 11 )
@@ -38,7 +34,7 @@ size = 24
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 36
+size = 24
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -46,10 +42,14 @@ size = 36
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 24
+size = 36
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=7]
+size = 24
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=8]
 size = 32
 font_data = ExtResource( 11 )
 
@@ -259,7 +259,7 @@ margin_right = 776.843
 margin_bottom = 177.192
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "State"
+text = "Status"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -280,7 +280,7 @@ margin_left = 501.267
 margin_top = 268.602
 margin_right = 874.267
 margin_bottom = 335.602
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "You cannot change status 
 until all npcs have exit from shop."
@@ -316,7 +316,7 @@ __meta__ = {
 margin_left = 41.0
 margin_right = 170.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Product Name"
 __meta__ = {
@@ -327,7 +327,7 @@ __meta__ = {
 margin_left = 310.0
 margin_right = 421.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Buy Product"
 __meta__ = {
@@ -338,7 +338,7 @@ __meta__ = {
 margin_left = 561.0
 margin_right = 613.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Stock"
 __meta__ = {
@@ -364,7 +364,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="PosContainer/PosBack/Stock/NameContainer/vbox"]
 margin_right = 89.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "SandWich"
 
@@ -372,7 +372,7 @@ text = "SandWich"
 margin_top = 36.0
 margin_right = 89.0
 margin_bottom = 68.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "SandWich"
 
@@ -409,7 +409,7 @@ margin_left = 68.0
 margin_top = 9.0
 margin_right = 103.0
 margin_bottom = 55.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "36"
 
@@ -429,7 +429,7 @@ margin_left = 175.0
 margin_top = 9.0
 margin_right = 244.0
 margin_bottom = 55.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "700$"
 
@@ -458,7 +458,7 @@ margin_left = 68.0
 margin_top = 9.0
 margin_right = 103.0
 margin_bottom = 55.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "36"
 
@@ -478,7 +478,7 @@ margin_left = 175.0
 margin_top = 9.0
 margin_right = 244.0
 margin_bottom = 55.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "700$"
 
@@ -509,7 +509,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="PosContainer/PosBack/Stock/StockContainer/vbox"]
 margin_right = 41.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "32개"
 
@@ -517,7 +517,7 @@ text = "32개"
 margin_top = 36.0
 margin_right = 41.0
 margin_bottom = 68.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "32개"
 
@@ -526,7 +526,7 @@ margin_left = 42.0
 margin_top = 340.0
 margin_right = 132.0
 margin_bottom = 382.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Cash :"
 __meta__ = {
@@ -538,7 +538,7 @@ margin_left = 150.0
 margin_top = 340.0
 margin_right = 248.0
 margin_bottom = 382.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Balance"
 __meta__ = {

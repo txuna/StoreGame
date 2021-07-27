@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/art/map/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/map/sky.png" type="Texture" id=2]
@@ -18,11 +18,14 @@
 size = 56
 font_data = ExtResource( 10 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 44.3007, 24.3559 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 9 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 24
 font_data = ExtResource( 10 )
 
@@ -336,6 +339,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ExitArea" type="Area2D" parent="InStore"]
+position = Vector2( -782.165, 478.229 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InStore/ExitArea"]
+position = Vector2( -12.681, 3.00342 )
+shape = SubResource( 2 )
+
 [node name="Clock" type="Sprite" parent="."]
 position = Vector2( 1726.94, 192.092 )
 scale = Vector2( 1.5, 1.5 )
@@ -346,7 +356,7 @@ margin_left = -48.6302
 margin_top = -16.7175
 margin_right = 68.3698
 margin_bottom = 11.2825
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "00:00:00"
 align = 1
@@ -359,7 +369,7 @@ margin_left = -24.7979
 margin_top = 14.1146
 margin_right = 46.2021
 margin_bottom = 46.1146
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Monday"
 __meta__ = {
@@ -375,4 +385,5 @@ texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="body_entered" from="InStore/ExitArea" to="." method="_on_ExitArea_body_entered"]
 [connection signal="pressed" from="Debug" to="." method="_on_Debug_pressed"]
