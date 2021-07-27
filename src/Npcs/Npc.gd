@@ -186,19 +186,17 @@ func exit_store():
 	
 	if get_probability(30):
 		float_msg_buy(Global.ExitMsg[randi() % Global.ExitMsg.size()])
-		
-	
+			
 	direction = Global.LEFT
 	$Sprite.flip_h = true
+
 
 # NPC가 Map의 특정 지점에 닿으면 signal 전송
 func get_exit_flag():
 	return exit_flag
 
-
 # NPC가 나가는도중 게임을 중단하면? 
 func _on_npc_exited():
-	emit_signal("NpcExited")
 	queue_free()
 
 

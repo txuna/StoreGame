@@ -49,6 +49,7 @@ func load_map():
 	var map_instance = map.instance()
 	map_instance.name = "Map"
 	map_instance.connect("LoadPosUI", posui, "tab_switch")
+	map_instance.connect("NpcExited", self, "_on_all_npc_exited")
 	add_child(map_instance)
 
 
@@ -64,23 +65,40 @@ func _on_change_store_status(status):
 		var nodes = get_tree().get_nodes_in_group("Npcs")
 		# 맵에 존재하는 모든 NPC에게 signal connect
 		
-		# 만약 이미 없는 상태라면
-		if  get_tree().get_nodes_in_group("Npcs").size() == 0:
+		# 만약 이미 없는 상태라면 exit_flag를 가진 NPC가 0인것으로 체크해야할듯
+		var count = nodes.size()
+		if count == 0:
 			_on_all_npc_exited()
 			return 
-			
+		
+
+		# map에서 시그널을 받아보자	
 		# NPC가 맵에 존재하는 상태라면 및 플레이어가 상점을 닫는다면 시그널 설정 그외는 X
 		for node in nodes:
-			node.connect("NpcExited", self, "_on_all_npc_exited")
+			node.connect("tree_exited", self, "_on_check_npc_exited")
 			
 		get_tree().call_group("Npcs", "exit_store")
 
 
+# NPC가 나갈때마다 체크 -> 남은 엔피시가 없는지 확인
+func _on_check_npc_exited():
+	var is_npc = false 
+	# 나중에 get_exit_flag함수 추가
+	for npc in get_node("Map/InStore/Npcs").get_children():
+		is_npc = true
+	
+	if is_npc:
+		return 
+	
+	_on_all_npc_exited()
+	
+
 func _on_all_npc_exited():
-	# NPC가 남아있다면 에러가 뜨는듯 # 게임종료시 남아있는 NPC가 exit 플래그 일때에러 발생
-	if get_tree().get_nodes_in_group("Npcs").size() == 0:
-		print("All npc exited!")
-		emit_signal("ActiveStatusBtn")
+	if State.is_open():
+		return
+
+	print("All npc exited!")
+	emit_signal("ActiveStatusBtn")
 
 
 # Stock 탭 정리 

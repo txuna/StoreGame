@@ -1,6 +1,8 @@
 extends Node2D
 
 signal LoadPosUI
+signal NpcExited
+
 
 onready var Clock = $Clock
 onready var Background = $Background
@@ -156,4 +158,8 @@ func _on_ExitArea_body_entered(body: Node) -> void:
 		
 	# NPC 출구
 	body._on_npc_exited()	
-	
+
+
+
+
+
