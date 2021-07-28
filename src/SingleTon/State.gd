@@ -356,7 +356,11 @@ func get_expenditure():
 func get_pos():
 	 return StoreState["pos"]
 
+func get_income_log():
+	return StoreState["sales"]["log"]["income"]
 
+func get_expanditure_log():
+	return StoreState["slaes"]["log"]["expanditure"]
 
 
 

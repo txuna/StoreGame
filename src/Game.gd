@@ -217,6 +217,9 @@ func _on_buy_display_stand(index:int):
 		
 	State.set_current_cash(price, -1)
 	State.set_display_stand_price(2)
+	State.add_sales(Global.Expenditure, Global.DisplayStand, price, {
+		"index" : index,
+	})
 	get_node("Map").show_display_stand(index)
 	get_node("Map").show_cash()
 

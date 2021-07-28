@@ -56,7 +56,7 @@ func show_display(tab_index=0):
 		load_state()
 	
 	elif tab_index == Global.SALES:
-		pass
+		load_sales()
 		
 	elif tab_index == Global.STOCK:
 		load_stock()
@@ -64,6 +64,59 @@ func show_display(tab_index=0):
 	elif tab_index == Global.EVENT:
 		load_event()
 		
+#############################SALES####################################
+func init_sales():
+	for child in $PosContainer/PosBack/Sales/IncomeContainer/VBoxContainer.get_children():
+		child.queue_free()
+		
+	for child in $PosContainer/PosBack/Sales/ExpandContainer/VBoxContainer.get_child_count():
+		child.queue_free()
+		
+		
+
+func load_sales():
+	init_sales()
+	show_income()
+	
+
+func show_income():
+	var income_dict = {}
+	var type:String
+	var iname:String
+	var logfile = State.get_income_log() 
+	for income in logfile:
+		var metadata = income["metadata"]
+		if income["type"] == Global.Product:
+			type = "[Product]"
+			iname = Products.get_products()[metadata["id"]]["name"]
+		else:
+			type = "[Tip]"
+			iname = "Tip"
+			
+		if not income_dict.has(metadata["id"]):
+			income_dict[metadata["id"]] = {
+				"count" : metadata["count"],
+				"price" : income["price"],
+				"type" : type,
+				"name" : iname
+			}
+		else:
+			income_dict[metadata["id"]]["count"] += metadata["count"]
+			income_dict[metadata["id"]]["price"] += income["price"]
+			
+	for income in income_dict:
+		var label = UIKit.make_label("{type} {name} x {count} = ${price}".format({
+			"type" : income_dict[income]["type"],
+			"name" : income_dict[income]["name"],
+			"count" : income_dict[income]["count"],
+			"price" : income_dict[income]["price"],
+		}), 24)
+	
+		$PosContainer/PosBack/Sales/IncomeContainer/VBoxContainer.add_child(label)
+	
+		
+func show_expanditure():
+	var expanditure_dict = {}	
 		
 ############################EVENT#####################################		
 func load_event():

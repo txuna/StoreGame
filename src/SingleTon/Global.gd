@@ -60,7 +60,9 @@ const Income = "income"
 const Expenditure = "expenditure"
 
 
-
+const Shopping = 0
+const EndShopping = 1
+const KickNpc = 2
 
 
 

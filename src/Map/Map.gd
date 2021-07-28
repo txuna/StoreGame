@@ -153,11 +153,16 @@ func _on_ExitArea_body_entered(body: Node) -> void:
 		return 
 		
 	# 나가는 NPC가 아니라면
-	if not body.get_exit_flag():
+	var flag = body.get_flag()
+	if flag == Global.Shopping:
 		return 
 		
-	# NPC 출구
-	body._on_npc_exited()	
+	elif flag == Global.EndShopping:
+		body._on_npc_exited()	
+		
+	elif flag == Global.KickNpc:
+		# NPC 출구
+		body._on_npc_exited()	
 
 
 

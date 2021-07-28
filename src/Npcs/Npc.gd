@@ -25,14 +25,14 @@ var velocity = Vector2.ZERO
 var direction = Global.RIGHT 
 var npc_info 
 
-var exit_flag = false # true면 매장을 나가는중
+var flag
 
 signal NpcBuyProduct
 signal NpcExited
 
 
 func _ready() -> void:
-	exit_flag = false
+	flag = Global.Shopping
 	$MoveTimer.wait_time = int(rand_range(2, 10))
 	$BuyTimer.wait_time = int(rand_range(3, 10))
 	$BuyTimer.one_shot = true
@@ -118,7 +118,7 @@ func buy_product():
 	# 유통기한을 지났다면
 	if not product.get_product_state():
 		float_msg_buy("The expiration date has passed...!")
-		return
+		return 
 		
 	# Game씬에서 해당 물건이 정확히 있는지 재점검 해야한다. 
 	emit_signal("NpcBuyProduct", product, npc_info["age"], npc_info["gender"])
@@ -127,6 +127,9 @@ func buy_product():
 	if get_probability(30):
 		float_msg_buy(Global.SuccessMsg[randi() % Global.SuccessMsg.size()])
 
+	flag = Global.EndShopping
+	direction = Global.LEFT
+	$Sprite.flip_h = true
 
 
 func get_probability(percent)->bool:
@@ -182,7 +185,7 @@ func _on_DetailExit_pressed() -> void:
 # 터치다운? 특정 flag단 상태에서?
 # 특정 경로를따라 걷게한다음 해당 지점에 도달하게 된다면 _on_npc_exited
 func exit_store():
-	exit_flag = true
+	flag = Global.KickNpc
 	$BuyTimer.stop() 
 	$MoveTimer.stop()
 	
@@ -194,8 +197,8 @@ func exit_store():
 
 
 # NPC가 Map의 특정 지점에 닿으면 signal 전송
-func get_exit_flag():
-	return exit_flag
+func get_flag():
+	return flag
 
 # NPC가 나가는도중 게임을 중단하면? 
 func _on_npc_exited():

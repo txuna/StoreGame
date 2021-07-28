@@ -82,6 +82,7 @@ __meta__ = {
 }
 
 [node name="State" type="Control" parent="PosContainer/PosBack"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -291,7 +292,6 @@ until all npcs have exit from shop."
 align = 1
 
 [node name="Sales" type="Control" parent="PosContainer/PosBack"]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -340,46 +340,27 @@ margin_bottom = 593.439
 rect_rotation = 90.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="InComtainerName" type="ScrollContainer" parent="PosContainer/PosBack/Sales"]
-margin_left = 488.0
-margin_top = 129.0
-margin_right = 640.0
-margin_bottom = 260.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PosContainer/PosBack/Sales/InComtainerName"]
-
-[node name="InComtainerValue" type="ScrollContainer" parent="PosContainer/PosBack/Sales"]
-margin_left = 651.94
-margin_top = 129.498
-margin_right = 803.94
-margin_bottom = 260.498
+[node name="IncomeContainer" type="ScrollContainer" parent="PosContainer/PosBack/Sales"]
+margin_left = 488.22
+margin_top = 126.78
+margin_right = 813.22
+margin_bottom = 258.78
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PosContainer/PosBack/Sales/InComtainerValue"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PosContainer/PosBack/Sales/IncomeContainer"]
 
-[node name="ExContainerName" type="ScrollContainer" parent="PosContainer/PosBack/Sales"]
-margin_left = 489.534
-margin_top = 307.534
-margin_right = 652.534
-margin_bottom = 455.534
+[node name="ExpandContainer" type="ScrollContainer" parent="PosContainer/PosBack/Sales"]
+margin_left = 494.0
+margin_top = 316.0
+margin_right = 815.0
+margin_bottom = 450.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PosContainer/PosBack/Sales/ExContainerName"]
-
-[node name="ExContainerValue" type="ScrollContainer" parent="PosContainer/PosBack/Sales"]
-margin_left = 666.748
-margin_top = 304.233
-margin_right = 830.748
-margin_bottom = 455.233
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PosContainer/PosBack/Sales/ExContainerValue"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PosContainer/PosBack/Sales/ExpandContainer"]
 
 [node name="Stock" type="Control" parent="PosContainer/PosBack"]
 visible = false
