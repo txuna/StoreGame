@@ -118,8 +118,10 @@ func buy_product():
 	# 유통기한을 지났다면
 	if not product.get_product_state():
 		float_msg_buy("The expiration date has passed...!")
+		return
+		
 	# Game씬에서 해당 물건이 정확히 있는지 재점검 해야한다. 
-	emit_signal("NpcBuyProduct", product)
+	emit_signal("NpcBuyProduct", product, npc_info["age"], npc_info["gender"])
 
 
 	if get_probability(30):

@@ -106,7 +106,7 @@ func _on_all_npc_exited():
 # DisplayStand는 정리안해도 object가 queue_free하는 과정에서 자동으로 될듯 바로 free하면 DisplayStand.gd에서 exit 에러 뜰듯한데
 # 위에 다 체크 및 정리하고 나서 Cash 정리
 # 정산 및 레이팅
-func _on_npc_buy_product(product):
+func _on_npc_buy_product(product, age, gender):
 	var id = product.get_id() 
 	var index = product.get_product_index()
 	var dispay_number = product.get_display_number()
@@ -143,13 +143,22 @@ func _on_npc_buy_product(product):
 			print("The expiration date has passed {index} and {id}".format({"index" : index, "id" : id}))
 		price = 0
 	State.set_current_cash(price ,1)
+	
+	# 로그 추가 
+	# sales_type, goods_type, price, metadata:Dictionary
+	State.add_sales(Global.Income, Global.Product, price,  {
+		"id" : id,
+		"count" : 1,
+		"age" : age,
+		"time" : State.get_time_type(),
+		"gender" : gender
+	})
 
 	get_node("Map").show_cash()
 	
 	product.queue_free()
 	
 	emit_signal("LoadPosUI", Global.RELOAD)
-
 
 
 func _on_buy_product(product:Dictionary):
@@ -168,6 +177,10 @@ func _on_buy_product(product:Dictionary):
 	
 	State.set_current_cash(product["price"], -1)
 	State.set_product_count(product["id"], product["count"], 1)
+	State.add_sales(Global.Expenditure, Global.Product, product["price"], {
+		"id" : product["id"],
+		"count" : product["count"],
+	})
 	
 	# 개별상품 관리를 위한 인덱스 부여
 	var flag = false
@@ -182,8 +195,10 @@ func _on_buy_product(product:Dictionary):
 				continue
 			else:
 				 break
+				
 		State.set_product_index(index, product["id"], shelf_life * 1200) #index와 count의 차이 : index는 개별상품에 대한 관리이고 count는 id가 같은 상품끼리 통틀어서 관리함 
 		get_node("Map").load_product(index, product["id"])
+		
 		
 	get_node("Map").show_cash()
 	emit_signal("LoadPosUI", Global.STOCK)

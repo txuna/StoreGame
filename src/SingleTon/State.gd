@@ -40,63 +40,26 @@ var day = {
 		"str" : "Sunday"
 	},
 }
-
+"""
+{
+	"id" : 0x0,
+	"type" : product,
+	"price" : 100,
+	# type이 product일때
+	"metadata" : {
+		"age" : 0x0,
+		"time" : 0x0, 
+	}
+}
+"""
 
 var Sales = {
-	"total_cash" : 0,
-	"rating" : 0, 
-	"age" : {
-		"0-19" : {
-			"count" : 0,
-			"product" : {
-				
-			}
-		},
-		"20-39" : {
-			"count" : 0,
-			"product" : {
-				
-			}
-		},
-		"40-59" : {
-			"count" : 0,
-			"product" : {
-				
-			}
-		},
-		"60-79" : {
-			"count" : 0,
-			"product" : {
-				
-			}
-		},
-	},
-	"time_sale" : {
-		"morning" : {
-			"count" : 0,
-			"product" : {
-				
-			}
-		},
-		"afternoon" : {
-			"count" : 0,
-			"product" : {
-				
-			}
-		},
-		"evening" : {
-			"count" : 0,
-			"product" : {
-				
-			}
-		},
-		"midnight" : {
-			"count" : 0,
-			"product" : {
-				
-			}
-		},
-	}
+	"income" : [
+		
+	],
+	"expenditure" : [
+		
+	]
 }
 
 """ Stock
@@ -122,9 +85,14 @@ var StoreState = {
 	},
 	"sales" : {
 		"cash" : 6000,
-		"total_cash" : 0,
-		"yesterday" : Sales.duplicate(true),
-		"today" : Sales.duplicate(true),
+		"log" : {
+			"income" : [
+				
+			],
+			"expenditure" : [
+				
+			]
+		},
 	},
 	# 모든 상품의 개수  
 	"total_stock_count" : 0,
@@ -175,6 +143,32 @@ func setup() -> void:
 	for index in get_product_all_index():
 		StoreState["products"][index]["is_correct_display"] = false 
 		StoreState["products"][index]["display_number"] = 0 
+
+
+func get_time_type():
+	var hour = StoreState["date"]["time"]["hour"]
+	if hour >= 0 and hour < 6:
+		return Global.Midnight
+	elif hour >= 6 and hour < 12:
+		return Global.Morning
+	elif hour >= 12 and hour < 18:
+		return Global.Afternoon
+	elif hour >= 18 and hour < 0:
+		return Global.Evening
+
+
+# add index 
+func add_sales(sales_type, goods_type, price, metadata:Dictionary):
+	StoreState["sales"]["log"][sales_type].append({
+		"type" : goods_type,
+		"price" : price,
+		"metadata" : metadata,
+	})
+
+
+func remove_sales(index):
+	pass
+
 
 func is_open():
 	return StoreState["is_open"]
@@ -339,17 +333,25 @@ func set_time(sec):
 			StoreState["date"]["day"] = Monday
 						
 
-func get_today_cash():
-	return StoreState["sales"]["today"]["total_cash"]
-
 func get_name():
 	return StoreState["name"]
+	
 	
 func get_rating():
 	return StoreState["rating"]
 
-func get_total_cash():
-	return StoreState["sales"]["total_cash"]
+
+func get_income():
+	var cash = 0
+	for node in StoreState["sales"]["log"]["income"]:
+		cash += node["price"]
+	return cash
+	
+func get_expenditure():
+	var cash = 0 
+	for node in StoreState["sales"]["log"]["expenditure"]:
+		cash += node["price"]
+	return cash
 	
 func get_pos():
 	 return StoreState["pos"]

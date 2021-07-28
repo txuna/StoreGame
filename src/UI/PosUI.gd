@@ -81,9 +81,9 @@ func load_state():
 			"min" : State.get_time()["min"],
 			"sec" : State.get_time()["sec"]})
 
-	StateTab.get_node("CashValue").text = str(State.get_current_cash()) + "$"
-	StateTab.get_node("TodayCashValue").text = str(State.get_today_cash()) + "$"
-	StateTab.get_node("TotalCashValue").text = str(State.get_total_cash()) + "$"
+	StateTab.get_node("CashValue").text = "$" + str(State.get_current_cash())
+	StateTab.get_node("ExpenditureValue").text = "$" +str(State.get_expenditure())
+	StateTab.get_node("IncomeValue").text = "$" +str(State.get_income())
 	StateTab.get_node("RatingValue").text = str(State.get_rating()) + " / 5"
 	var pos = State.get_pos()
 	StateTab.get_node("PositionValue").text = pos +" Region"
@@ -138,7 +138,7 @@ func init_stock():
 
 func load_stock():
 	init_stock()
-	$PosContainer/PosBack/Stock/MoneyValue.text = str(State.get_current_cash()) + "$"
+	$PosContainer/PosBack/Stock/MoneyValue.text ="$"+str(State.get_current_cash())
 	var product_list = Products.get_products()
 	for id in product_list:
 		var product = product_list[id]
@@ -168,7 +168,7 @@ func make_buy(product):
 		"res://assets/art/ui/minus_pressed.png",
 		"res://assets/art/ui/minus_pressed.png")
 	
-	var price = UIKit.make_label(str(product["buy"])+"$", 36)	
+	var price = UIKit.make_label("$"+str(product["buy"]), 36)	
 		
 	var buy_btn = UIKit.make_texture_btn(
 		"res://assets/art/ui/buy_btn.png",
@@ -208,7 +208,7 @@ func _on_count_btn_pressed(id, count:Label, price:Label, buy:int, mask):
 	if value < 0 or value > 10:
 		return
 	count.text = str(value)
-	price.text = str(value * buy) + "$"
+	price.text = "$"+str(value * buy)
 	
 	buy_list[id]["count"] = value 
 	buy_list[id]["price"] = value * buy

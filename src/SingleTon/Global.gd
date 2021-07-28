@@ -28,6 +28,11 @@ const IDLE = 0
 
 const DAY = 1200.0
 
+const Morning = 0 
+const Afternoon = 1
+const Evening = 2
+const Midnight = 3
+
 const FailMsg = [
 	"Where is the {name}?",
 	"Damn It!!!! There is No {name}",
@@ -48,7 +53,11 @@ const ExitMsg = [
 	"Oh I must do my assignment by this Weekend."
 ]
 
+const Product = 1
+const DisplayStand = 2
 
+const Income = "income"
+const Expenditure = "expenditure"
 
 
 
