@@ -37,7 +37,8 @@ func _on_game_start(type):
 	if game.has_method("start_game"):
 		game.start_game()
 	else:
-		_on_error("Game dont had start_game method")
+		if OS.is_debug_build():
+			_on_error("Game dont had start_game method")
 		
 		
 func _on_error(msg:String):

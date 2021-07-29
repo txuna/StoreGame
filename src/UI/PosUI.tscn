@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/art/ui/pos_tab_panel.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/ui/cancel_pressed.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/art/ui/event.png" type="Texture" id=18]
 [ext_resource path="res://assets/art/ui/event_pressed.png" type="Texture" id=19]
 [ext_resource path="res://assets/art/ui/breaking_news.png" type="Texture" id=20]
+[ext_resource path="res://assets/art/ui/pie.png" type="Texture" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -31,6 +32,22 @@ font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 32
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 32
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 24
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 24
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -317,13 +334,13 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Income"
 
 [node name="Statistics3" type="Label" parent="PosContainer/PosBack/Sales"]
-margin_left = 592.961
-margin_top = 266.031
-margin_right = 741.961
-margin_bottom = 308.031
+margin_left = 573.633
+margin_top = 272.63
+margin_right = 774.633
+margin_bottom = 314.63
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Expenditure"
+text = "Gender Analysis"
 
 [node name="ColorRect" type="ColorRect" parent="PosContainer/PosBack/Sales"]
 margin_left = 478.0
@@ -361,6 +378,331 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PosContainer/PosBack/Sales/ExpandContainer"]
+
+[node name="Time" type="Control" parent="PosContainer/PosBack/Sales"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 176.569
+margin_top = 103.695
+margin_right = 348.569
+margin_bottom = 145.695
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Time Analysis"
+
+[node name="midnight" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 190.0
+margin_top = 155.0
+margin_right = 311.0
+margin_bottom = 187.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0am ~ 6am : "
+
+[node name="midnightValue" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 330.0
+margin_top = 154.0
+margin_right = 361.0
+margin_bottom = 186.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "12%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="morning" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 190.0
+margin_top = 190.0
+margin_right = 318.0
+margin_bottom = 222.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "6am ~ 12pm : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="morningValue" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 330.0
+margin_top = 190.0
+margin_right = 366.0
+margin_bottom = 222.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "24%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="afternoon" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 190.0
+margin_top = 265.0
+margin_right = 333.0
+margin_bottom = 297.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "18pm ~ 0am : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="afternoonValue" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 330.0
+margin_top = 264.0
+margin_right = 353.0
+margin_bottom = 296.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "9%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="evening" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 190.0
+margin_top = 226.0
+margin_right = 326.0
+margin_bottom = 258.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "12pm ~ 18pm : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="eveningValue" type="Label" parent="PosContainer/PosBack/Sales/Time"]
+margin_left = 330.0
+margin_top = 226.32
+margin_right = 364.0
+margin_bottom = 258.32
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "23%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Age" type="Control" parent="PosContainer/PosBack/Sales"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 176.262
+margin_top = 301.921
+margin_right = 335.262
+margin_bottom = 343.921
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Age Analysis"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="age1" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 190.0
+margin_top = 349.554
+margin_right = 309.0
+margin_bottom = 381.554
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0 ~ 19 olds : "
+
+[node name="age1Value" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 330.0
+margin_top = 349.554
+margin_right = 431.0
+margin_bottom = 381.554
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "10%"
+
+[node name="age2" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 190.0
+margin_top = 382.08
+margin_right = 323.0
+margin_bottom = 414.08
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "20 ~ 39 olds : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="age2Value" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 330.0
+margin_top = 382.853
+margin_right = 431.0
+margin_bottom = 414.853
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "10%"
+
+[node name="age3" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 190.0
+margin_top = 413.193
+margin_right = 325.0
+margin_bottom = 445.193
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "40 ~ 59 olds : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="age3Value" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 330.0
+margin_top = 414.106
+margin_right = 465.0
+margin_bottom = 446.106
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "10%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="age4" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 190.0
+margin_top = 443.834
+margin_right = 324.0
+margin_bottom = 475.834
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "60 ~ 79 olds : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="age4Value" type="Label" parent="PosContainer/PosBack/Sales/Age"]
+margin_left = 330.0
+margin_top = 441.006
+margin_right = 463.0
+margin_bottom = 473.006
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "10%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gender" type="Control" parent="PosContainer/PosBack/Sales"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 587.032
+margin_top = 309.491
+margin_right = 843.032
+margin_bottom = 565.49
+rect_scale = Vector2( 0.7, 0.7 )
+texture_under = ExtResource( 21 )
+texture_progress = ExtResource( 21 )
+fill_mode = 4
+tint_progress = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="male" type="Label" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 623.628
+margin_top = 357.881
+margin_right = 686.628
+margin_bottom = 389.881
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Male : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="maleValue" type="Label" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 688.177
+margin_top = 358.352
+margin_right = 724.177
+margin_bottom = 390.352
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "54%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="femaleValue" type="Label" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 692.352
+margin_top = 396.881
+margin_right = 729.352
+margin_bottom = 428.881
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "46%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="female" type="Label" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 612.288
+margin_top = 396.478
+margin_right = 697.288
+margin_bottom = 428.478
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Female : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 766.022
+margin_top = 335.644
+margin_right = 806.022
+margin_bottom = 359.644
+color = Color( 0.360784, 0.360784, 0.360784, 1 )
+
+[node name="male2" type="Label" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 811.651
+margin_top = 370.427
+margin_right = 862.651
+margin_bottom = 402.427
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Male "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 765.966
+margin_top = 375.371
+margin_right = 805.966
+margin_bottom = 399.371
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="female2" type="Label" parent="PosContainer/PosBack/Sales/Gender"]
+margin_left = 811.022
+margin_top = 332.202
+margin_right = 878.022
+margin_bottom = 364.202
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Female"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Stock" type="Control" parent="PosContainer/PosBack"]
 visible = false

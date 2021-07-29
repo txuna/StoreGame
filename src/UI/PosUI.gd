@@ -10,6 +10,18 @@ onready var Stock_NameContainer = $PosContainer/PosBack/Stock/NameContainer/vbox
 onready var Stock_SalesContainer = $PosContainer/PosBack/Stock/BuyContainer/vbox
 onready var Stock_StockContainer = $PosContainer/PosBack/Stock/StockContainer/vbox
 
+onready var Midnight = $PosContainer/PosBack/Sales/Time/midnightValue
+onready var Morning = $PosContainer/PosBack/Sales/Time/morningValue
+onready var Afternoon = $PosContainer/PosBack/Sales/Time/afternoonValue
+onready var Evening = $PosContainer/PosBack/Sales/Time/eveningValue
+
+onready var Age1 = $PosContainer/PosBack/Sales/Age/age1Value
+onready var Age2 = $PosContainer/PosBack/Sales/Age/age2Value
+onready var Age3 = $PosContainer/PosBack/Sales/Age/age3Value
+onready var Age4 = $PosContainer/PosBack/Sales/Age/age4Value
+
+onready var Male = $PosContainer/PosBack/Sales/Gender/maleValue
+onready var Female = $PosContainer/PosBack/Sales/Gender/femaleValue
 
 signal ChangeStatus
 
@@ -77,7 +89,8 @@ func init_sales():
 func load_sales():
 	init_sales()
 	show_income()
-	
+	show_TimeAge_statistics()
+
 
 func show_income():
 	var income_dict = {}
@@ -118,6 +131,103 @@ func show_income():
 func show_expanditure():
 	var expanditure_dict = {}	
 		
+		
+func show_TimeAge_statistics():
+	var logfile = State.get_income_log() 
+	var length = 0
+	var time_dict = {
+		Global.Midnight : {
+			"node" : Midnight,
+			"value" : 0.0,
+		},
+		Global.Morning : {
+			"node" : Morning,
+			"value" : 0.0 
+		},
+		Global.Afternoon : {
+			"node" : Afternoon,
+			"value" : 0.0,
+		},
+		Global.Evening : {
+			"node" : Evening,
+			"value" : 0.0
+		},
+	}
+	var age_dict = {
+		Global.Age1 : {
+			"node" : Age1,
+			"value" : 0.0
+		}, 
+		Global.Age2 : {
+			"node" : Age2,
+			"value" : 0.0
+		}, 
+		Global.Age3 : {
+			"node" : Age3,
+			"value" : 0.0
+		},
+		Global.Age4 : {
+			"node" : Age4,
+			"value" : 0.0
+		},
+	}
+	var gender_dict = {
+		Global.Male : {
+			"node" : Male,
+			"value" : 0.0
+		},
+		Global.Female : {
+			"node" : Female,
+			"value" : 0.0
+		}
+	}
+	
+	for income in logfile:
+		if income["type"] != Global.Product:
+			continue
+	
+		var metadata = income["metadata"]
+		var age = metadata["age"]
+		var time = metadata["time"]
+		var gender = metadata["gender"]
+		time_dict[time]["value"]+=1.0
+		age_dict[age]["value"]+=1.0
+		gender_dict[gender]["value"]+=1.0
+		length+=1
+
+	for time in time_dict:
+		var value = time_dict[time]["value"]
+		var node = time_dict[time]["node"]
+		var lstr:String
+		if length == 0:
+			lstr= "0%"
+		else:
+			lstr = str(stepify(value/length*100, 0.1))+"%"
+		node.text = lstr
+		
+	for age in age_dict:
+		var value = age_dict[age]["value"]
+		var node = age_dict[age]["node"]
+		var lstr:String
+		if length == 0:
+			lstr= "0%"
+		else:
+			lstr = str(stepify(value/length*100, 0.1))+"%"
+		node.text = lstr
+		
+	for gender in gender_dict:
+		var value = gender_dict[gender]["value"]
+		var node = gender_dict[gender]["node"]
+		var lstr:String
+		if length == 0:
+			lstr= "0%"
+		else:
+			var tmp = stepify(value/length*100, 0.1)
+			lstr = str(tmp)+"%"
+			if gender == Global.Male:
+				$PosContainer/PosBack/Sales/Gender/TextureProgress.value = tmp
+		node.text = lstr
+
 ############################EVENT#####################################		
 func load_event():
 	pass

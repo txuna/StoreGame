@@ -123,7 +123,7 @@ func _on_clock_timeout():
 		"min" : time["min"],
 		"sec" : time["sec"]})
 		
-	emit_signal("LoadPosUI", Global.RELOAD)
+	#emit_signal("LoadPosUI", Global.RELOAD)
 
 
 func show_cash():
