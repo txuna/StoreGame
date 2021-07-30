@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tissue.png-6aa627a4fe4397555c6d7a16b70dfc6b.stex"
+path="res://.import/apple.png-54c843fd7b5e5b1ef1a033d21fa956c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/product/tissue.png"
-dest_files=[ "res://.import/tissue.png-6aa627a4fe4397555c6d7a16b70dfc6b.stex" ]
+source_file="res://assets/art/product/apple.png"
+dest_files=[ "res://.import/apple.png-54c843fd7b5e5b1ef1a033d21fa956c5.stex" ]
 
 [params]
 

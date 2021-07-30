@@ -111,12 +111,14 @@ var logging = {
 	},
 }
 
+var current_npc:int
 
 signal AllNpcExited
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	region =  Region.get_region(State.get_pos())
+	current_npc = 0
 
 """
 1n : 3n : 4n : 2n으로 생성 
@@ -159,6 +161,10 @@ func _on_npc_exited():
 
 
 func _on_spawn_npc(age_index):
+	if current_npc >= Global.MAX_NPC:
+		if OS.is_debug_build():
+			print("MAX NPC")
+		return
 	if not check_rating():
 		return 
 
@@ -187,7 +193,7 @@ func _on_spawn_npc(age_index):
 		"cash" : cash,
 		"name" : "James Smith"
 	})
-	
+	current_npc+=1
 	
 	### Debugging!!
 	"""
@@ -337,4 +343,6 @@ func check_rating():
 		return false
 
 
+func set_current_npc(value, mask):
+	current_npc += (value * mask)
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Product/Object.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/product/grape.png" type="Texture" id=2]
+
+[node name="Grape" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( -27.9492, -35.1805, -24.578, -41.361, 5.38809, -29.7491, 17.7491, -27.8763, 20.3712, -30.311, 24.4915, -26.378, 21.6822, -21.6957, 17.9364, -20.1974, -0.23056, -25.8161, -4.16362, -21.3212, 24.3042, -13.2678, 23.9296, -3.71606, 19.9966, 6.21022, -22.3306, 30.9323, -26.0764, 27.7484, -23.267, 21.006, -25.1399, 18.384, -35.4408, -26.0034, -31.1331, -31.4347, -9.4077, -23.5686, -6.97295, -26.9398 )

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Product/Object.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/product/gimbap.png" type="Texture" id=2]
+
+[node name="Gimbap" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( -5.16927, -24.9713, 0.0647583, -28.869, 8.63966, -25.0827, 21.4463, -7.59882, 28.5735, 10.6646, 28.4622, 22.3576, 5.74424, 25.5872, -12.1851, 24.4735, -24.435, 21.1327, -18.1987, -6.26247 )

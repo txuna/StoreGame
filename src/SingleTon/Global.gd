@@ -64,6 +64,8 @@ const Shopping = 0
 const EndShopping = 1
 const KickNpc = 2
 
+const MAX_NPC = 30
+
 
 
 

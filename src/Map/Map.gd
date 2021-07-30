@@ -164,5 +164,6 @@ func _on_ExitArea_body_entered(body: Node) -> void:
 		# NPC 출구
 		body._on_npc_exited()	
 
+	get_node("/root/Main/Game/NpManager").set_current_npc(1, -1)
 
 

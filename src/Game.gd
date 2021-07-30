@@ -96,8 +96,8 @@ func _on_check_npc_exited():
 func _on_all_npc_exited():
 	if State.is_open():
 		return
-
-	print("All npc exited!")
+	if OS.is_debug_build():
+		print("All npc exited!")
 	emit_signal("ActiveStatusBtn")
 
 

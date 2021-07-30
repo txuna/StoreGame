@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Product/Object.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/product/chocomilk.png" type="Texture" id=2]
+
+[node name="ChocoMilk" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( -41.2366, -47.8312, 39.167, -45.8267, 42.7306, -34.9132, 41.617, -31.7951, 47.8533, -13.9771, 45.626, 61.0811, -32.773, 62.1947, -58.8318, 42.3722, -58.8318, -16.6498, -41.4593, -34.9132 )
