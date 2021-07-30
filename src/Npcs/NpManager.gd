@@ -111,6 +111,13 @@ var logging = {
 	},
 }
 
+var age_suggestion = {
+	Global.Age1 : [0xA006, 0xA00B],
+	Global.Age2 : [0xA00C, 0xA009],
+	Global.Age3 : [0xA00A, 0xA00D],
+	Global.Age4 : [0xA00E]
+}
+
 var current_npc:int
 
 signal AllNpcExited
@@ -231,7 +238,6 @@ func _on_spawn_npc(age_index):
 # 추천하는 아이템 ID 반환
 func setup_npc_suggestion(age_index, gender, cash):
 	# 이제 생성되는 시간과 평일인지 주말인지, 뉴스 영향 및 나이대에 따른 니즈 등등 설정 + 소지금도 체크
-
 	var state = age_ability[age_index]
 	var goal = {
 		"taste" : 0,
@@ -239,6 +245,11 @@ func setup_npc_suggestion(age_index, gender, cash):
 		"satiety" : 0,
 		"health" : 0,
 	}
+	
+	var suggestion = get_age_suggestion(age_index, cash)
+	if suggestion != 0:
+		return suggestion
+	
 	for ability in state:
 		goal[ability] = stepify(rand_range(state[ability][0], state[ability][1]), 0.1)
 	
@@ -251,7 +262,6 @@ func setup_npc_suggestion(age_index, gender, cash):
 	
 	# Product List와 비교 남는 능력치가 가장 작은 것이 선발 
 	var min_value = 100
-	var suggestion = 0
 	var products = Products.get_products()
 
 	for id in products:
@@ -277,8 +287,33 @@ func setup_npc_suggestion(age_index, gender, cash):
 			min_value = temp
 			suggestion = product["id"]
 	
-	
 	return suggestion
+
+func get_probability(percent)->bool:
+	var value = int(rand_range(0, 100))
+	if percent <= value:
+		return true 
+	else:
+		return false
+	
+# percent와 age에따라서 고정 선택값 단 캐쉬가 부족하면 패스
+# 0x0 이라면 선택 X 
+# 아니라면 선택됨
+func get_age_suggestion(age, cash):
+	var percent = 10
+	var suggestion = 0x0 
+	
+	if get_probability(percent):
+		var temp = age_suggestion[age]
+		var id = temp[randi() % temp.size()]
+		var price = Products.get_products()[id]["sell"]
+		if cash < price:
+			return suggestion
+		else:
+			suggestion = id 
+		
+	return suggestion
+
 
 # 젠더 버프, Female : taste 10% health 10% Male : satiety : 10% 증가 moisture : 10%
 func setup_gender_effect(goal, gender):

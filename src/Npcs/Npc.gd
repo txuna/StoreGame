@@ -130,7 +130,9 @@ func buy_product():
 	flag = Global.EndShopping
 	direction = Global.LEFT
 	$Sprite.flip_h = true
-
+	$BuyTimer.stop() 
+	$MoveTimer.stop()
+	
 
 func get_probability(percent)->bool:
 	var value = int(rand_range(0, 100))
