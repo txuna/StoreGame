@@ -19,7 +19,7 @@ size = 56
 font_data = ExtResource( 10 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 44.3007, 24.3559 )
+extents = Vector2( 20.8436, 24.3559 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
@@ -343,7 +343,7 @@ __meta__ = {
 position = Vector2( -782.165, 478.229 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InStore/ExitArea"]
-position = Vector2( -12.681, 3.00342 )
+position = Vector2( -43.9273, 2.1626 )
 shape = SubResource( 2 )
 
 [node name="Clock" type="Sprite" parent="."]

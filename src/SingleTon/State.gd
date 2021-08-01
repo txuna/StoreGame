@@ -84,7 +84,7 @@ var StoreState = {
 		}
 	},
 	"sales" : {
-		"cash" : 6000,
+		"cash" : 60000,
 		"log" : {
 			"income" : [
 				
